@@ -1,11 +1,13 @@
 import pandas as pd
 import glob
+import docx
 from docx import Document
 from docx.shared import Pt
 from docx.enum.text import WD_BREAK
 from docx.shared import Inches
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 from docx.oxml.ns import qn
 import os
@@ -33,16 +35,19 @@ def createdocx(xlsx_file, imgs_path):
     
     header = doc.sections[0].header
     header_table = header.add_table(rows=1, cols=2, width=Inches(8))
-    header_table.columns[0].width = Inches(2)
-    header_table.columns[1].width = Inches(6)
+    header_table.columns[0].width = Inches(3)
+    header_table.columns[1].width = Inches(5)
     header_table.alignment = WD_TABLE_ALIGNMENT.CENTER
 
     header_paragraph = header_table.cell(0, 0).paragraphs[0]
-    header_paragraph.style.font.size = Pt(16)
-    header_paragraph.text = "Quickestspecs"
+    header_run = header_paragraph.add_run("QuickestSpecs")
+    header_run.font.size = Pt(18)
+    header_run.font.bold = True
     header_paragraph = header_table.cell(0, 1).paragraphs[0]
-    header_paragraph.text = prod_name
-
+    header_run2 = header_paragraph.add_run(prod_name)
+    header_run2.font.size = Pt(14)
+    header_run2.font.bold = True
+    header_table.cell(0, 1).paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
     ################################################################ Footer
 
@@ -59,9 +64,9 @@ def createdocx(xlsx_file, imgs_path):
 
 
     footer_paragraph = footer_table.cell(0, 0).paragraphs[0]
-    footer_paragraph.style.font.size = Pt(10)
     footer_paragraph.add_run().add_picture(imgs_path + "hp-logo.png", width=Inches(.4), height=Inches(.4))
     footer_paragraph = footer_table.cell(0, 1).paragraphs[0]
+    footer_table.cell(0, 1).paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
     footer_paragraph.text = "Worldwide — Version 1 — March 19, 2023"
     footer_paragraph = footer_table.cell(0, 2).paragraphs[0]
     footer_paragraph.text = "page x"
@@ -76,8 +81,40 @@ def createdocx(xlsx_file, imgs_path):
     img_path2 = os.path.join(imgs_path, 'c08518762.png')
 
     doc.add_picture(img_path, width=Inches(6))
+    
+    paragraph = doc.add_paragraph()
+    run = paragraph.add_run("Left")
+    run.bold = True
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    callout_table = doc.add_table(rows=4, cols=4)
+    callout_table.alignment = WD_TABLE_ALIGNMENT.CENTER
+
+    for i in range(4):
+        for j in range(4):
+            cell = callout_table.cell(i, j)
+            cell.text = str(i * 4 + j + 1)
+            cell.vertical_alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
     doc.add_picture(img_path2, width=Inches(6))
+
+    paragraph = doc.add_paragraph()
+    run = paragraph.add_run("Right")
+    run.bold = True
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    
+    callout_table2 = doc.add_table(rows=4, cols=4)
+    callout_table2.alignment = WD_TABLE_ALIGNMENT.CENTER
+
+    for i in range(4):
+        for j in range(4):
+            cell = callout_table2.cell(i, j)
+            cell.text = str(i * 4 + j + 1)
+            cell.vertical_alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
     ################################################################ At a glance section
@@ -123,6 +160,7 @@ def createdocx(xlsx_file, imgs_path):
 
             
     doc.save('quickestspecs.docx')
+
 
 def main():
     loadxlsx()
