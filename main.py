@@ -1,5 +1,5 @@
 import glob
-from quickestpects.format import createdocx
+from quickestspects.buildQS import createdocx
 
 def loadxlsx():
     """Load the xlsx file"""
@@ -7,9 +7,8 @@ def loadxlsx():
     imgs_path = "./imgs/"
     xlsx_files = glob.glob(folder_path + "*.xlsx")
     
-    for xlsx_file in xlsx_files: #loop through all the files
+    for xlsx_file in xlsx_files:
         createdocx(xlsx_file, imgs_path)
-
 def main():
     loadxlsx()
 

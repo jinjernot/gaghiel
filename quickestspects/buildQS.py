@@ -2,13 +2,14 @@ import pandas as pd
 from docx import Document
 from docx.shared import Pt
 
-from quickestpects.callouts import callout_section
-from quickestpects.at_a_glance import ataglance_section
-from quickestpects.operating_system import os_section
-from quickestpects.header import header
-from quickestpects.footer import footer
-from quickestpects.storage_and_drives import hd_section
-
+from quickestspects.callouts import callout_section
+from quickestspects.at_a_glance import ataglance_section
+from quickestspects.operating_system import os_section
+from quickestspects.header import header
+from quickestspects.footer import footer
+from quickestspects.storage_and_drives import hd_section
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 def set_margins(doc):
     sections = doc.sections
@@ -27,13 +28,13 @@ def createdocx(xlsx_file, imgs_path):
     df = df[df['4RA85F [Product]'] != '##BLANK##'] 
 
     prod_name = df.loc[df['Tag'] == 'prodname', '4RA85F [Product]'].iloc[0] 
-    header(doc, prod_name,)
+    header(doc, prod_name)
     footer(doc, imgs_path)
-    callout_section(doc, imgs_path,)
-    ataglance_section(doc, df)
+    callout_section(doc, imgs_path)
+    ataglance_section(doc,df)
     os_section(doc, df)
     hd_section(doc)
 
-    
-
-    doc.save('quickestspecs.docx')
+    # Save as DOCX
+    docx_file = 'quickestspecs.docx'
+    doc.save(docx_file)

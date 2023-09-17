@@ -3,6 +3,7 @@ from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from datetime import datetime
 from docx.oxml import OxmlElement, ns
+from quickestspects.hr import insertHR
 
 def create_element(name):
     return OxmlElement(name)
@@ -27,7 +28,8 @@ def add_page_number(paragraph):
     run._r.append(fldChar2)
 
 def footer(doc, imgs_path):
-    footer = doc.sections[0].footer 
+    footer = doc.sections[0].footer
+    insertHR(footer.add_paragraph(), thickness=10)
     footer_table = footer.add_table(rows=1, cols=3, width=Inches(8)) 
 
     footer_table.columns[0].width = Inches(1)
@@ -42,11 +44,14 @@ def footer(doc, imgs_path):
     footer_paragraph = footer_table.cell(0, 1).paragraphs[0]
     footer_table.cell(0, 1).paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
 
+    # Add the text before the current date
+    footer_paragraph.add_run("Not all configuration components are available in all regions/countries.")
+    footer_paragraph.add_run().add_break()
+
     current_date = datetime.now().strftime("%B %d, %Y")
-    footer_paragraph.text = f"Worldwide — Version 1 — {current_date}"
+    footer_paragraph.add_run(f"Worldwide — Version 1 — {current_date}")
 
     footer_paragraph = footer_table.cell(0, 2).paragraphs[0]
     footer_paragraph.text = "Page "
-    
 
     add_page_number(footer_paragraph)

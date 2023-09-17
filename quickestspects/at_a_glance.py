@@ -1,10 +1,7 @@
 import pandas as pd
 from docx.enum.text import WD_BREAK
-from quickestpects import header
-
 
 def ataglance_section(doc, df):
-
 
     doc.add_paragraph().add_run("At a Glance").bold = True
 
