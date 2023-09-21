@@ -30,11 +30,11 @@ def add_page_number(paragraph):
 def footer(doc, imgs_path):
     footer = doc.sections[0].footer
     insertHR(footer.add_paragraph(), thickness=10)
-    footer_table = footer.add_table(rows=1, cols=3, width=Inches(8)) 
+    footer_table = footer.add_table(rows=1, cols=3, width=Inches(10)) 
 
-    footer_table.columns[0].width = Inches(1)
-    footer_table.columns[1].width = Inches(6)
-    footer_table.columns[2].width = Inches(1)
+    footer_table.columns[0].width = Inches(2)
+    footer_table.columns[1].width = Inches(5)
+    footer_table.columns[2].width = Inches(2)
 
     footer_table.rows[0].height = Inches(.4)
     footer_table.alignment = WD_TABLE_ALIGNMENT.CENTER
