@@ -16,13 +16,13 @@ def header(doc, prod_name):
     # Left-aligned text
     header_paragraph = header_table.cell(0, 0).paragraphs[0]
     header_run = header_paragraph.add_run("QuickestSpecs")
-    header_run.font.size = Pt(24)
+    header_run.font.size = Pt(27)
     header_run.font.bold = True
 
     # Right-aligned text
     header_paragraph = header_table.cell(0, 1).paragraphs[0]
     header_run2 = header_paragraph.add_run(prod_name)
-    header_run2.font.size = Pt(14)
+    header_run2.font.size = Pt(12)
     header_run2.font.bold = True
     header_paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 

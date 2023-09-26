@@ -1,4 +1,4 @@
-from docx.shared import Inches
+from docx.shared import Pt, Inches
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from datetime import datetime
@@ -47,11 +47,16 @@ def footer(doc, imgs_path):
     # Add the text before the current date
     footer_paragraph.add_run("Not all configuration components are available in all regions/countries.")
     footer_paragraph.add_run().add_break()
+    for run in footer_paragraph.runs:
+        run.font.size = Pt(8)
 
     current_date = datetime.now().strftime("%B %d, %Y")
     footer_paragraph.add_run(f"Worldwide — Version 1 — {current_date}")
+    for run in footer_paragraph.runs:
+        run.font.size = Pt(8)
 
     footer_paragraph = footer_table.cell(0, 2).paragraphs[0]
     footer_paragraph.text = "Page "
-
     add_page_number(footer_paragraph)
+    for run in footer_paragraph.runs:
+        run.font.size = Pt(8)

@@ -20,6 +20,7 @@ def panel_specs(doc, df):
     first_row = table.rows[0]
     first_row.cells[0].paragraphs[0].add_run("Panel Specifications")
     first_row.cells[0].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.LEFT
+    
 
     # List of values to populate in the second column
     values_to_populate = [
