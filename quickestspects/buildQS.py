@@ -4,7 +4,7 @@ from docx.shared import Pt
 
 from quickestspects.callouts import callout_section
 from quickestspects.at_a_glance import ataglance_section
-from quickestspects.panel_specifications import panel_specs
+from quickestspects.tech_specs import tech_specs_section
 from quickestspects.header import header
 from quickestspects.footer import footer
 
@@ -36,7 +36,8 @@ def createdocx(xlsx_file, imgs_path):
     header(doc, prod_name)
     footer(doc, imgs_path)
     callout_section(xlsx_file, doc, imgs_path)
-    #panel_specs(doc, df)
+    ataglance_section(doc, xlsx_file)
+    tech_specs_section(xlsx_file, doc, df, prod_name)
 
 
     # Save as DOCX

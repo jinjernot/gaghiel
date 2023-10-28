@@ -30,20 +30,23 @@ def callout_section(xlsx_file, doc, imgs_path):
     # Filter out NaN values
     filtered_tags = [tag for tag in tags_to_process if pd.notna(tag)]
 
+    # Create a new list to store the previous column data
+    previous_column_data = df.iloc[11:31, 5].tolist()
+
     # Calculate the number of rows needed
     total_rows = (len(filtered_tags) + 1) // 2  # Adding 1 to round up if there's an odd number of tags
 
-    # Create the table with the dynamically determined number of rows
+    # Create the table with the dynamically determined number of rows and 4 columns
     callout_table = doc.add_table(rows=total_rows, cols=2)
     callout_table.alignment = WD_TABLE_ALIGNMENT.CENTER
-
+    
     # Populate the table
     for row_index in range(total_rows):
         for col_index in range(2):
             list_index = row_index * 2 + col_index
             if list_index < len(filtered_tags):
                 callout_table.cell(row_index, col_index).text = str(filtered_tags[list_index])
-    
+
     # Center the table cells
         for row in callout_table.rows:
             for cell in row.cells:
