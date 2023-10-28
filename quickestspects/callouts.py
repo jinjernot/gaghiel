@@ -8,7 +8,7 @@ from docx.enum.section import WD_SECTION
 import pandas as pd
 
 
-def callout_section(df, doc, imgs_path):
+def callout_section(xlsx_file, doc, imgs_path):
     img_path = os.path.join(imgs_path, 'placeholder-image.png')
     img_path2 = os.path.join(imgs_path, 'placeholder-image.png')
 
@@ -20,27 +20,36 @@ def callout_section(df, doc, imgs_path):
     run.bold = True
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
-    callout_table = doc.add_table(rows=6, cols=2)
+
+    # Read data from the Excel file
+    df = pd.read_excel(xlsx_file, sheet_name='QS Callouts & Overview')
+
+    # Define the 'calloutfront_' tags you want to process
+    tags_to_process = df.iloc[11:31, 6].tolist()
+
+    # Filter out NaN values
+    filtered_tags = [tag for tag in tags_to_process if pd.notna(tag)]
+
+    # Calculate the number of rows needed
+    total_rows = (len(filtered_tags) + 1) // 2  # Adding 1 to round up if there's an odd number of tags
+
+    # Create the table with the dynamically determined number of rows
+    callout_table = doc.add_table(rows=total_rows, cols=2)
     callout_table.alignment = WD_TABLE_ALIGNMENT.CENTER
 
- # Define the 'calloutfront_' tags you want to process
-    tags_to_process = ['calloutfront_01', 'calloutfront_02', 'calloutfront_03', 'calloutfront_04', 'calloutfront_05', 'calloutfront_06']
-
-
-
-
-    for row_index, tag in enumerate(tags_to_process):
-        # Find the value for the current tag in the DataFrame
-        value_to_populate = df[df['Tag'] == tag]['ChunkValue'].values
-        if len(value_to_populate) > 0 and not pd.isna(value_to_populate[0]):
-            callout_table.cell(row_index, 0).paragraphs[0].add_run(str(value_to_populate[0]))
-   
-   # Center the table cells
-    for row in callout_table.rows:
-        for cell in row.cells:
-            cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
-            for run in cell.paragraphs[0].runs:
-                run.font.size = Pt(10) 
+    # Populate the table
+    for row_index in range(total_rows):
+        for col_index in range(2):
+            list_index = row_index * 2 + col_index
+            if list_index < len(filtered_tags):
+                callout_table.cell(row_index, col_index).text = str(filtered_tags[list_index])
+    
+    # Center the table cells
+        for row in callout_table.rows:
+            for cell in row.cells:
+                cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+                for run in cell.paragraphs[0].runs:
+                    run.font.size = Pt(10) 
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
@@ -51,21 +60,26 @@ def callout_section(df, doc, imgs_path):
     run.font.size = Pt(12)
     run.bold = True
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    
-    callout_table2 = doc.add_table(rows=6, cols=2)
-    callout_table2.alignment = WD_TABLE_ALIGNMENT.CENTER
 
     # Define the 'calloutback_' tags you want to process
-    tags_to_process_back = ['calloutback_01', 'calloutback_02', 'calloutback_03', 'calloutback_04', 'calloutback_05', 'calloutback_06']
+    tags_to_process_back = df.iloc[40:60, 6].tolist()
 
+    # Filter out NaN values
+    filtered_tags2 = [tag for tag in tags_to_process_back if pd.notna(tag)]
 
+    # Calculate the number of rows needed
+    total_rows = (len(filtered_tags2) + 1) // 2  # Adding 1 to round up if there's an odd number of tags
 
-    for row_index, tag in enumerate(tags_to_process_back):
-        # Find the value for the current tag in the DataFrame
-        value_to_populate = df[df['Tag'] == tag]['ChunkValue'].values
-        if len(value_to_populate) > 0 and not pd.isna(value_to_populate[0]):
-            callout_table2.cell(row_index, 0).paragraphs[0].add_run(str(value_to_populate[0]))
+    # Create the table with the dynamically determined number of rows
+    callout_table2 = doc.add_table(rows=total_rows, cols=2)
+    callout_table2.alignment = WD_TABLE_ALIGNMENT.CENTER
 
+    # Populate the table
+    for row_index in range(total_rows):
+        for col_index in range(2):
+            list_index = row_index * 2 + col_index
+            if list_index < len(filtered_tags2):
+                callout_table2.cell(row_index, col_index).text = str(filtered_tags2[list_index])
 
     # Center the table cells
     for row in callout_table2.rows:

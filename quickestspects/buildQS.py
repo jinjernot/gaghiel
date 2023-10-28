@@ -18,25 +18,25 @@ def set_margins(doc):
         section.top_margin = Pt(20)  
         section.bottom_margin = Pt(20)  
 
-def set_default_font_to_hp_simplified(doc):
+def default_font(doc):
     styles = doc.styles
     default_style = styles['Normal']
     font = default_style.font
     font.name = 'HP Simplified'
-    font.size = Pt(12)  # You can adjust the font size as needed
+    font.size = Pt(12)
 
 
 def createdocx(xlsx_file, imgs_path):
     """Create the Quickestspecs"""
     doc = Document()
     set_margins(doc)
-    set_default_font_to_hp_simplified(doc)
-    df = pd.read_excel(xlsx_file) 
-    prod_name = df['ItemName'].iloc[0]
+    default_font(doc)
+    df = pd.read_excel(xlsx_file,sheet_name = 'Metadata') 
+    prod_name = df.columns[1]
     header(doc, prod_name)
     footer(doc, imgs_path)
-    callout_section(df, doc, imgs_path)
-    panel_specs(doc, df)
+    callout_section(xlsx_file, doc, imgs_path)
+    #panel_specs(doc, df)
 
 
     # Save as DOCX
