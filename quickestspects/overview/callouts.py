@@ -8,7 +8,14 @@ from docx.enum.section import WD_SECTION
 import pandas as pd
 
 
-def callout_section(xlsx_file, doc, imgs_path):
+def callout_section(doc, df, prod_name, imgs_path):
+
+    prodname_paragraph = doc.add_paragraph()
+    run = prodname_paragraph.add_run(prod_name)
+    run.font.size = Pt(12)
+    run.bold = True
+    prodname_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    
     img_path = os.path.join(imgs_path, 'placeholder-image.png')
     img_path2 = os.path.join(imgs_path, 'placeholder-image.png')
 
@@ -20,21 +27,17 @@ def callout_section(xlsx_file, doc, imgs_path):
     run.bold = True
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
-
-    # Read data from the Excel file
-    df = pd.read_excel(xlsx_file, sheet_name='QS Callouts & Overview')
-
     # Define the 'calloutfront_' tags you want to process
-    tags_to_process = df.iloc[11:31, 6].tolist()
+    callouts = df.iloc[11:31, 6].tolist()
 
     # Filter out NaN values
-    filtered_tags = [tag for tag in tags_to_process if pd.notna(tag)]
+    callouts = [tag for tag in callouts if pd.notna(tag)]
 
     # Create a new list to store the previous column data
     previous_column_data = df.iloc[11:31, 5].tolist()
 
     # Calculate the number of rows needed
-    total_rows = (len(filtered_tags) + 1) // 2  # Adding 1 to round up if there's an odd number of tags
+    total_rows = (len(callouts) + 1) // 2  # Adding 1 to round up if there's an odd number of tags
 
     # Create the table with the dynamically determined number of rows and 4 columns
     callout_table = doc.add_table(rows=total_rows, cols=2)
@@ -44,8 +47,8 @@ def callout_section(xlsx_file, doc, imgs_path):
     for row_index in range(total_rows):
         for col_index in range(2):
             list_index = row_index * 2 + col_index
-            if list_index < len(filtered_tags):
-                callout_table.cell(row_index, col_index).text = str(filtered_tags[list_index])
+            if list_index < len(callouts):
+                callout_table.cell(row_index, col_index).text = str(callouts[list_index])
 
     # Center the table cells
         for row in callout_table.rows:

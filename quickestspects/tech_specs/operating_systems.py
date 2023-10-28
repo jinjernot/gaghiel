@@ -1,23 +1,13 @@
-import pandas as pd
-from docx.shared import Inches, Pt
-from docx.enum.text import WD_BREAK,WD_ALIGN_PARAGRAPH
+
+from quickestspects.format.hr import insertHR
+from docx.shared import Pt
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.shared import RGBColor
-from quickestspects.hr import insertHR
+from docx.enum.text import WD_BREAK
+import pandas as pd
 
-def tech_specs_section(xlsx_file, doc, df, prod_name):
-
-    # Read data from the Excel file
-    df = pd.read_excel(xlsx_file, sheet_name='Tech Specs & QS Features')
-
-    paragraph = doc.add_paragraph()
-    run = paragraph.add_run("PRODUCT NAME")
-    run.font.size = Pt(12)
-    run.bold = True
-    paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-
-    prod_name_paragraph = doc.add_paragraph(prod_name)
-    insertHR(doc.add_paragraph(), thickness=3)
+def operating_systems_section(doc, df):
 
     paragraph = doc.add_paragraph()
     run = paragraph.add_run("OPERATING SYSTEMS")
@@ -30,7 +20,7 @@ def tech_specs_section(xlsx_file, doc, df, prod_name):
     # Filter out NaN values
     operating_systems = [os for os in operating_systems if pd.notna(os)]
 
-    total_rows = (len(operating_systems)) # Adding 1 to round up if there's an odd number of items
+    total_rows = (len(operating_systems))
 
     # Create the table with the dynamically determined number of rows and 2 columns
     os_table = doc.add_table(rows=total_rows, cols=2)
@@ -49,7 +39,6 @@ def tech_specs_section(xlsx_file, doc, df, prod_name):
 
     operating_systems_footnotes = df.iloc[31:36, 6].tolist()
     operating_systems_footnotes = [os for os in operating_systems_footnotes if pd.notna(os)]
-    print(operating_systems_footnotes)
 
     # Create a new paragraph
     footnote_paragraph = doc.add_paragraph()
@@ -62,6 +51,6 @@ def tech_specs_section(xlsx_file, doc, df, prod_name):
         run.font.color.rgb = RGBColor(0, 0, 255)  # RGB for blue
 
         run.add_break(WD_BREAK.LINE)
-
+    insertHR(doc.add_paragraph(), thickness=3)
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

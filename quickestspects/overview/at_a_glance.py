@@ -2,12 +2,11 @@ import pandas as pd
 
 from docx.enum.text import WD_BREAK,WD_ALIGN_PARAGRAPH
 
-def ataglance_section(doc, xlsx_file):
+def ataglance_section(doc, df):
     paragraph = doc.add_paragraph()
     run = paragraph.add_run("At a Glance")
     run.bold = True
 
-    df = pd.read_excel(xlsx_file, sheet_name='QS Callouts & Overview')
     at_a_glance = df.iloc[70:85, 6].tolist()
     
     for item in at_a_glance:

@@ -3,7 +3,7 @@ from quickestspects.buildQS import createdocx
 
 def loadxlsx():
     """Load the xlsx file"""
-    folder_path = "./xlsx/"
+    folder_path = "./xlsx/" 
     imgs_path = "./imgs/"
     xlsx_files = glob.glob(folder_path + "*.xlsx")
     

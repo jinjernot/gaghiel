@@ -3,7 +3,7 @@ from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from datetime import datetime
 from docx.oxml import OxmlElement, ns
-from quickestspects.hr import insertHR
+from quickestspects.format.hr import insertHR
 
 def create_element(name):
     return OxmlElement(name)
