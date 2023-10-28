@@ -1,10 +1,9 @@
+from quickestspects.tech_specs.tech_specs import tech_specs_section
+from quickestspects.overview.overview import overview_section
+from quickestspects.format.format import format_document
+
 import pandas as pd
 from docx import Document
-
-
-from quickestspects.overview.overview import overview_section
-from quickestspects.tech_specs.tech_specs import tech_specs_section
-from quickestspects.format.format import format_document
 
 
 

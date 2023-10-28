@@ -1,11 +1,9 @@
-import os
-from docx.shared import Pt, Inches
-from docx.enum.text import WD_BREAK
-from docx.shared import Inches
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.enum.table import WD_TABLE_ALIGNMENT
-from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.section import WD_SECTION
+from docx.shared import Pt, Inches
 import pandas as pd
+import os
 
 
 def callout_section(doc, df, prod_name, imgs_path):

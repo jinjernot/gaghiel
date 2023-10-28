@@ -1,7 +1,8 @@
-from docx.shared import Pt, Inches
+from quickestspects.format.hr import insertHR
+
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from quickestspects.format.hr import insertHR
+from docx.shared import Pt, Inches
 
 def header(doc, prod_name):
     

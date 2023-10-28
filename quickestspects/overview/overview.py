@@ -1,8 +1,7 @@
-import pandas as pd
-
 from quickestspects.overview.callouts import callout_section
 from quickestspects.overview.at_a_glance import ataglance_section
 
+import pandas as pd
 
 def overview_section(xlsx_file, doc, df, prod_name, imgs_path):
 

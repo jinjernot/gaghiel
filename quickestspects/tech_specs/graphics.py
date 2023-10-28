@@ -1,9 +1,9 @@
 
 from quickestspects.format.hr import insertHR
-from docx.shared import Pt
-from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.enum.text import WD_BREAK
+
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.shared import RGBColor
+from docx.shared import Pt
 import pandas as pd
 
 def graphics_section(doc, df):
@@ -15,11 +15,22 @@ def graphics_section(doc, df):
     graphics_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
     graphics_paragraph.add_run().add_break()
 
+
+
+    # Assuming that df.iloc[102, 6] contains the text you want to use
+    integrated_subtitle = df.iloc[102, 6]
+
+    # Create a new paragraph in your Word document
     integrated_paragraph = doc.add_paragraph()
-    run = integrated_paragraph.add_run("Integrated")
+
+    # Add the text from the DataFrame to the paragraph
+    run = integrated_paragraph.add_run(integrated_subtitle)
     run.bold = True
     integrated_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    # Add a line break
     integrated_paragraph.add_run().add_break()
+
 
     integrated = df.iloc[103:108, 6].tolist()
     integrated = [gfx for gfx in integrated if pd.notna(gfx)]
@@ -29,11 +40,19 @@ def graphics_section(doc, df):
     for gfx in integrated:
         run = integrated_paragraph.add_run(gfx)
 
-    discrete_paragraph = doc.add_paragraph()
-    run = discrete_paragraph.add_run("Discrete")
+    # Assuming that df.iloc[102, 6] contains the text you want to use
+    discrete_subtitle = df.iloc[108, 6]
+    
+    # Create a new paragraph in your Word document
+    integrated_paragraph = doc.add_paragraph()
+
+    # Add the text from the DataFrame to the paragraph
+    run = integrated_paragraph.add_run(discrete_subtitle)
     run.bold = True
-    discrete_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    discrete_paragraph.add_run().add_break()
+    integrated_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    # Add a line break
+    integrated_paragraph.add_run().add_break()
 
     discrete = df.iloc[110:111, 6].tolist()
     discrete = [gfx for gfx in discrete if pd.notna(gfx)]
@@ -43,10 +62,18 @@ def graphics_section(doc, df):
     for gfx in discrete:
         run = discrete_paragraph.add_run(gfx)
 
+    # Assuming that df.iloc[102, 6] contains the text you want to use
+    supports_subtitle = df.iloc[111, 6]
+    
+    # Create a new paragraph in your Word document
     supports_paragraph = doc.add_paragraph()
-    run = supports_paragraph.add_run("Supports")
+
+    # Add the text from the DataFrame to the paragraph
+    run = supports_paragraph.add_run(supports_subtitle)
     run.bold = True
     supports_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    # Add a line break
     supports_paragraph.add_run().add_break()
 
     supports = df.iloc[112:116, 6].tolist()

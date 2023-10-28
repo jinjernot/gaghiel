@@ -1,11 +1,11 @@
 
 from quickestspects.format.hr import insertHR
-from docx.shared import Pt
-from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.enum.table import WD_TABLE_ALIGNMENT,  WD_ALIGN_VERTICAL
-from docx.shared import RGBColor
-from docx.enum.text import WD_BREAK
+
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
+from docx.enum.table import WD_ALIGN_VERTICAL
+from docx.shared import Pt, RGBColor
 import pandas as pd
+
 
 def processors_section(doc, df):
 
@@ -42,13 +42,11 @@ def processors_section(doc, df):
 
             if not pd.isna(value):
                 cell.text = str(value)
-
     # Make the first row bold
     for cell in table.rows[0].cells:
         for paragraph in cell.paragraphs:
             for run in paragraph.runs:
                 run.font.bold = True
-    
 
     run.add_break(WD_BREAK.LINE)
 
@@ -64,6 +62,5 @@ def processors_section(doc, df):
         run.add_break(WD_BREAK.LINE)
         # Set the font color to blue
         run.font.color.rgb = RGBColor(0, 0, 255)  # RGB for blue
-
     run.add_break(WD_BREAK.LINE)
     insertHR(doc.add_paragraph(), thickness=3)

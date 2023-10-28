@@ -1,7 +1,7 @@
-
 from quickestspects.format.hr import insertHR
-from docx.shared import Pt
+
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.shared import Pt
 
 def chipset_section(doc, df):
 

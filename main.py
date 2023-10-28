@@ -1,5 +1,6 @@
-import glob
 from quickestspects.buildQS import createdocx
+
+import glob
 
 def loadxlsx():
     """Load the xlsx file"""

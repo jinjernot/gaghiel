@@ -1,9 +1,11 @@
-from docx.shared import Pt, Inches
+from quickestspects.format.hr import insertHR
+
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from datetime import datetime
 from docx.oxml import OxmlElement, ns
-from quickestspects.format.hr import insertHR
+from docx.shared import Pt, Inches
+from datetime import datetime
+
 
 def create_element(name):
     return OxmlElement(name)

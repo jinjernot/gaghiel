@@ -1,10 +1,9 @@
 
 from quickestspects.format.hr import insertHR
-from docx.shared import Pt
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.enum.table import WD_TABLE_ALIGNMENT
-from docx.shared import RGBColor
-from docx.enum.text import WD_BREAK
+from docx.shared import Pt, RGBColor
 import pandas as pd
 
 def operating_systems_section(doc, df):
@@ -15,7 +14,7 @@ def operating_systems_section(doc, df):
     run.bold = True
     paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
-    operating_systems = df.iloc[21:31, 6].tolist()
+    operating_systems = df.iloc[19:30, 6].tolist()
 
     # Filter out NaN values
     operating_systems = [os for os in operating_systems if pd.notna(os)]
@@ -34,8 +33,11 @@ def operating_systems_section(doc, df):
             os_table.cell(row_index, col_index).text = str(operating_systems[list_index])
     
     # Add "Preinstalled" to the first cell of the first column
+    preinstalled_text = df.iloc[12, 6]
     preinstalled = os_table.cell(0, 0)
-    preinstalled.text = "Preinstalled"
+    preinstalled.text = preinstalled_text
+    run = preinstalled.paragraphs[0].runs[0]
+    run.bold = True
 
     operating_systems_footnotes = df.iloc[31:36, 6].tolist()
     operating_systems_footnotes = [os for os in operating_systems_footnotes if pd.notna(os)]
