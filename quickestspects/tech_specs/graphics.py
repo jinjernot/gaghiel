@@ -2,7 +2,6 @@
 from quickestspects.format.hr import insertHR
 from docx.shared import Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_BREAK
 from docx.shared import RGBColor
 import pandas as pd
