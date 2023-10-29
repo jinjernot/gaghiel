@@ -29,7 +29,6 @@ def display_section(doc, df):
 
     non_touch = df.iloc[131:142, 6].tolist()
     non_touch = [disp for disp in non_touch if pd.notna(disp)]
-    non_touch_paragraph = doc.add_paragraph()
 
      # Add the data from the list to the paragraph
     for disp in non_touch:
@@ -52,7 +51,6 @@ def display_section(doc, df):
 
     touch = df.iloc[146:149, 6].tolist()
     touch = [disp for disp in touch if pd.notna(disp)]
-    touch_paragraph = doc.add_paragraph()
 
      # Add the data from the list to the paragraph
     for disp in touch:
@@ -75,11 +73,10 @@ def display_section(doc, df):
 
     displayport = df.iloc[156:157, 6].tolist()
     displayport = [disp for disp in displayport if pd.notna(disp)]
-    dp_paragraph = doc.add_paragraph()
 
      # Add the data from the list to the paragraph
     for disp in displayport:
-        run = dp_paragraph.add_run(disp)
+        run = displayport_paragraph.add_run(disp)
         run.add_break(WD_BREAK.LINE)
 
         # Get the Subtitle
@@ -98,7 +95,6 @@ def display_section(doc, df):
 
     display_support = df.iloc[159:161, 6].tolist()
     display_support = [disp for disp in display_support if pd.notna(disp)]
-    display_support_paragraph = doc.add_paragraph()
 
      # Add the data from the list to the paragraph
     for disp in display_support:
@@ -121,7 +117,6 @@ def display_section(doc, df):
 
     display_size = df.iloc[162:164, 6].tolist()
     display_size = [disp for disp in display_size if pd.notna(disp)]
-    display_size_paragraph = doc.add_paragraph()
 
      # Add the data from the list to the paragraph
     for disp in display_size:

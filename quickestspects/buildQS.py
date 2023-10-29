@@ -2,6 +2,8 @@ from quickestspects.tech_specs.tech_specs import tech_specs_section
 from quickestspects.overview.overview import overview_section
 from quickestspects.format.format import format_document
 
+from quickestspects.tables.system_unit import system_unit_section
+
 import pandas as pd
 from docx import Document
 
@@ -19,7 +21,8 @@ def createdocx(xlsx_file, imgs_path):
     format_document(doc, prod_name, imgs_path)
     overview_section(xlsx_file, doc, df, prod_name, imgs_path)
     tech_specs_section(xlsx_file, doc, df, prod_name)
-
+    
+    system_unit_section(doc, xlsx_file, df)
     # Save as DOCX
     docx_file = 'quickestspecs.docx'
     doc.save(docx_file)

@@ -16,47 +16,34 @@ def graphics_section(doc, df):
     graphics_paragraph.add_run().add_break()
 
 
-
-    # Assuming that df.iloc[102, 6] contains the text you want to use
     integrated_subtitle = df.iloc[102, 6]
-
-    # Create a new paragraph in your Word document
     integrated_paragraph = doc.add_paragraph()
-
-    # Add the text from the DataFrame to the paragraph
     run = integrated_paragraph.add_run(integrated_subtitle)
     run.bold = True
     integrated_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
-    # Add a line break
-    integrated_paragraph.add_run().add_break()
-
-
     integrated = df.iloc[103:108, 6].tolist()
     integrated = [gfx for gfx in integrated if pd.notna(gfx)]
-    integrated_paragraph = doc.add_paragraph()
+    integrated_paragraph.add_run().add_break()
 
-     # Add the data from the list to the paragraph
     for gfx in integrated:
         run = integrated_paragraph.add_run(gfx)
 
-    # Assuming that df.iloc[102, 6] contains the text you want to use
+
     discrete_subtitle = df.iloc[108, 6]
-    
-    # Create a new paragraph in your Word document
-    integrated_paragraph = doc.add_paragraph()
+    discrete_paragraph = doc.add_paragraph()
 
     # Add the text from the DataFrame to the paragraph
-    run = integrated_paragraph.add_run(discrete_subtitle)
+    run = discrete_paragraph.add_run(discrete_subtitle)
     run.bold = True
-    integrated_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    discrete_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
     # Add a line break
     integrated_paragraph.add_run().add_break()
 
     discrete = df.iloc[110:111, 6].tolist()
     discrete = [gfx for gfx in discrete if pd.notna(gfx)]
-    discrete_paragraph = doc.add_paragraph()
+    discrete_paragraph.add_run().add_break()
 
      # Add the data from the list to the paragraph
     for gfx in discrete:
@@ -73,12 +60,9 @@ def graphics_section(doc, df):
     run.bold = True
     supports_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
-    # Add a line break
-    supports_paragraph.add_run().add_break()
-
     supports = df.iloc[112:116, 6].tolist()
     supports = [gfx for gfx in supports if pd.notna(gfx)]
-    supports_paragraph = doc.add_paragraph()
+    supports_paragraph.add_run().add_break()
 
      # Add the data from the list to the paragraph
     for gfx in supports:
