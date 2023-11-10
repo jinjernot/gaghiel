@@ -14,8 +14,8 @@ def callout_section(doc, df, prod_name, imgs_path):
     run.bold = True
     prodname_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
     
-    img_path = os.path.join(imgs_path, 'placeholder-image.png')
-    img_path2 = os.path.join(imgs_path, 'placeholder-image.png')
+    img_path = os.path.join(imgs_path, 'right.png')
+    img_path2 = os.path.join(imgs_path, 'left.png')
 
     doc.add_picture(img_path, width=Inches(6))
     
