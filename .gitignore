@@ -1,5 +1,4 @@
-*.docx
-*.docx#
+*.docx*
 __pycache__
 *.pdf
-*.docx################################
+verga

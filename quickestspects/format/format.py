@@ -3,7 +3,6 @@ from quickestspects.format.footer import footer
 
 from docx.shared import Pt
 
-
 def set_margins(doc):
     sections = doc.sections
     for section in sections:
