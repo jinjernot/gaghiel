@@ -16,7 +16,7 @@ def default_font(doc):
     default_style = styles['Normal']
     font = default_style.font
     font.name = 'HP Simplified'
-    font.size = Pt(12)
+    font.size = Pt(10)
 
 
 def format_document(doc, prod_name, imgs_path):
