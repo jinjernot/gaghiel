@@ -10,7 +10,7 @@ from quickestspects.tech_specs.networking import networking_section
 
 import pandas as pd
 
-def tech_specs_section(xlsx_file, doc, df, prod_name):
+def tech_specs_section(doc, xlsx_file, txt_file, df, prod_name):
 
     df = pd.read_excel(xlsx_file, sheet_name='Tech Specs & QS Features')
     

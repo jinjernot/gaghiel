@@ -1,3 +1,4 @@
+from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.section import WD_SECTION
@@ -6,19 +7,31 @@ import pandas as pd
 import os
 
 
-def callout_section(doc, df, prod_name, imgs_path):
-
+def callout_section(doc, txt_file, df, prod_name, imgs_path):
+    # Add the product name to the Word document and text file
     prodname_paragraph = doc.add_paragraph()
     run = prodname_paragraph.add_run(prod_name)
     run.font.size = Pt(12)
     run.bold = True
     prodname_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    
-    img_path = os.path.join(imgs_path, 'right.png')
-    img_path2 = os.path.join(imgs_path, 'left.png')
+
+    with open(txt_file, 'a') as txt:
+        txt.write("<h1>Overview</h1>\n")
+        txt.write(f"<p style='font-size:14pt;'><strong>{prod_name}</strong></p>\n")
+
+    img_path = os.path.join(imgs_path, 'image001.png')
+    img_path2 = os.path.join(imgs_path, 'image002.png')
+
+    # Append HTML code for the image to the text file
+    img_html_code = f'<img src="{img_path}" alt="Product Image" width="702" height="561">'
+    img_html_code2 = f'<img src="{img_path2}" alt="Product Image" width="702" height="561">'
+
+    with open(txt_file, 'a') as txt:
+        txt.write(img_html_code + '\n')
+        txt.write("<p align='center'>Left</p>\n")
 
     doc.add_picture(img_path, width=Inches(6))
-    
+
     paragraph = doc.add_paragraph()
     run = paragraph.add_run("Front")
     run.font.size = Pt(12)
@@ -31,16 +44,13 @@ def callout_section(doc, df, prod_name, imgs_path):
     # Filter out NaN values
     callouts = [tag for tag in callouts if pd.notna(tag)]
 
-    # Create a new list to store the previous column data
-    previous_column_data = df.iloc[11:31, 5].tolist()
-
     # Calculate the number of rows needed
     total_rows = (len(callouts) + 1) // 2  # Adding 1 to round up if there's an odd number of tags
 
-    # Create the table with the dynamically determined number of rows and 4 columns
+    # Create the table with the dynamically determined number of rows and 2 columns
     callout_table = doc.add_table(rows=total_rows, cols=2)
     callout_table.alignment = WD_TABLE_ALIGNMENT.CENTER
-    
+
     # Populate the table
     for row_index in range(total_rows):
         for col_index in range(2):
@@ -49,15 +59,36 @@ def callout_section(doc, df, prod_name, imgs_path):
                 callout_table.cell(row_index, col_index).text = str(callouts[list_index])
 
     # Center the table cells
-        for row in callout_table.rows:
-            for cell in row.cells:
-                cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
-                for run in cell.paragraphs[0].runs:
-                    run.font.size = Pt(10) 
+    for row in callout_table.rows:
+        for cell in row.cells:
+            cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+            for run in cell.paragraphs[0].runs:
+                run.font.size = Pt(10)
+
+    # Append HTML code for the table to the text file
+    table_html = '<table border="1" style="width:50%">\n'
+    for i in range(0, len(callouts), 2):
+        row_html = f'<tr>\n<td>{callouts[i]}</td>\n'
+        if i + 1 < len(callouts):
+            row_html += f'<td>{callouts[i + 1]}</td>\n'
+        else:
+            row_html += '<td></td>\n'
+        row_html += '</tr>\n'
+        table_html += row_html
+
+    # Closing HTML tags
+    table_html += '</table>\n'
+
+    with open(txt_file, 'a') as txt:
+        txt.write(table_html)
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
     doc.add_picture(img_path2, width=Inches(6))
+
+    with open(txt_file, 'a') as txt:
+        txt.write(img_html_code2 + '\n')
+        txt.write("<p align='center'>Right</p>\n")
 
     paragraph = doc.add_paragraph()
     run = paragraph.add_run("Back")
@@ -90,9 +121,26 @@ def callout_section(doc, df, prod_name, imgs_path):
         for cell in row.cells:
             cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
             for run in cell.paragraphs[0].runs:
-                run.font.size = Pt(10) 
+                run.font.size = Pt(10)
 
-    doc.add_page_break() 
+    # Append HTML code for the table to the text file
+    table_html2 = '<table border="1" style="width:50%">\n'
+    for i in range(0, len(filtered_tags2), 2):
+        row_html = f'<tr>\n<td>{filtered_tags2[i]}</td>\n'
+        if i + 1 < len(filtered_tags2):
+            row_html += f'<td>{filtered_tags2[i + 1]}</td>\n'
+        else:
+            row_html += '<td></td>\n'
+        row_html += '</tr>\n'
+        table_html2 += row_html
+
+    # Closing HTML tags
+    table_html2 += '</table>\n'
+
+    with open(txt_file, 'a') as txt:
+        txt.write(table_html2)
+
+    doc.add_page_break()
     section = doc.sections[-1]
     section.start_type
     section.start_type = WD_SECTION.CONTINUOUS

@@ -10,7 +10,7 @@ from docx import Document
 
 
 
-def createdocx(xlsx_file, imgs_path):
+def createdocx(xlsx_file, imgs_path, txt_file):
     """Create the Quickestspecs"""
 
     #get product name
@@ -20,8 +20,8 @@ def createdocx(xlsx_file, imgs_path):
     doc = Document()
 
     format_document(doc, prod_name, imgs_path)
-    overview_section(xlsx_file, doc, df, prod_name, imgs_path)
-    tech_specs_section(xlsx_file, doc, df, prod_name)
+    overview_section(doc, xlsx_file, txt_file, df, prod_name, imgs_path)
+    tech_specs_section(doc, xlsx_file, txt_file, df, prod_name)
     
     system_unit_section(doc, xlsx_file, df)
 
