@@ -6,13 +6,17 @@ from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.shared import Pt, RGBColor
 import pandas as pd
 
-def operating_systems_section(doc, df):
+def operating_systems_section(doc, txt_file, df):
 
     paragraph = doc.add_paragraph()
     run = paragraph.add_run("OPERATING SYSTEMS")
     run.font.size = Pt(12)
     run.bold = True
     paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    with open(txt_file, 'a') as txt:
+        txt.write("<h1>OPERATING SYSTEMS</h1>\n")
+
 
     operating_systems = df.iloc[19:30, 6].tolist()
 
@@ -39,6 +43,23 @@ def operating_systems_section(doc, df):
     run = preinstalled.paragraphs[0].runs[0]
     run.bold = True
 
+    # Generate HTML code for the table
+    html_table = '<table border="1" style="width:50%">\n'
+
+    # Add "Preinstalled" to the first cell of the first column
+    html_table += f'<tr>\n<td><strong>{preinstalled_text}</strong></td>\n</tr>\n'
+
+    # Populate the second column with values from operating_systems starting from the first row
+    for os in operating_systems:
+        html_table += f'<tr>\n<td></td>\n<td>{os}</td>\n</tr>\n'
+    # Closing HTML tags
+    html_table += '</table>\n'
+        # Now you can write the HTML code to a file or use it as needed
+    with open(txt_file, 'a') as txt:
+            txt.write(html_table)
+
+
+
     operating_systems_footnotes = df.iloc[31:36, 6].tolist()
     operating_systems_footnotes = [os for os in operating_systems_footnotes if pd.notna(os)]
 
@@ -53,6 +74,21 @@ def operating_systems_section(doc, df):
         run.font.color.rgb = RGBColor(0, 0, 255)  # RGB for blue
 
         run.add_break(WD_BREAK.LINE)
+
+
+    html_footnotes = '<div style="color: blue;">\n'
+
+    for os_footnote in operating_systems_footnotes:
+        html_footnotes += f'  <span>{os_footnote}</span>\n'
+
+    # Closing HTML tags
+    html_footnotes += '</div>\n'
+
+    with open(txt_file, 'a') as txt:
+            txt.write(html_footnotes)
+
+
+
     insertHR(doc.add_paragraph(), thickness=3)
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

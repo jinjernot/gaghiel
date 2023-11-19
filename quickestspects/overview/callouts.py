@@ -16,8 +16,13 @@ def callout_section(doc, txt_file, df, prod_name, imgs_path):
     prodname_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
     with open(txt_file, 'a') as txt:
+        txt.write(f"<html><head><title>{prod_name}</title>\n")
+        txt.write('<meta content="text/html; charset=utf-8" http-equiv="Content-Type">\n')
+        txt.write('<meta name="Generator" content="Microsoft Word 15 (filtered)">\n')
+        txt.write("</head>\n")
         txt.write("<h1>Overview</h1>\n")
         txt.write(f"<p style='font-size:14pt;'><strong>{prod_name}</strong></p>\n")
+
 
     img_path = os.path.join(imgs_path, 'image001.png')
     img_path2 = os.path.join(imgs_path, 'image002.png')
@@ -82,6 +87,9 @@ def callout_section(doc, txt_file, df, prod_name, imgs_path):
     with open(txt_file, 'a') as txt:
         txt.write(table_html)
 
+    with open(txt_file, 'a') as txt:
+        txt.write('<hr align="center" SIZE="2" width="100%">\n')
+
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
     doc.add_picture(img_path2, width=Inches(6))
@@ -139,6 +147,9 @@ def callout_section(doc, txt_file, df, prod_name, imgs_path):
 
     with open(txt_file, 'a') as txt:
         txt.write(table_html2)
+
+    with open(txt_file, 'a') as txt:
+        txt.write('<hr align="center" SIZE="2" width="100%">\n')
 
     doc.add_page_break()
     section = doc.sections[-1]

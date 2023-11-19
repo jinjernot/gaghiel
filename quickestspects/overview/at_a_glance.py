@@ -22,7 +22,7 @@ def ataglance_section(doc, txt_file, df):
 
             # Append the item to the text file
             with open(txt_file, 'a') as txt:
-                txt.write(f"<li>{item}</li>\n")
+                txt.write(f"<p>{item}</p>\n")
 
      # Add the note
     note_paragraph = doc.add_paragraph("NOTE: See important legal disclosures for all listed specs in their respective features sections")
@@ -30,8 +30,11 @@ def ataglance_section(doc, txt_file, df):
 
         # Append the note to the text file
     with open(txt_file, 'a') as txt:
-        txt.write("NOTE: See important legal disclosures for all listed specs in their respective features sections\n")
-    
+        txt.write("<b>NOTE: See important legal disclosures for all listed specs in their respective features sections</b>\n")
+        
+    with open(txt_file, 'a') as txt:
+        txt.write('<hr align="center" SIZE="2" width="100%">\n')
+
     for run in note_paragraph.runs:
         run.bold = True
 
