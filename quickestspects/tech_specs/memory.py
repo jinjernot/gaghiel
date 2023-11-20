@@ -42,7 +42,6 @@ def memory_section(doc, df):
     memory_slots_subtitle = df.iloc[247, 6]
     memory_slots_paragraph = doc.add_paragraph()
 
-    # Add the text from the DataFrame to the paragraph
     run = memory_slots_paragraph.add_run(memory_slots_subtitle)
     run.bold = True
     memory_slots_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
@@ -51,7 +50,6 @@ def memory_section(doc, df):
     memory_slots = [hd for hd in memory_slots if pd.notna(hd)]
     memory_slots_paragraph.add_run().add_break()
 
-     # Add the data from the list to the paragraph
     for hd in memory_slots:
         run = memory_slots_paragraph.add_run(hd)
         run.add_break(WD_BREAK.LINE)
@@ -59,15 +57,12 @@ def memory_section(doc, df):
     memory_footnotes = df.iloc[257:258, 6].tolist()
     memory_footnotes = [hd_footnote for hd_footnote in memory_footnotes if pd.notna(hd_footnote)]
 
-    # Create a new paragraph
     memory_footnote_paragraph = doc.add_paragraph()
 
-    # Add the data from the list to the paragraph
     for hd_footnote in memory_footnotes:
         run = memory_footnote_paragraph.add_run(hd_footnote)
 
-        # Set the font color to blue
-        run.font.color.rgb = RGBColor(0, 0, 255)  # RGB for blue
+        run.font.color.rgb = RGBColor(0, 0, 255) 
 
         run.add_break(WD_BREAK.LINE)
     insertHR(doc.add_paragraph(), thickness=3)

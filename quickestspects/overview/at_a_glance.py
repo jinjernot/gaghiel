@@ -3,7 +3,6 @@ import pandas as pd
 
 def ataglance_section(doc, txt_file, df):
 
-    # Add a title to the Word document
     paragraph = doc.add_paragraph()
     run = paragraph.add_run("At a Glance")
     run.bold = True

@@ -46,7 +46,6 @@ def footer(doc, imgs_path):
     footer_paragraph = footer_table.cell(0, 1).paragraphs[0]
     footer_table.cell(0, 1).paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
 
-    # Add the text before the current date
     footer_paragraph.add_run("Not all configuration components are available in all regions/countries.")
     footer_paragraph.add_run().add_break()
     for run in footer_paragraph.runs:

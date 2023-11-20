@@ -13,7 +13,6 @@ from docx import Document
 def createdocx(xlsx_file, imgs_path, txt_file):
     """Create the Quickestspecs"""
 
-    #get product name
     df = pd.read_excel(xlsx_file,sheet_name = 'Metadata') 
     prod_name = df.columns[1]
     

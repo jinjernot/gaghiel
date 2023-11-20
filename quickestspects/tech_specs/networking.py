@@ -32,7 +32,6 @@ def networking_section(doc, df):
     wwlan_subtitle = df.iloc[274, 6]
     wwlan_paragraph = doc.add_paragraph()
 
-    # Add the text from the DataFrame to the paragraph
     run = wwlan_paragraph.add_run(wwlan_subtitle)
     run.bold = True
     wwlan_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
@@ -41,7 +40,6 @@ def networking_section(doc, df):
     wwlan = [x for x in wwlan if pd.notna(x)]
     wwlan_paragraph.add_run().add_break()
 
-     # Add the data from the list to the paragraph
     for x in wwlan:
         run = wwlan_paragraph.add_run(x)
         run.add_break(WD_BREAK.LINE)
@@ -49,7 +47,6 @@ def networking_section(doc, df):
     nfc_subtitle = df.iloc[279, 6]
     nfc_paragraph = doc.add_paragraph()
 
-    # Add the text from the DataFrame to the paragraph
     run = nfc_paragraph.add_run(nfc_subtitle)
     run.bold = True
     nfc_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
@@ -58,7 +55,6 @@ def networking_section(doc, df):
     nfc = [x for x in nfc if pd.notna(x)]
     nfc_paragraph.add_run().add_break()
 
-     # Add the data from the list to the paragraph
     for x in nfc:
         run = nfc_paragraph.add_run(x)
         run.add_break(WD_BREAK.LINE)
@@ -66,7 +62,6 @@ def networking_section(doc, df):
     miracast_subtitle = df.iloc[282, 6]
     miracast_paragraph = doc.add_paragraph()
 
-    # Add the text from the DataFrame to the paragraph
     run = miracast_paragraph.add_run(miracast_subtitle)
     run.bold = True
     miracast_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
@@ -75,7 +70,6 @@ def networking_section(doc, df):
     miracast = [x for x in miracast if pd.notna(x)]
     miracast_paragraph.add_run().add_break()
 
-     # Add the data from the list to the paragraph
     for x in miracast:
         run = miracast_paragraph.add_run(x)
         run.add_break(WD_BREAK.LINE)
@@ -83,7 +77,6 @@ def networking_section(doc, df):
     ethernet_subtitle = df.iloc[286, 6]
     ethernet_paragraph = doc.add_paragraph()
 
-    # Add the text from the DataFrame to the paragraph
     run = ethernet_paragraph.add_run(ethernet_subtitle)
     run.bold = True
     ethernet_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
@@ -92,7 +85,6 @@ def networking_section(doc, df):
     ethernet = [x for x in ethernet if pd.notna(x)]
     ethernet_paragraph.add_run().add_break()
 
-     # Add the data from the list to the paragraph
     for x in ethernet:
         run = ethernet_paragraph.add_run(x)
         run.add_break(WD_BREAK.LINE)
@@ -100,15 +92,12 @@ def networking_section(doc, df):
     networking_footnotes = df.iloc[291:300, 6].tolist()
     networking_footnotes = [x for x in networking_footnotes if pd.notna(x)]
 
-    # Create a new paragraph
     networking_footnotes_paragraph = doc.add_paragraph()
 
-    # Add the data from the list to the paragraph
     for x in networking_footnotes:
         run = networking_footnotes_paragraph.add_run(x)
 
-        # Set the font color to blue
-        run.font.color.rgb = RGBColor(0, 0, 255)  # RGB for blue
+        run.font.color.rgb = RGBColor(0, 0, 255) 
 
         run.add_break(WD_BREAK.LINE)
     insertHR(doc.add_paragraph(), thickness=3)
