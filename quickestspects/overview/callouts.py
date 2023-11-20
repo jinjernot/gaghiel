@@ -33,7 +33,7 @@ def callout_section(doc, txt_file, df, prod_name, imgs_path):
 
     with open(txt_file, 'a') as txt:
         txt.write(img_html_code + '\n')
-        txt.write("<p align='center'>Left</p>\n")
+        txt.write("<p>Left</p>\n")
 
     doc.add_picture(img_path, width=Inches(6))
 
@@ -71,7 +71,7 @@ def callout_section(doc, txt_file, df, prod_name, imgs_path):
                 run.font.size = Pt(10)
 
     # Append HTML code for the table to the text file
-    table_html = '<table border="1" style="width:50%">\n'
+    table_html = '<table border="1" style="border-collapse: collapse;">\n'
     for i in range(0, len(callouts), 2):
         row_html = f'<tr>\n<td>{callouts[i]}</td>\n'
         if i + 1 < len(callouts):
@@ -96,7 +96,7 @@ def callout_section(doc, txt_file, df, prod_name, imgs_path):
 
     with open(txt_file, 'a') as txt:
         txt.write(img_html_code2 + '\n')
-        txt.write("<p align='center'>Right</p>\n")
+        txt.write("<p>Right</p>\n")
 
     paragraph = doc.add_paragraph()
     run = paragraph.add_run("Back")
@@ -132,7 +132,7 @@ def callout_section(doc, txt_file, df, prod_name, imgs_path):
                 run.font.size = Pt(10)
 
     # Append HTML code for the table to the text file
-    table_html2 = '<table border="1" style="width:50%">\n'
+    table_html2 = '<table border="1" style="border-collapse: collapse;">\n'
     for i in range(0, len(filtered_tags2), 2):
         row_html = f'<tr>\n<td>{filtered_tags2[i]}</td>\n'
         if i + 1 < len(filtered_tags2):

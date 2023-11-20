@@ -19,3 +19,6 @@ def product_name_section(doc, txt_file, prod_name):
     prod_name_paragraph = doc.add_paragraph(prod_name)
 
     insertHR(doc.add_paragraph(), thickness=3)
+
+    with open(txt_file, 'a') as txt:
+        txt.write('<hr align="center" SIZE="2" width="100%">\n')

@@ -4,7 +4,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.shared import Pt, RGBColor
 import pandas as pd
 
-def display_section(doc, df):
+def display_section(doc, txt_file, df):
 
     display_paragraph = doc.add_paragraph()
     run = display_paragraph.add_run("DISPLAY")
@@ -13,130 +13,129 @@ def display_section(doc, df):
     display_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
     display_paragraph.add_run().add_break()
 
-    # Get the Subtitle
-    non_touch_subtitle = df.iloc[130, 6]
-    
-    # Create a new paragraph in your Word document
-    non_touch_paragraph = doc.add_paragraph()
+    with open(txt_file, 'a') as txt:
+        txt.write("<h1>DISPLAY</h1>\n")
 
-    # Add the text from the DataFrame to the paragraph
+    non_touch_subtitle = df.iloc[130, 6]
+    non_touch_paragraph = doc.add_paragraph()
     run = non_touch_paragraph.add_run(non_touch_subtitle)
     run.bold = True
     non_touch_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-
-    # Add a line break
     non_touch_paragraph.add_run().add_break()
-
     non_touch = df.iloc[131:142, 6].tolist()
     non_touch = [disp for disp in non_touch if pd.notna(disp)]
 
-     # Add the data from the list to the paragraph
+    with open(txt_file, 'a') as txt:
+        txt.write(f"<p>{non_touch_subtitle}</p>\n")
+
     for disp in non_touch:
         run = non_touch_paragraph.add_run(disp)
         run.add_break(WD_BREAK.LINE)
 
-    # Get the Subtitle
+        with open(txt_file, 'a') as txt:
+            txt.write(f"<p>{disp}</p>\n")
+
     touch_subtitle = df.iloc[145, 6]
-    
-    # Create a new paragraph in your Word document
     touch_paragraph = doc.add_paragraph()
 
-    # Add the text from the DataFrame to the paragraph
     run = touch_paragraph.add_run(touch_subtitle)
     run.bold = True
     touch_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-
-    # Add a line break
     touch_paragraph.add_run().add_break()
+
+    with open(txt_file, 'a') as txt:
+        txt.write(f"<p>{touch_subtitle}</p>\n")
 
     touch = df.iloc[146:149, 6].tolist()
     touch = [disp for disp in touch if pd.notna(disp)]
+    touch_paragraph.add_run().add_break()
 
-     # Add the data from the list to the paragraph
     for disp in touch:
         run = touch_paragraph.add_run(disp)
         run.add_break(WD_BREAK.LINE)
 
-    # Get the Subtitle
-    displayport_subtitle = df.iloc[155, 6]
-    
-    # Create a new paragraph in your Word document
-    displayport_paragraph = doc.add_paragraph()
+        with open(txt_file, 'a') as txt:
+            txt.write(f"<p>{disp}</p>\n")
 
-    # Add the text from the DataFrame to the paragraph
+    displayport_subtitle = df.iloc[155, 6]
+    displayport_paragraph = doc.add_paragraph()
     run = displayport_paragraph.add_run(displayport_subtitle)
     run.bold = True
     displayport_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-
-    # Add a line break
     displayport_paragraph.add_run().add_break()
+
+    with open(txt_file, 'a') as txt:
+        txt.write(f"<p>{displayport_subtitle}</p>\n")
+
 
     displayport = df.iloc[156:157, 6].tolist()
     displayport = [disp for disp in displayport if pd.notna(disp)]
 
-     # Add the data from the list to the paragraph
     for disp in displayport:
         run = displayport_paragraph.add_run(disp)
         run.add_break(WD_BREAK.LINE)
 
-        # Get the Subtitle
-    display_support_subtitle = df.iloc[158, 6]
-    
-    # Create a new paragraph in your Word document
-    display_support_paragraph = doc.add_paragraph()
+        with open(txt_file, 'a') as txt:
+            txt.write(f"<p>{disp}</p>\n")
 
-    # Add the text from the DataFrame to the paragraph
+    display_support_subtitle = df.iloc[158, 6]
+    display_support_paragraph = doc.add_paragraph()
     run = display_support_paragraph.add_run(display_support_subtitle)
     run.bold = True
     display_support_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-
-    # Add a line break
     display_support_paragraph.add_run().add_break()
+
+    with open(txt_file, 'a') as txt:
+        txt.write(f"<p>{display_support_subtitle}</p>\n")
 
     display_support = df.iloc[159:161, 6].tolist()
     display_support = [disp for disp in display_support if pd.notna(disp)]
 
-     # Add the data from the list to the paragraph
     for disp in display_support:
         run = display_support_paragraph.add_run(disp)
         run.add_break(WD_BREAK.LINE)
+        with open(txt_file, 'a') as txt:
+            txt.write(f"<p>{disp}</p>\n")
 
-    # Get the Subtitle
     display_size_subtitle = df.iloc[161, 6]
-    
-    # Create a new paragraph in your Word document
     display_size_paragraph = doc.add_paragraph()
-
-    # Add the text from the DataFrame to the paragraph
     run = display_size_paragraph.add_run(display_size_subtitle)
     run.bold = True
     display_size_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-
-    # Add a line break
     display_size_paragraph.add_run().add_break()
+
+    with open(txt_file, 'a') as txt:
+        txt.write(f"<p>{display_size_subtitle}</p>\n")
 
     display_size = df.iloc[162:164, 6].tolist()
     display_size = [disp for disp in display_size if pd.notna(disp)]
 
-     # Add the data from the list to the paragraph
     for disp in display_size:
         run = display_size_paragraph.add_run(disp)
         run.add_break(WD_BREAK.LINE)
+        with open(txt_file, 'a') as txt:
+            txt.write(f"<p>{disp}</p>\n")
 
     display_footnotes = df.iloc[186:191, 6].tolist()
     display_footnotes = [disp_footnote for disp_footnote in display_footnotes if pd.notna(disp_footnote)]
 
-    # Create a new paragraph
-    graphics_footnote_paragraph = doc.add_paragraph()
+    display_footnote_paragraph = doc.add_paragraph()
 
-    # Add the data from the list to the paragraph
     for disp_footnote in display_footnotes:
-        run = graphics_footnote_paragraph.add_run(disp_footnote)
-
-        # Set the font color to blue
-        run.font.color.rgb = RGBColor(0, 0, 255)  # RGB for blue
-
+        run = display_footnote_paragraph.add_run(disp_footnote)
+        run.font.color.rgb = RGBColor(0, 0, 255)
         run.add_break(WD_BREAK.LINE)
+
+    html_footnotes = '<div style="color: blue;">\n'
+    for disp_footnote in display_footnotes:
+        html_footnotes += f'  <span>{disp_footnote}</span>\n'
+    html_footnotes += '</div>\n'
+    with open(txt_file, 'a') as txt:
+            txt.write(html_footnotes)
+
     insertHR(doc.add_paragraph(), thickness=3)
+
+    with open(txt_file, 'a') as txt:
+        txt.write('<hr align="center" SIZE="2" width="100%">\n')
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

@@ -17,7 +17,6 @@ def operating_systems_section(doc, txt_file, df):
     with open(txt_file, 'a') as txt:
         txt.write("<h1>OPERATING SYSTEMS</h1>\n")
 
-
     operating_systems = df.iloc[19:30, 6].tolist()
 
     # Filter out NaN values
@@ -44,7 +43,7 @@ def operating_systems_section(doc, txt_file, df):
     run.bold = True
 
     # Generate HTML code for the table
-    html_table = '<table border="1" style="width:50%">\n'
+    html_table = '<table class="MsoNormalTable" cellSpacing="3" cellPadding="0" width="728" border="0">\n'
 
     # Add "Preinstalled" to the first cell of the first column
     html_table += f'<tr>\n<td><strong>{preinstalled_text}</strong></td>\n</tr>\n'
@@ -87,8 +86,9 @@ def operating_systems_section(doc, txt_file, df):
     with open(txt_file, 'a') as txt:
             txt.write(html_footnotes)
 
-
-
     insertHR(doc.add_paragraph(), thickness=3)
+
+    with open(txt_file, 'a') as txt:
+        txt.write('<hr align="center" SIZE="2" width="100%">\n')
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

@@ -7,13 +7,16 @@ from docx.shared import Pt, RGBColor
 import pandas as pd
 
 
-def processors_section(doc, df):
+def processors_section(doc, txt_file, df):
 
     paragraph = doc.add_paragraph()
     run = paragraph.add_run("PROCESSORS")
     run.font.size = Pt(12)
     run.bold = True
     paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    with open(txt_file, 'a') as txt:
+        txt.write("<h1>PROCESSORS</h1>\n")
 
  # Define the column indices for the range G54:M60
     start_col_idx = 6  # Column G
@@ -48,6 +51,23 @@ def processors_section(doc, df):
             for run in paragraph.runs:
                 run.font.bold = True
 
+    # Generate HTML code for the table
+    processors_table = '<table border="1" style="border-collapse: collapse;">\n'
+
+    # Populate the table with data and handle NaN values
+    for row_idx in range(data_range.shape[0]):
+        processors_table += '  <tr>\n'
+        for col_idx in range(data_range.shape[1]):
+            value = data_range.iat[row_idx, col_idx]
+            processors_table += f'    <td>{value}</td>\n' if not pd.isna(value) else '    <td></td>\n'
+        processors_table += '  </tr>\n'
+
+    # Closing HTML tags
+    processors_table += '</table>\n'
+
+    with open(txt_file, 'a') as txt:
+        txt.write(processors_table)
+
     run.add_break(WD_BREAK.LINE)
 
     processors_footnotes = df.iloc[73:80, 6].tolist()
@@ -63,4 +83,19 @@ def processors_section(doc, df):
         # Set the font color to blue
         run.font.color.rgb = RGBColor(0, 0, 255)  # RGB for blue
     run.add_break(WD_BREAK.LINE)
+
+    pro_footnotes = '<div style="color: blue;">\n'
+
+    for pro_footnote in processors_footnotes:
+        pro_footnotes += f'  <span>{pro_footnote}</span>\n'
+
+    # Closing HTML tags
+    pro_footnotes += '</div>\n'
+
+    with open(txt_file, 'a') as txt:
+            txt.write(pro_footnotes)
+
     insertHR(doc.add_paragraph(), thickness=3)
+
+    with open(txt_file, 'a') as txt:
+        txt.write('<hr align="center" SIZE="2" width="100%">\n')
