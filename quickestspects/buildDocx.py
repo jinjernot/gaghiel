@@ -18,7 +18,10 @@ def createdocx(xlsx_file, imgs_path, txt_file):
     
     doc = Document()
 
+    
     format_document(doc, prod_name, imgs_path)
+
+    # Quickspecs sections
     overview_section(doc, xlsx_file, txt_file, df, prod_name, imgs_path)
     tech_specs_section(doc, xlsx_file, txt_file, df, prod_name)
     
@@ -26,6 +29,5 @@ def createdocx(xlsx_file, imgs_path, txt_file):
 
     #process_superscript(doc)
     
-
     docx_file = 'quickestspecs.docx'
     doc.save(docx_file)

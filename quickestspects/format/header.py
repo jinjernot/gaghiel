@@ -5,13 +5,13 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Pt, Inches
 
 def header(doc, prod_name):
+    """Generate the Word Header"""
     
     header = doc.sections[0].header
     
     header_table = header.add_table(rows=1, cols=2, width=Inches(8))
     header_table.columns[0].width = Inches(4)
     header_table.columns[1].width = Inches(4)
-
     header_table.alignment = WD_TABLE_ALIGNMENT.CENTER
 
     header_paragraph = header_table.cell(0, 0).paragraphs[0]

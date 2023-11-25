@@ -4,6 +4,7 @@ from quickestspects.format.footer import footer
 from docx.shared import Pt
 
 def set_margins(doc):
+    """Set document margins"""
     sections = doc.sections
     for section in sections:
         section.left_margin = Pt(20)  
@@ -12,6 +13,7 @@ def set_margins(doc):
         section.bottom_margin = Pt(20)  
 
 def default_font(doc):
+    """Set default font"""
     styles = doc.styles
     default_style = styles['Normal']
     font = default_style.font
@@ -20,6 +22,7 @@ def default_font(doc):
 
 
 def format_document(doc, prod_name, imgs_path):
+    
     header(doc, prod_name)
     footer(doc, imgs_path)
     set_margins(doc)

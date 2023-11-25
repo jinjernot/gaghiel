@@ -6,15 +6,15 @@ import pandas as pd
 
 def display_section(doc, txt_file, df):
 
-    display_paragraph = doc.add_paragraph()
-    run = display_paragraph.add_run("DISPLAY")
+    paragraph = doc.add_paragraph()
+    run = paragraph.add_run("DISPLAY")
     run.font.size = Pt(12)
     run.bold = True
-    display_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    display_paragraph.add_run().add_break()
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    paragraph.add_run().add_break()
 
     with open(txt_file, 'a') as txt:
-        txt.write("<h1>DISPLAY</h1>\n")
+        txt.write("<h1><b>DISPLAY</h1></b>\n")
 
     non_touch_subtitle = df.iloc[130, 6]
     non_touch_paragraph = doc.add_paragraph()
@@ -36,33 +36,33 @@ def display_section(doc, txt_file, df):
             txt.write(f"<p>{disp}</p>\n")
 
     touch_subtitle = df.iloc[145, 6]
-    touch_paragraph = doc.add_paragraph()
+    paragraph = doc.add_paragraph()
 
-    run = touch_paragraph.add_run(touch_subtitle)
+    run = paragraph.add_run(touch_subtitle)
     run.bold = True
-    touch_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    touch_paragraph.add_run().add_break()
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    paragraph.add_run().add_break()
 
     with open(txt_file, 'a') as txt:
         txt.write(f"<p>{touch_subtitle}</p>\n")
 
     touch = df.iloc[146:149, 6].tolist()
     touch = [disp for disp in touch if pd.notna(disp)]
-    touch_paragraph.add_run().add_break()
+    paragraph.add_run().add_break()
 
     for disp in touch:
-        run = touch_paragraph.add_run(disp)
+        run = paragraph.add_run(disp)
         run.add_break(WD_BREAK.LINE)
 
         with open(txt_file, 'a') as txt:
             txt.write(f"<p>{disp}</p>\n")
 
     displayport_subtitle = df.iloc[155, 6]
-    displayport_paragraph = doc.add_paragraph()
-    run = displayport_paragraph.add_run(displayport_subtitle)
+    paragraph = doc.add_paragraph()
+    run = paragraph.add_run(displayport_subtitle)
     run.bold = True
-    displayport_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    displayport_paragraph.add_run().add_break()
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    paragraph.add_run().add_break()
 
     with open(txt_file, 'a') as txt:
         txt.write(f"<p>{displayport_subtitle}</p>\n")
@@ -72,18 +72,18 @@ def display_section(doc, txt_file, df):
     displayport = [disp for disp in displayport if pd.notna(disp)]
 
     for disp in displayport:
-        run = displayport_paragraph.add_run(disp)
+        run = paragraph.add_run(disp)
         run.add_break(WD_BREAK.LINE)
 
         with open(txt_file, 'a') as txt:
             txt.write(f"<p>{disp}</p>\n")
 
     display_support_subtitle = df.iloc[158, 6]
-    display_support_paragraph = doc.add_paragraph()
-    run = display_support_paragraph.add_run(display_support_subtitle)
+    paragraph = doc.add_paragraph()
+    run = paragraph.add_run(display_support_subtitle)
     run.bold = True
-    display_support_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    display_support_paragraph.add_run().add_break()
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    paragraph.add_run().add_break()
 
     with open(txt_file, 'a') as txt:
         txt.write(f"<p>{display_support_subtitle}</p>\n")
@@ -92,17 +92,17 @@ def display_section(doc, txt_file, df):
     display_support = [disp for disp in display_support if pd.notna(disp)]
 
     for disp in display_support:
-        run = display_support_paragraph.add_run(disp)
+        run = paragraph.add_run(disp)
         run.add_break(WD_BREAK.LINE)
         with open(txt_file, 'a') as txt:
             txt.write(f"<p>{disp}</p>\n")
 
     display_size_subtitle = df.iloc[161, 6]
-    display_size_paragraph = doc.add_paragraph()
-    run = display_size_paragraph.add_run(display_size_subtitle)
+    paragraph = doc.add_paragraph()
+    run = paragraph.add_run(display_size_subtitle)
     run.bold = True
-    display_size_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    display_size_paragraph.add_run().add_break()
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    paragraph.add_run().add_break()
 
     with open(txt_file, 'a') as txt:
         txt.write(f"<p>{display_size_subtitle}</p>\n")
@@ -111,7 +111,7 @@ def display_section(doc, txt_file, df):
     display_size = [disp for disp in display_size if pd.notna(disp)]
 
     for disp in display_size:
-        run = display_size_paragraph.add_run(disp)
+        run = paragraph.add_run(disp)
         run.add_break(WD_BREAK.LINE)
         with open(txt_file, 'a') as txt:
             txt.write(f"<p>{disp}</p>\n")
@@ -119,10 +119,10 @@ def display_section(doc, txt_file, df):
     display_footnotes = df.iloc[186:191, 6].tolist()
     display_footnotes = [disp_footnote for disp_footnote in display_footnotes if pd.notna(disp_footnote)]
 
-    display_footnote_paragraph = doc.add_paragraph()
+    paragraph = doc.add_paragraph()
 
     for disp_footnote in display_footnotes:
-        run = display_footnote_paragraph.add_run(disp_footnote)
+        run = paragraph.add_run(disp_footnote)
         run.font.color.rgb = RGBColor(0, 0, 255)
         run.add_break(WD_BREAK.LINE)
 

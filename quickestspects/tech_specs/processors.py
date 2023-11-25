@@ -1,4 +1,3 @@
-
 from quickestspects.format.hr import insertHR
 
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
@@ -16,7 +15,7 @@ def processors_section(doc, txt_file, df):
     paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
     with open(txt_file, 'a') as txt:
-        txt.write("<h1>PROCESSORS</h1>\n")
+        txt.write("<h1><b>PROCESSORS</h1></b>\n")
 
     start_col_idx = 6
     end_col_idx = 12
@@ -63,10 +62,10 @@ def processors_section(doc, txt_file, df):
     processors_footnotes = df.iloc[73:80, 6].tolist()
     processors_footnotes = [os for os in processors_footnotes if pd.notna(os)]
     
-    processor_footnote_paragraph = doc.add_paragraph()
+    paragraph = doc.add_paragraph()
 
     for pro_footnote in processors_footnotes:
-        run = processor_footnote_paragraph.add_run(pro_footnote)
+        run = paragraph.add_run(pro_footnote)
         run.add_break(WD_BREAK.LINE)
         run.font.color.rgb = RGBColor(0, 0, 255)
     run.add_break(WD_BREAK.LINE)

@@ -5,18 +5,18 @@ from docx.shared import Pt
 
 def chipset_section(doc, txt_file, df):
 
-    chipset_paragraph = doc.add_paragraph()
-    run = chipset_paragraph.add_run("CHIPSET")
+    paragraph = doc.add_paragraph()
+    run = paragraph.add_run("CHIPSET")
     run.font.size = Pt(12)
     run.bold = True
-    chipset_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    chipset_paragraph.add_run().add_break()
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    paragraph.add_run().add_break()
 
     with open(txt_file, 'a') as txt:
-        txt.write("<h1>CHIPSET</h1>\n")
+        txt.write("<h1><b>CHIPSET</h1></b>\n")
 
     chipset = df.iloc[90, 6]
-    chipset_paragraph.add_run(chipset)
+    paragraph.add_run(chipset)
 
     with open(txt_file, 'a') as txt:
         txt.write(f"<p>{chipset}</p>\n")

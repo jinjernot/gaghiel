@@ -1,6 +1,6 @@
 # gaghiel
 
-I have developed a tool to automate the time-consuming task of creating word files for HP's quickspecs from cleaned up reports. The tool uses a previously cleaned report as input and selects relevant content to create a word file matching the Quickspecs format for HP's laser printers.
+I have developed a tool to automate the time-consuming task of creating word and HTML files for HP's Quickspecs from cleaned up reports. The tool uses a previously cleaned report as input and selects relevant content to create a word file matching the Quickspecs format for HP's laser printers.
 
 By automating this process, I have significantly reduced the time and effort required for manual word file creation, allowing me to focus on more strategic tasks. This repository contains the code for this tool, which is currently in version 1.0.
 

@@ -1,4 +1,3 @@
-
 from quickestspects.format.hr import insertHR
 
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
@@ -15,7 +14,7 @@ def operating_systems_section(doc, txt_file, df):
     paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
     with open(txt_file, 'a') as txt:
-        txt.write("<h1>OPERATING SYSTEMS</h1>\n")
+        txt.write("<h1><b>OPERATING SYSTEMS</h1></b>\n")
 
     operating_systems = df.iloc[19:30, 6].tolist()
 
@@ -44,7 +43,6 @@ def operating_systems_section(doc, txt_file, df):
 
     for os in operating_systems:
         html_table += f'<tr>\n<td></td>\n<td>{os}</td>\n</tr>\n'
-    # Closing HTML tags
     html_table += '</table>\n'
     with open(txt_file, 'a') as txt:
             txt.write(html_table)

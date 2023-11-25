@@ -2,6 +2,8 @@ from docx.oxml.shared import OxmlElement
 from docx.oxml.ns import qn
 
 def insertHR(paragraph, thickness=12):
+    """Inser horizontal line"""
+
     p = paragraph._p
     pPr = p.get_or_add_pPr()
     pBdr = OxmlElement('w:pBdr')

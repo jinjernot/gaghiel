@@ -11,6 +11,7 @@ def loadxlsx():
     
     for xlsx_file in xlsx_files:
         createdocx(xlsx_file, imgs_path, txt_file)
+        
 def main():
     loadxlsx()
 

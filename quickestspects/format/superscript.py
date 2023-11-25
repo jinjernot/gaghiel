@@ -35,6 +35,5 @@ def superscript_numbers_in_square_brackets(docx_path):
 
     doc.save('output.docx')
 
-# Example usage
 docx_path = 'quickestspecs.docx'
 superscript_numbers_in_square_brackets(docx_path)
