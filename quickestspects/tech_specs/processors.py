@@ -1,14 +1,15 @@
+from quickestspects.blocks.paragraph import *
+from quickestspects.blocks.title import *
 from quickestspects.format.hr import *
-from quickestspects.blocks.title import  insertTitle
 
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
+from docx.enum.text import WD_BREAK
 from docx.enum.table import WD_ALIGN_VERTICAL
-from docx.shared import Pt, RGBColor
 import pandas as pd
 
-
 def processors_section(doc, txt_file, df):
+    """Processors techspecs section"""
 
+    # Add the title: PROCESSORS
     insertTitle(doc, "PROCESSORS", txt_file)
 
     start_col_idx = 6
@@ -53,28 +54,11 @@ def processors_section(doc, txt_file, df):
 
     run.add_break(WD_BREAK.LINE)
 
-    processors_footnotes = df.iloc[73:80, 6].tolist()
-    processors_footnotes = [os for os in processors_footnotes if pd.notna(os)]
-    
-    paragraph = doc.add_paragraph()
+    # Footnotes
+    insertFootnote(doc, txt_file, df, slice(73, 80), 6)
 
-    for pro_footnote in processors_footnotes:
-        run = paragraph.add_run(pro_footnote)
-        run.add_break(WD_BREAK.LINE)
-        run.font.color.rgb = RGBColor(0, 0, 255)
-    run.add_break(WD_BREAK.LINE)
-
-    pro_footnotes = '<div style="color: blue;">\n'
-
-    for pro_footnote in processors_footnotes:
-        pro_footnotes += f'  <span>{pro_footnote}</span>\n'
-
-    pro_footnotes += '</div>\n'
-
-    with open(txt_file, 'a') as txt:
-            txt.write(pro_footnotes)
-
+    # HR
     insertHR(doc.add_paragraph(), thickness=3)
+    insertHTMLhr(txt_file)
 
-    with open(txt_file, 'a') as txt:
-        txt.write('<hr align="center" SIZE="2" width="100%">\n')
+    doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

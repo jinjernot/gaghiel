@@ -8,8 +8,8 @@ from docx.enum.text import WD_BREAK
 def graphics_section(doc, txt_file, df):
     """ Graphics techspecs section"""
     
+    # Add the title: GRAPHICS
     insertTitle(doc, "GRAPHICS", txt_file)
-
 
     # Integrated
     insertSubtitle(doc, txt_file, df, 102, 6)

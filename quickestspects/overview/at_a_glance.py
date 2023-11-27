@@ -1,17 +1,12 @@
 from docx.enum.text import WD_BREAK,WD_ALIGN_PARAGRAPH
+from quickestspects.blocks.title import *
 import pandas as pd
 
 def ataglance_section(doc, txt_file, df):
     """At a glance section"""
 
-    # Create subtitle
-    paragraph = doc.add_paragraph()
-    run = paragraph.add_run("At a Glance")
-    run.bold = True
-
-    #HTML subtitle
-    with open(txt_file, 'a') as txt:
-        txt.write("<h1><b>At a Glance</h1></b>\n")
+    # Add the title: At a glance 
+    insertTitle(doc, "At a glance ", txt_file)
 
     with open(txt_file, 'a') as txt:
         txt.write("<tbody>\n")

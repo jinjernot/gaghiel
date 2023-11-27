@@ -4,8 +4,6 @@ from quickestspects.format.hr import *
 
 from docx.enum.text import WD_BREAK
 
-import pandas as pd
-
 def display_section(doc, txt_file, df):
     """Display techspecs section"""
 
@@ -38,6 +36,5 @@ def display_section(doc, txt_file, df):
     # HR
     insertHR(doc.add_paragraph(), thickness=3)
     insertHTMLhr(txt_file)
-
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

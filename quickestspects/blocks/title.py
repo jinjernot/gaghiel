@@ -26,4 +26,4 @@ def insertSubtitle(doc, txt_file, df,  iloc_row, iloc_column):
 
     # Write the HTML subtitle
     with open(txt_file, 'a') as txt:
-        txt.write(f"<p>{subtitle}</p>\n")
+        txt.write(f"<b><p>{subtitle}</p></b>\n")

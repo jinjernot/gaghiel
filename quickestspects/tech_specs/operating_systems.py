@@ -1,13 +1,15 @@
+from quickestspects.blocks.paragraph import *
+from quickestspects.blocks.title import *
 from quickestspects.format.hr import *
-from quickestspects.blocks.title import  insertTitle
 
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.enum.table import WD_TABLE_ALIGNMENT
-from docx.shared import Pt, RGBColor
+from docx.enum.text import WD_BREAK
 import pandas as pd
 
 def operating_systems_section(doc, txt_file, df):
+    """Operating system techspecs section"""
 
+    # Add the title: OPERATING SYSTEMS
     insertTitle(doc, "OPERATING SYSTEMS", txt_file)
 
     operating_systems = df.iloc[19:30, 6].tolist()
@@ -41,34 +43,11 @@ def operating_systems_section(doc, txt_file, df):
     with open(txt_file, 'a') as txt:
             txt.write(html_table)
 
+    # Footnotes
+    insertFootnote(doc, txt_file, df, slice(31, 36), 6)
 
-
-    operating_systems_footnotes = df.iloc[31:36, 6].tolist()
-    operating_systems_footnotes = [os for os in operating_systems_footnotes if pd.notna(os)]
-
-    footnote_paragraph = doc.add_paragraph()
-
-    for os_footnote in operating_systems_footnotes:
-        run = footnote_paragraph.add_run(os_footnote)
-
-        run.font.color.rgb = RGBColor(0, 0, 255) 
-
-        run.add_break(WD_BREAK.LINE)
-
-
-    html_footnotes = '<div style="color: blue;">\n'
-
-    for os_footnote in operating_systems_footnotes:
-        html_footnotes += f'  <span>{os_footnote}</span>\n'
-        
-    html_footnotes += '</div>\n'
-
-    with open(txt_file, 'a') as txt:
-            txt.write(html_footnotes)
-
+    # HR
     insertHR(doc.add_paragraph(), thickness=3)
-
-    with open(txt_file, 'a') as txt:
-        txt.write('<hr align="center" SIZE="2" width="100%">\n')
+    insertHTMLhr(txt_file)
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

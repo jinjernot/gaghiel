@@ -5,6 +5,8 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 
 def product_name_section(doc, txt_file, prod_name):
+    """Product name section"""
+
     paragraph = doc.add_paragraph()
     run = paragraph.add_run("PRODUCT NAME")
     run.font.size = Pt(12)
@@ -18,7 +20,6 @@ def product_name_section(doc, txt_file, prod_name):
     
     paragraph = doc.add_paragraph(prod_name)
 
+    # HR
     insertHR(doc.add_paragraph(), thickness=3)
-
-    with open(txt_file, 'a') as txt:
-        txt.write('<hr align="center" SIZE="2" width="100%">\n')
+    insertHTMLhr(txt_file)
