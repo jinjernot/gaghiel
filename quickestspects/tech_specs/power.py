@@ -1,4 +1,5 @@
-from quickestspects.format.hr import insertHR
+from quickestspects.format.hr import *
+from quickestspects.blocks.title import  insertTitle
 
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.shared import RGBColor
@@ -7,15 +8,8 @@ import pandas as pd
 
 def power_section(doc, txt_file, df):
 
-    paragraph = doc.add_paragraph()
-    run = paragraph.add_run("POWER")
-    run.font.size = Pt(12)
-    run.bold = True
-    paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    paragraph.add_run().add_break()
+    insertTitle(doc, "POWER", txt_file)
 
-    with open(txt_file, 'a') as txt:
-        txt.write("<b><h1>POWER</h1></b>\n")
 
     insertHR(doc.add_paragraph(), thickness=3)
 

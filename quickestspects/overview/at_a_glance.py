@@ -2,13 +2,14 @@ from docx.enum.text import WD_BREAK,WD_ALIGN_PARAGRAPH
 import pandas as pd
 
 def ataglance_section(doc, txt_file, df):
-    """At a glance"""
+    """At a glance section"""
 
-    # Create Subtitle
+    # Create subtitle
     paragraph = doc.add_paragraph()
     run = paragraph.add_run("At a Glance")
     run.bold = True
 
+    #HTML subtitle
     with open(txt_file, 'a') as txt:
         txt.write("<h1><b>At a Glance</h1></b>\n")
 
@@ -34,6 +35,7 @@ def ataglance_section(doc, txt_file, df):
     note_paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
     for run in note_paragraph.runs:
         run.bold = True
+    # HTML note
     with open(txt_file, 'a') as txt:
         txt.write("<b>NOTE: See important legal disclosures for all listed specs in their respective features sections</b>\n")
     with open(txt_file, 'a') as txt:

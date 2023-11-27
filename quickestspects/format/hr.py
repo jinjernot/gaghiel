@@ -2,7 +2,7 @@ from docx.oxml.shared import OxmlElement
 from docx.oxml.ns import qn
 
 def insertHR(paragraph, thickness=12):
-    """Inser horizontal line"""
+    """Insert horizontal line"""
 
     p = paragraph._p
     pPr = p.get_or_add_pPr()
@@ -22,3 +22,7 @@ def insertHR(paragraph, thickness=12):
     bottom.set(qn('w:space'), '0')
     bottom.set(qn('w:color'), 'auto')
     pBdr.append(bottom)
+
+def insertHTMLhr(txt_file):
+    with open(txt_file, 'a') as txt:
+        txt.write('<hr align="center" SIZE="2" width="100%">\n')

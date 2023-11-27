@@ -1,4 +1,4 @@
-from quickestspects.format.hr import insertHR
+from quickestspects.format.hr import *
 
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -6,7 +6,6 @@ from docx.shared import Pt, Inches
 
 def header(doc, prod_name):
     """Generate the Word Header"""
-    
     header = doc.sections[0].header
     
     header_table = header.add_table(rows=1, cols=2, width=Inches(8))

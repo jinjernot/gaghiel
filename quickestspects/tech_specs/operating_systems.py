@@ -1,4 +1,5 @@
-from quickestspects.format.hr import insertHR
+from quickestspects.format.hr import *
+from quickestspects.blocks.title import  insertTitle
 
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.enum.table import WD_TABLE_ALIGNMENT
@@ -7,14 +8,7 @@ import pandas as pd
 
 def operating_systems_section(doc, txt_file, df):
 
-    paragraph = doc.add_paragraph()
-    run = paragraph.add_run("OPERATING SYSTEMS")
-    run.font.size = Pt(12)
-    run.bold = True
-    paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-
-    with open(txt_file, 'a') as txt:
-        txt.write("<h1><b>OPERATING SYSTEMS</h1></b>\n")
+    insertTitle(doc, "OPERATING SYSTEMS", txt_file)
 
     operating_systems = df.iloc[19:30, 6].tolist()
 

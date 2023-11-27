@@ -5,6 +5,7 @@ from docx.shared import Pt
 
 def set_margins(doc):
     """Set document margins"""
+    
     sections = doc.sections
     for section in sections:
         section.left_margin = Pt(20)  
@@ -22,7 +23,7 @@ def default_font(doc):
 
 
 def format_document(doc, prod_name, imgs_path):
-    
+    """Apply formatting to document"""
     header(doc, prod_name)
     footer(doc, imgs_path)
     set_margins(doc)

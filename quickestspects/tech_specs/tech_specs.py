@@ -20,9 +20,10 @@ import pandas as pd
 def tech_specs_section(doc, xlsx_file, txt_file, df, prod_name):
     """TechSpecs Sections"""
 
-    #Load sheet into df
+    # Load sheet into df
     df = pd.read_excel(xlsx_file, sheet_name='Tech Specs & QS Features')
     
+    # Run the functions to build the tech specs section
     product_name_section(doc, txt_file, prod_name)
     operating_systems_section(doc, txt_file, df)
     processors_section(doc, txt_file, df)
