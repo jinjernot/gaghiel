@@ -1,4 +1,6 @@
 
+from quickestspects.blocks.paragraph import *
+from quickestspects.blocks.title import *
 from quickestspects.format.hr import *
 
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
@@ -7,23 +9,19 @@ from docx.shared import RGBColor
 from docx.shared import Pt
 import pandas as pd
 
-def system_unit_section(doc, xlsx_file, df):
+def system_unit_section(doc, xlsx_file, txt_file):
     """System Unit table"""
 
-    # Load xlst
+    # Load xlsx
     df = pd.read_excel(xlsx_file, sheet_name='QS-Only System Unit')
 
-    paragraph = doc.add_paragraph()
-    run = paragraph.add_run("SYSTEM UNIT")
-    run.font.size = Pt(12)
-    run.bold = True
-    paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    paragraph.add_run().add_break()
+    # Add tible: PORTS
+    insertTitle(doc, "SYSTEM UNIT", txt_file)
 
-    start_col_idx = 5
-    end_col_idx = 6
-    start_row_idx = 10
-    end_row_idx = 52
+    start_col_idx = 0
+    end_col_idx = 1
+    start_row_idx = 4
+    end_row_idx = 41
 
     data_range = df.iloc[start_row_idx:end_row_idx+1, start_col_idx:end_col_idx+1]
     data_range = data_range.dropna(how='all')
@@ -32,6 +30,7 @@ def system_unit_section(doc, xlsx_file, df):
     table = doc.add_table(rows=num_rows, cols=num_cols)
 
     table.alignment = WD_ALIGN_VERTICAL.CENTER
+
 
     for row_idx in range(num_rows):
         for col_idx in range(num_cols):
@@ -43,6 +42,20 @@ def system_unit_section(doc, xlsx_file, df):
         for paragraph in cell.paragraphs:
             for run in paragraph.runs:
                 run.font.bold = True
+
+
+    html_table = '<table class="MsoNormalTable" cellSpacing="3" cellPadding="0" width="728" border="0">\n'
+    for row_idx in range(num_rows):
+        html_table += "  <tr>\n"
+        for col_idx in range(num_cols):
+            value = data_range.iat[row_idx, col_idx]
+            html_table += f"    <td>{value}</td>\n"
+        html_table += "  </tr>\n"
+    html_table += "</table>"
+
+    with open(txt_file, 'a') as txt:
+        txt.write(html_table)
+
 
     # Insert HR
     insertHR(doc.add_paragraph(), thickness=3)

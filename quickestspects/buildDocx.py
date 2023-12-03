@@ -21,7 +21,7 @@ def createdocx(xlsx_file, imgs_path):
     #overview_section(doc, xlsx_file, txt_file, df, prod_name, imgs_path)
     tech_specs_section(doc, xlsx_file, txt_file)
     
-    #$system_unit_section(doc, xlsx_file)
+    system_unit_section(doc, xlsx_file, txt_file)
     
     docx_file = 'quickestspecs.docx'
     doc.save(docx_file)

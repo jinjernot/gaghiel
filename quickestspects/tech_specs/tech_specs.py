@@ -38,7 +38,7 @@ def tech_specs_section(doc, xlsx_file, txt_file):
     keyboard_section(doc, txt_file, df)
     software_section(doc, txt_file, df)
     power_section(doc, txt_file, df)
-    #dimensions_section(doc, txt_file, df)
-    #ports_section(doc, txt_file, df)
-    #service_section(doc, txt_file, df)
+    dimensions_section(doc, txt_file, df)
+    ports_section(doc, txt_file, df)
+    service_section(doc, txt_file, df)
     
