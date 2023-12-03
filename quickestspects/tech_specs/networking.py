@@ -11,27 +11,27 @@ def networking_section(doc, txt_file, df):
     insertTitle(doc, "NETWORKING", txt_file)
 
     # Wlan
-    insertSubtitle(doc, txt_file, df, 267, 6)
-    insertList(doc, txt_file, df, slice(268, 273), 6)
+    insertSubtitle(doc, txt_file, df, 100, 1)
+    insertList(doc, txt_file, df, slice(101, 103),1)
 
     # Wwlan
-    insertSubtitle(doc, txt_file, df, 274, 6)
-    insertList(doc, txt_file, df, slice(275, 278), 6)
+    insertSubtitle(doc, txt_file, df, 103, 1)
+    insertList(doc, txt_file, df, slice(104, 106), 1)
+
+    # LPWAN
+    insertSubtitle(doc, txt_file, df, 106, 1)
+    insertList(doc, txt_file, df, slice(107, 108), 1)
 
     # NFC
-    insertSubtitle(doc, txt_file, df, 279, 6)
-    insertList(doc, txt_file, df, slice(280, 281), 6)
+    insertSubtitle(doc, txt_file, df, 108, 1)
+    insertList(doc, txt_file, df, slice(109, 110), 1)
 
     # Miracast
-    insertSubtitle(doc, txt_file, df, 282, 6)
-    insertList(doc, txt_file, df, slice(283, 285), 6)
-
-    # Ethernet
-    insertSubtitle(doc, txt_file, df, 286, 6)
-    insertList(doc, txt_file, df, slice(287, 289), 6)
+    insertSubtitle(doc, txt_file, df, 110, 1)
+    insertList(doc, txt_file, df, slice(111, 112), 1)
 
     # Footnotes
-    insertFootnote(doc, txt_file, df, slice(291, 300), 6)
+    insertFootnote(doc, txt_file, df, slice(113, 119), 1)
 
     # HR
     insertHR(doc.add_paragraph(), thickness=3)

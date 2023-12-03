@@ -3,7 +3,8 @@ from quickestspects.format.footer import footer
 
 from docx.shared import Pt
 
-def set_margins(doc):
+def set_margins(doc, xlsx_file):
+   
     """Set document margins"""
     
     sections = doc.sections
@@ -15,6 +16,7 @@ def set_margins(doc):
 
 def default_font(doc):
     """Set default font"""
+
     styles = doc.styles
     default_style = styles['Normal']
     font = default_style.font
@@ -22,9 +24,10 @@ def default_font(doc):
     font.size = Pt(10)
 
 
-def format_document(doc, prod_name, imgs_path):
+def format_document(doc, xlsx_file, imgs_path):
     """Apply formatting to document"""
-    header(doc, prod_name)
+
+    header(doc, xlsx_file)
     footer(doc, imgs_path)
-    set_margins(doc)
+    set_margins(doc, xlsx_file)
     default_font(doc)

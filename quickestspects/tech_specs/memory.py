@@ -11,19 +11,19 @@ def memory_section(doc, txt_file, df):
     insertTitle(doc, "MEMORY", txt_file)
 
     # Maximum memory
-    insertSubtitle(doc, txt_file, df, 235, 6)
-    insertParagraph(doc, txt_file, df, 236, 6)
+    insertSubtitle(doc, txt_file, df, 81, 1)
+    insertParagraph(doc, txt_file, df, 82, 1)
 
     # Primary memory
-    insertSubtitle(doc, txt_file, df, 237, 6)
-    insertList(doc, txt_file, df, slice(238, 246), 6)
+    insertSubtitle(doc, txt_file, df, 83, 1)
+    insertList(doc, txt_file, df, slice(84, 90), 1)
 
     # Memory slots
-    insertSubtitle(doc, txt_file, df, 247, 6)
-    insertList(doc, txt_file, df, slice(248, 255), 6)
+    insertSubtitle(doc, txt_file, df, 90, 1)
+    insertList(doc, txt_file, df, slice(91, 93), 1)
 
     # Footnotes
-    insertFootnote(doc, txt_file, df, slice(257, 258), 6)
+    insertFootnote(doc, txt_file, df, slice(95, 97), 1)
 
     # HR
     insertHR(doc.add_paragraph(), thickness=3)

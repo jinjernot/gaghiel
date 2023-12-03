@@ -16,20 +16,30 @@ def insertList(doc, txt_file, df, iloc_range, iloc_column):
     #Remove N/A 
     items  = [data for data in items if pd.notna(data)]
 
+    # Create a paragraph
+    paragraph = doc.add_paragraph()
+
+    # Add each item to the paragraph with a line break
     for data in items:
-        run = doc.add_paragraph().add_run(data)
-        #run.add_break(WD_BREAK.LINE)
+        run = paragraph.add_run(data)
+        run.add_break(WD_BREAK.LINE)
 
         with open(txt_file, 'a') as txt:
             txt.write(f"<p>{data}</p>\n")
 
 def insertFootnote(doc, txt_file, df, iloc_range, iloc_column):
+    # Get the data
     footnote = df.iloc[iloc_range, iloc_column].tolist()
+    #Remove N/A 
     footnote  = [note for note in footnote if pd.notna(note)]
+
+    # Create a paragraph
     paragraph = doc.add_paragraph()
 
+    # Add each footnote to the paragraph with a line break, set font
     for note in footnote:
         run = paragraph.add_run(note)
+        # Set color to Blue
         run.font.color.rgb = RGBColor(0, 0, 255)
         run.add_break(WD_BREAK.LINE)
 

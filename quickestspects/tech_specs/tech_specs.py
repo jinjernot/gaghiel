@@ -17,17 +17,18 @@ from quickestspects.tech_specs.service import service_section
 
 import pandas as pd
 
-def tech_specs_section(doc, xlsx_file, txt_file, df, prod_name):
+def tech_specs_section(doc, xlsx_file, txt_file):
     """TechSpecs Sections"""
 
     # Load sheet into df
     df = pd.read_excel(xlsx_file, sheet_name='Tech Specs & QS Features')
+    prod_name = df.columns[1]
     
     # Run the functions to build the tech specs section
     product_name_section(doc, txt_file, prod_name)
     operating_systems_section(doc, txt_file, df)
-    processors_section(doc, txt_file, df)
-    chipset_section(doc, txt_file, df)
+    #processors_section(doc, txt_file, df)
+    #chipset_section(doc, txt_file, df)
     graphics_section(doc, txt_file, df)
     display_section(doc, txt_file, df)
     storage_section(doc, txt_file, df)
@@ -37,7 +38,7 @@ def tech_specs_section(doc, xlsx_file, txt_file, df, prod_name):
     keyboard_section(doc, txt_file, df)
     software_section(doc, txt_file, df)
     power_section(doc, txt_file, df)
-    dimensions_section(doc, txt_file, df)
-    ports_section(doc, txt_file, df)
-    service_section(doc, txt_file, df)
+    #dimensions_section(doc, txt_file, df)
+    #ports_section(doc, txt_file, df)
+    #service_section(doc, txt_file, df)
     

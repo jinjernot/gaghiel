@@ -9,22 +9,19 @@ from docx import Document
 
 
 
-def createdocx(xlsx_file, imgs_path, txt_file):
+def createdocx(xlsx_file, imgs_path):
     """Create the Quickestspecs"""
-
-    df = pd.read_excel(xlsx_file,sheet_name = 'Metadata') 
-    prod_name = df.columns[1]
     
+    # Variables
     doc = Document()
-
-    
-    format_document(doc, prod_name, imgs_path)
+    txt_file = 'quickestspecs.txt'
+    format_document(doc, xlsx_file, imgs_path)
 
     # Quickspecs sections
-    overview_section(doc, xlsx_file, txt_file, df, prod_name, imgs_path)
-    tech_specs_section(doc, xlsx_file, txt_file, df, prod_name)
+    #overview_section(doc, xlsx_file, txt_file, df, prod_name, imgs_path)
+    tech_specs_section(doc, xlsx_file, txt_file)
     
-    system_unit_section(doc, xlsx_file, df)
+    #$system_unit_section(doc, xlsx_file)
     
     docx_file = 'quickestspecs.docx'
     doc.save(docx_file)

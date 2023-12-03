@@ -4,8 +4,14 @@ from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Pt, Inches
 
-def header(doc, prod_name):
+import pandas as pd
+
+def header(doc,xlsx_file):
     """Generate the Word Header"""
+
+    # Get product name
+    df = pd.read_excel(xlsx_file,sheet_name = 'Tech Specs & QS Features') 
+    prod_name = df.columns[1]
     header = doc.sections[0].header
     
     header_table = header.add_table(rows=1, cols=2, width=Inches(8))

@@ -3,6 +3,7 @@ from quickestspects.format.hr import *
 from docx.shared import Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
+import pandas as pd
 
 def product_name_section(doc, txt_file, prod_name):
     """Product name section"""

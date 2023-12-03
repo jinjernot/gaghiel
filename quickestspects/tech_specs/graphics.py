@@ -4,27 +4,26 @@ from quickestspects.format.hr import *
 
 from docx.enum.text import WD_BREAK
 
-
 def graphics_section(doc, txt_file, df):
-    """ Graphics techspecs section"""
+    """Graphics techspecs section"""
     
     # Add the title: GRAPHICS
     insertTitle(doc, "GRAPHICS", txt_file)
 
     # Integrated
-    insertSubtitle(doc, txt_file, df, 102, 6)
-    insertList(doc, txt_file, df, slice(103, 108), 6)
+    insertSubtitle(doc, txt_file, df, 13, 1)
+    insertList(doc, txt_file, df, slice(14, 16), 1)
 
     # Discrete
-    insertSubtitle(doc, txt_file, df, 108, 6)
-    insertList(doc, txt_file, df, slice(110, 111), 6)
+    insertSubtitle(doc, txt_file, df, 16, 1)
+    insertList(doc, txt_file, df, slice(17, 18), 1)
 
     # Supports
-    insertSubtitle(doc, txt_file, df, 111, 6)
-    insertList(doc, txt_file, df, slice(112, 116), 6)
+    insertSubtitle(doc, txt_file, df, 18, 1)
+    insertList(doc, txt_file, df, slice(19, 21), 1)
 
     # Footnotes
-    insertFootnote(doc, txt_file, df, slice(117, 121), 6)
+    insertFootnote(doc, txt_file, df, slice(22, 24), 1)
 
     # HR
     insertHR(doc.add_paragraph(), thickness=3)
