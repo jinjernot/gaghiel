@@ -3,10 +3,10 @@ from quickestspects.overview.overview import overview_section
 from quickestspects.format.format import format_document
 
 from quickestspects.tables.system_unit import system_unit_section
+from quickestspects.tables.displays import displays_section
 
 import pandas as pd
 from docx import Document
-
 
 
 def createdocx(xlsx_file, imgs_path):
@@ -22,6 +22,7 @@ def createdocx(xlsx_file, imgs_path):
     tech_specs_section(doc, xlsx_file, txt_file)
     
     system_unit_section(doc, xlsx_file, txt_file)
+    displays_section(doc, xlsx_file, txt_file)
     
     docx_file = 'quickestspecs.docx'
     doc.save(docx_file)
