@@ -27,10 +27,6 @@ def storage_section(doc, xlsx_file, txt_file):
             # Add a table with 3 columns to the Word document
             table = doc.add_table(rows=1, cols=3)
             
-            # Populate the table
-            # Insert the value next to the table into the first cell of column 0
-            table.cell(0, 0).text = str(row[1])  # Assuming the value is in the same row
-            
             # Determine the number of rows until the next "Table" is met
             end_row_index = start_row_index
             while end_row_index < len(df) and df.iloc[end_row_index, 0] != "Table":
@@ -43,6 +39,9 @@ def storage_section(doc, xlsx_file, txt_file):
                 
                 # Populate column 2
                 table.rows[-1].cells[2].text = str(df.iloc[i, 1])
+            
+            # Insert the value next to the table into the second row of column 0
+            table.cell(1, 0).text = str(row[1])  # Assuming the value is in the same row
 
 
 
