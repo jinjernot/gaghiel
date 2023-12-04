@@ -3,20 +3,17 @@ from quickestspects.blocks.paragraph import *
 from quickestspects.blocks.title import *
 from quickestspects.format.hr import *
 
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
-from docx.enum.table import WD_ALIGN_VERTICAL
-from docx.shared import RGBColor
-from docx.shared import Pt
+from docx.enum.text import WD_BREAK
 import pandas as pd
 
-def displays_section(doc, xlsx_file, txt_file):
-    """Displays QS Only Section"""
+def network_section(doc, xlsx_file, txt_file):
+    """Network QS Only Section"""
 
     # Load xlsx
-    df = pd.read_excel(xlsx_file, sheet_name='QS-Only Displays')
+    df = pd.read_excel(xlsx_file, sheet_name='QS-Only Network')
 
-    # Add tible: Displays
-    insertTitle(doc, "DISPLAYS", txt_file)
+    # Add tible: Networking
+    insertTitle(doc, "NETWORKING / COMMUNICATIONS", txt_file)
 
     for index, row in df.iterrows():
         # Check if the content in column 0 is "Table"
@@ -43,6 +40,9 @@ def displays_section(doc, xlsx_file, txt_file):
                 
                 # Populate column 2
                 table.rows[-1].cells[2].text = str(df.iloc[i, 1])
+
+
+
 
     # Insert HR
     insertHR(doc.add_paragraph(), thickness=3)

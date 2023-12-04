@@ -9,14 +9,14 @@ from docx.shared import RGBColor
 from docx.shared import Pt
 import pandas as pd
 
-def displays_section(doc, xlsx_file, txt_file):
-    """Displays QS Only Section"""
+def storage_section(doc, xlsx_file, txt_file):
+    """Storage QS Only Section"""
 
     # Load xlsx
-    df = pd.read_excel(xlsx_file, sheet_name='QS-Only Displays')
+    df = pd.read_excel(xlsx_file, sheet_name='QS-Only Storage')
 
-    # Add tible: Displays
-    insertTitle(doc, "DISPLAYS", txt_file)
+    # Add tible: Storage Reader
+    insertTitle(doc, "STORAGE", txt_file)
 
     for index, row in df.iterrows():
         # Check if the content in column 0 is "Table"
@@ -43,6 +43,8 @@ def displays_section(doc, xlsx_file, txt_file):
                 
                 # Populate column 2
                 table.rows[-1].cells[2].text = str(df.iloc[i, 1])
+
+
 
     # Insert HR
     insertHR(doc.add_paragraph(), thickness=3)

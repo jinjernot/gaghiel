@@ -7,19 +7,19 @@ from docx.enum.text import WD_BREAK
 from docx.enum.table import WD_ALIGN_VERTICAL
 import pandas as pd
 
-def system_unit_section(doc, xlsx_file, txt_file):
-    """System Unit table"""
+def options_section(doc, xlsx_file, txt_file):
+    """Options QS Only Section"""
 
     # Load xlsx
-    df = pd.read_excel(xlsx_file, sheet_name='QS-Only System Unit')
+    df = pd.read_excel(xlsx_file, sheet_name='QS-Only Options')
 
-    # Add tible: PORTS
-    insertTitle(doc, "SYSTEM UNIT", txt_file)
+    # Add tible: Options
+    insertTitle(doc, "Options", txt_file)
 
     start_col_idx = 0
-    end_col_idx = 1
-    start_row_idx = 4
-    end_row_idx = 41
+    end_col_idx = 2
+    start_row_idx = 1
+    end_row_idx = 54
 
     data_range = df.iloc[start_row_idx:end_row_idx+1, start_col_idx:end_col_idx+1]
     data_range = data_range.dropna(how='all')

@@ -31,7 +31,7 @@ def networking_section(doc, txt_file, df):
     insertList(doc, txt_file, df, slice(111, 112), 1)
 
     # Footnotes
-    insertFootnote(doc, txt_file, df, slice(113, 119), 1)
+    insertFootnote(doc, txt_file, df, slice(114, 119), 1)
 
     # HR
     insertHR(doc.add_paragraph(), thickness=3)
