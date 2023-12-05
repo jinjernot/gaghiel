@@ -13,7 +13,7 @@ def options_section(doc, xlsx_file, txt_file):
     # Load xlsx
     df = pd.read_excel(xlsx_file, sheet_name='QS-Only Options')
 
-    # Add tible: Options
+    # Add title: Options
     insertTitle(doc, "Options", txt_file)
 
     start_col_idx = 0

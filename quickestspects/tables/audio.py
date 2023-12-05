@@ -13,7 +13,7 @@ def audio_section(doc, xlsx_file, txt_file):
     # Load xlsx
     df = pd.read_excel(xlsx_file, sheet_name='QS-Only Audio')
 
-    # Add tible: PORTS
+    # Add title: PORTS
     insertTitle(doc, "AUDIO", txt_file)
 
     start_col_idx = 0

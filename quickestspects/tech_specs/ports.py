@@ -8,7 +8,7 @@ from docx.enum.text import WD_BREAK
 def ports_section(doc, txt_file, df):
     """Ports techspecs section"""
 
-    # Add tible: PORTS
+    # Add title: PORTS
     insertTitle(doc, "PORTS", txt_file)
 
     # Left side
