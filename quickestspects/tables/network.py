@@ -19,9 +19,6 @@ def network_section(doc, xlsx_file, txt_file):
     # Add table
     insertTable(doc, df, txt_file)
 
-
-
-
     # Insert HR
     insertHR(doc.add_paragraph(), thickness=3)
 

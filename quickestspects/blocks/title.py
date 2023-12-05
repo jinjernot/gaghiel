@@ -13,7 +13,6 @@ def insertTitle(doc, title, txt_file):
     with open(txt_file, 'a') as txt:
         txt.write(f"<b><h1>{title}</h1></b>\n")
 
-
 def insertSubtitle(doc, txt_file, df,  iloc_row, iloc_column):
     # Add the subtitle to the Word document
     paragraph = doc.add_paragraph()

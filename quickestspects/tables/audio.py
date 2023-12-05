@@ -13,7 +13,7 @@ def audio_section(doc, xlsx_file, txt_file):
     # Load xlsx
     df = pd.read_excel(xlsx_file, sheet_name='QS-Only Audio')
 
-    # Add title: PORTS
+    # Add title: AUDIO
     insertTitle(doc, "AUDIO", txt_file)
 
     start_col_idx = 0
@@ -29,7 +29,6 @@ def audio_section(doc, xlsx_file, txt_file):
 
     table.alignment = WD_ALIGN_VERTICAL.CENTER
 
-
     for row_idx in range(num_rows):
         for col_idx in range(num_cols):
             value = data_range.iat[row_idx, col_idx]
@@ -40,7 +39,6 @@ def audio_section(doc, xlsx_file, txt_file):
         for paragraph in cell.paragraphs:
             for run in paragraph.runs:
                 run.font.bold = True
-
 
     html_table = '<table class="MsoNormalTable" cellSpacing="3" cellPadding="0" width="728" border="0">\n'
     for row_idx in range(num_rows):
@@ -53,7 +51,6 @@ def audio_section(doc, xlsx_file, txt_file):
 
     with open(txt_file, 'a') as txt:
         txt.write(html_table)
-
 
     # Insert HR
     insertHR(doc.add_paragraph(), thickness=3)

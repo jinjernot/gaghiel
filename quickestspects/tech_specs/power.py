@@ -33,7 +33,6 @@ def power_section(doc, txt_file, df):
     # Footnotes
     insertFootnote(doc, txt_file, df, slice(280, 284), 1)
 
-
     # HR
     insertHR(doc.add_paragraph(), thickness=3)
     insertHTMLhr(txt_file)

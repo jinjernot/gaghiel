@@ -19,7 +19,6 @@ def ports_section(doc, txt_file, df):
     insertSubtitle(doc, txt_file, df, 305, 1)
     insertList(doc, txt_file, df, slice(306, 310), 1)
 
-
     # Footnotes
     insertFootnote(doc, txt_file, df, slice(311, 313), 1)
 

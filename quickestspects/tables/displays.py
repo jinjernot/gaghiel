@@ -12,7 +12,6 @@ def displays_section(doc, xlsx_file, txt_file):
 
     # Load xlsx
     df = pd.read_excel(xlsx_file, sheet_name='QS-Only Displays')
-    
 
     # Add title: Displays
     insertTitle(doc, "DISPLAYS", txt_file)
