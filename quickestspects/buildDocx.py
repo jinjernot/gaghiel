@@ -9,6 +9,7 @@ from quickestspects.tables.audio import audio_section
 from quickestspects.tables.fingerprint import fingerprint_section
 from quickestspects.tables.storage import storage_section
 from quickestspects.tables.network import network_section
+#from quickestspects.format.superscript import superscript
 
 import pandas as pd
 from docx import Document
@@ -33,6 +34,7 @@ def createdocx(xlsx_file, imgs_path):
     audio_section(doc, xlsx_file, txt_file)
     fingerprint_section(doc, xlsx_file, txt_file)
     options_section(doc, xlsx_file, txt_file)
+    #superscript(doc, xlsx_file, txt_file)
 
     
     docx_file = 'quickestspecs.docx'
