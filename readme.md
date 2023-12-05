@@ -8,4 +8,4 @@ I invite you to explore the code and see for yourself the potential benefits of 
 
 v1 - Word file
 
-Coming soon: HTML file
+Coming soon: HTML file, zip file
