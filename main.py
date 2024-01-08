@@ -1,4 +1,4 @@
-from quickestspects.buildDocx import createdocx
+from app.buildDocx import createdocx
 
 import glob
 
