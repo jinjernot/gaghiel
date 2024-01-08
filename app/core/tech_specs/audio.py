@@ -22,10 +22,10 @@ def audio_section(doc, txt_file, df):
 
     # Sensors
     insertSubtitle(doc, txt_file, df, 132, 1)
-    insertList(doc, txt_file, df, slice(133, 139),1)
+    insertList(doc, txt_file, df, slice(133, 138),1)
 
     # Footnotes
-    insertFootnote(doc, txt_file, df, slice(141, 143), 1)
+    insertFootnote(doc, txt_file, df, slice(140, 142), 1)
 
     # HR
     insertHR(doc.add_paragraph(), thickness=3)

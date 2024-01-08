@@ -11,47 +11,47 @@ def software_section(doc, txt_file, df):
     insertTitle(doc, "SOFTWARE AND SECURITY", txt_file)
 
     # Software
-    insertSubtitle(doc, txt_file, df, 175, 1)
-    insertList(doc, txt_file, df, slice(176, 196),1)
+    insertSubtitle(doc, txt_file, df, 173, 1)
+    insertList(doc, txt_file, df, slice(175, 191),1)
 
     # Manageability Features
-    insertSubtitle(doc, txt_file, df, 196, 1)
-    insertList(doc, txt_file, df, slice(197, 205), 1)
+    insertSubtitle(doc, txt_file, df, 191, 1)
+    insertList(doc, txt_file, df, slice(193, 200), 1)
 
     # Security Management
-    insertSubtitle(doc, txt_file, df, 205, 1)
-    insertList(doc, txt_file, df, slice(206, 217), 1)
+    insertSubtitle(doc, txt_file, df, 203, 1)
+    insertList(doc, txt_file, df, slice(202, 212), 1)
 
     # Security- TPM
-    insertSubtitle(doc, txt_file, df, 217, 1)
-    insertList(doc, txt_file, df, slice(218, 219), 1)
+    insertSubtitle(doc, txt_file, df, 212, 1)
+    insertList(doc, txt_file, df, slice(214, 223), 1)
 
     # TCG TPM 2.0
-    insertSubtitle(doc, txt_file, df, 219, 1)
-    insertList(doc, txt_file, df, slice(220, 221), 1)
+    #insertSubtitle(doc, txt_file, df, 215, 1)
+    #insertList(doc, txt_file, df, slice(216, 217), 1)
 
     # FIPS 140-2 Compliant: Yes
-    insertSubtitle(doc, txt_file, df, 221, 1)
-    insertList(doc, txt_file, df, slice(223, 223), 1)
+    #insertSubtitle(doc, txt_file, df, 217, 1)
+    #insertList(doc, txt_file, df, slice(219, 221), 1)
 
     # BIOS
-    insertSubtitle(doc, txt_file, df, 223, 1)
-    insertList(doc, txt_file, df, slice(224, 231), 1)
+    insertSubtitle(doc, txt_file, df, 224, 1)
+    insertList(doc, txt_file, df, slice(226, 232), 1)
 
     # Smartcard Reader
-    insertSubtitle(doc, txt_file, df, 231, 1)
-    insertList(doc, txt_file, df, slice(232, 235), 1)
+    insertSubtitle(doc, txt_file, df, 232, 1)
+    insertList(doc, txt_file, df, slice(233, 235), 1)
 
     # IPv6 Support
-    insertSubtitle(doc, txt_file, df, 235, 1)
-    insertList(doc, txt_file, df, slice(236, 237), 1)
+    insertSubtitle(doc, txt_file, df, 236, 1)
+    insertList(doc, txt_file, df, slice(237, 238), 1)
 
     # FirstNet Certified
-    insertSubtitle(doc, txt_file, df, 237, 1)
-    insertList(doc, txt_file, df, slice(238, 242), 1)
+    insertSubtitle(doc, txt_file, df, 238, 1)
+    insertList(doc, txt_file, df, slice(239, 243), 1)
 
     # Footnotes
-    insertFootnote(doc, txt_file, df, slice(243, 260), 1)
+    insertFootnote(doc, txt_file, df, slice(245, 261), 1)
 
 
     # HR

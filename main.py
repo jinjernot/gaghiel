@@ -1,9 +1,8 @@
 from app.buildDocx import createdocx
-
 import glob
 
-def loadxlsx():
-    """Load the xlsx file"""
+def main():
+    """Load the xlsx file and create DOCX"""
     
     folder_path = "./xlsx/" 
     imgs_path = "./imgs/"
@@ -11,9 +10,6 @@ def loadxlsx():
     
     for xlsx_file in xlsx_files:
         createdocx(xlsx_file, imgs_path)
-        
-def main():
-    loadxlsx()
 
 if __name__ == "__main__":
-        main()  
+    main()
