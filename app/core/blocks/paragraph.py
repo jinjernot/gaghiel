@@ -40,12 +40,12 @@ def insertFootnote(doc, txt_file, df, iloc_range, iloc_column):
     for note in footnote:
         run = paragraph.add_run(note)
         # Set color to Blue
-        run.font.color.rgb = RGBColor(0, 0, 255)
+        run.font.color.rgb = RGBColor(0, 0, 153)
         run.add_break(WD_BREAK.LINE)
 
-    html_footnotes = '<div style="color: blue;">\n'
+    html_footnotes = '<div style="color: rgb(0, 0, 153);">\n'
     for note in footnote:
         html_footnotes += f'  <span>{note}</span>\n'
     html_footnotes += '</div>\n'
     with open(txt_file, 'a') as txt:
-            txt.write(html_footnotes)
+        txt.write(html_footnotes)

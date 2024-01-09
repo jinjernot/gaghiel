@@ -7,7 +7,7 @@ import pandas as pd
 import os
 
 
-def callout_section(doc, txt_file, df, prod_name, imgs_path):
+def callout_section(doc, txt_file, prod_name, imgs_path, df):
     """Add Callout Section"""
 
     # Add the product name

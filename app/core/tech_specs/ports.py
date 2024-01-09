@@ -12,15 +12,15 @@ def ports_section(doc, txt_file, df):
     insertTitle(doc, "PORTS", txt_file)
 
     # Left side
-    insertSubtitle(doc, txt_file, df, 299, 1)
-    insertList(doc, txt_file, df, slice(300, 305),1)
+    insertSubtitle(doc, txt_file, df, 301, 1)
+    insertList(doc, txt_file, df, slice(302, 306),1)
 
     # Right side
-    insertSubtitle(doc, txt_file, df, 305, 1)
-    insertList(doc, txt_file, df, slice(306, 310), 1)
+    insertSubtitle(doc, txt_file, df, 306, 1)
+    insertList(doc, txt_file, df, slice(307, 311), 1)
 
     # Footnotes
-    insertFootnote(doc, txt_file, df, slice(311, 313), 1)
+    insertFootnote(doc, txt_file, df, slice(312, 315), 1)
 
     # HR
     insertHR(doc.add_paragraph(), thickness=3)
