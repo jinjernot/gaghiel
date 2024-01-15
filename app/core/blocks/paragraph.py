@@ -2,15 +2,15 @@ from docx.enum.text import WD_BREAK
 from docx.shared import RGBColor
 import pandas as pd
 
-def insertParagraph(doc, txt_file, df, iloc_row, iloc_column):
+def insertParagraph(doc, html_file, df, iloc_row, iloc_column):
     data = df.iloc[iloc_row, iloc_column]
     paragraph = doc.add_paragraph()
     paragraph.add_run(data)
 
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
         txt.write(f"<p>{data}</p>\n")
 
-def insertList(doc, txt_file, df, iloc_range, iloc_column):
+def insertList(doc, html_file, df, iloc_range, iloc_column):
     # Get the data
     items = df.iloc[iloc_range, iloc_column].tolist()
     #Remove N/A 
@@ -24,10 +24,10 @@ def insertList(doc, txt_file, df, iloc_range, iloc_column):
         run = paragraph.add_run(data)
         run.add_break(WD_BREAK.LINE)
 
-        with open(txt_file, 'a') as txt:
+        with open(html_file, 'a') as txt:
             txt.write(f"<p>{data}</p>\n")
 
-def insertFootnote(doc, txt_file, df, iloc_range, iloc_column):
+def insertFootnote(doc, html_file, df, iloc_range, iloc_column):
     # Get the data
     footnote = df.iloc[iloc_range, iloc_column].tolist()
     #Remove N/A 
@@ -47,5 +47,5 @@ def insertFootnote(doc, txt_file, df, iloc_range, iloc_column):
     for note in footnote:
         html_footnotes += f'  <span>{note}</span>\n'
     html_footnotes += '</div>\n'
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
         txt.write(html_footnotes)

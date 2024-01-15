@@ -7,7 +7,7 @@ import pandas as pd
 import os
 
 
-def callout_section(doc, txt_file, prod_name, imgs_path, df):
+def callout_section(doc, html_file, prod_name, imgs_path, df):
     """Add Callout Section"""
 
     # Add the product name
@@ -18,7 +18,7 @@ def callout_section(doc, txt_file, prod_name, imgs_path, df):
     prodname_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
     # add HTML Headers
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
         txt.write(f"<html><head><title>{prod_name}</title>\n")
         txt.write('<meta content="text/html; charset=utf-8" http-equiv="Content-Type">\n')
         txt.write('<meta name="Generator" content="Microsoft Word 15 (filtered)">\n')
@@ -37,7 +37,7 @@ def callout_section(doc, txt_file, prod_name, imgs_path, df):
     img_html_code2 = f'<img src="{img_path2}" alt="Product Image" width="702" height="561">'
 
     # Left image HTML subtitle
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
         txt.write(img_html_code + '\n')
         txt.write("<b><p>Left</p></b>\n")
     # Add  left image to docx
@@ -83,11 +83,11 @@ def callout_section(doc, txt_file, prod_name, imgs_path, df):
         table_html += row_html
     table_html += '</table>\n'
 
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
         txt.write(table_html)
 
     # add HTML <hr>
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
         txt.write('<hr align="center" SIZE="2" width="100%">\n')
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
@@ -96,7 +96,7 @@ def callout_section(doc, txt_file, prod_name, imgs_path, df):
     doc.add_picture(img_path2, width=Inches(6))
 
     # Right image HTML subtitle
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
         txt.write(img_html_code2 + '\n')
         txt.write("<b><p>Right</p></b>\n")
 
@@ -140,11 +140,11 @@ def callout_section(doc, txt_file, prod_name, imgs_path, df):
         table_html2 += row_html
     table_html2 += '</table>\n'
 
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
         txt.write(table_html2)
 
     # add HTML <hr>
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
         txt.write('<hr align="center" SIZE="2" width="100%">\n')
 
     doc.add_page_break()

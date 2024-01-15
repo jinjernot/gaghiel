@@ -1,7 +1,7 @@
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.shared import Pt
 
-def insertTitle(doc, title, txt_file):
+def insertTitle(doc, title, html_file):
     # Add the title to the Word document
     paragraph = doc.add_paragraph()
     run = paragraph.add_run(title)
@@ -10,10 +10,10 @@ def insertTitle(doc, title, txt_file):
     #paragraph.add_run().add_break()
 
     # Write the HTML title
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
         txt.write(f"<b><h1>{title}</h1></b>\n")
 
-def insertSubtitle(doc, txt_file, df,  iloc_row, iloc_column):
+def insertSubtitle(doc, html_file, df,  iloc_row, iloc_column):
     # Add the subtitle to the Word document
     paragraph = doc.add_paragraph()
     subtitle = df.iloc[iloc_row, iloc_column]
@@ -22,5 +22,5 @@ def insertSubtitle(doc, txt_file, df,  iloc_row, iloc_column):
     #run.add_break(WD_BREAK.LINE)
 
     # Write the HTML subtitle
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
         txt.write(f"<b><p>{subtitle}</p></b>\n")

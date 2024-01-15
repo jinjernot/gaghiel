@@ -6,11 +6,11 @@ from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_BREAK
 import pandas as pd
 
-def operating_systems_section(doc, txt_file, df):
+def operating_systems_section(doc, html_file, df):
     """Operating system techspecs section"""
 
     # Add the title: OPERATING SYSTEMS
-    insertTitle(doc, "OPERATING SYSTEMS", txt_file)
+    insertTitle(doc, "OPERATING SYSTEMS", html_file)
     operating_systems = df.iloc[3:8, 1].tolist()
     operating_systems = [os for os in operating_systems if pd.notna(os)]
 
@@ -44,14 +44,14 @@ def operating_systems_section(doc, txt_file, df):
     for os in operating_systems:
         html_table += f'<tr>\n<td></td>\n<td>{os}</td>\n</tr>\n'
     html_table += '</table>\n'
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
             txt.write(html_table)
 
     # Footnotes
-    insertFootnote(doc, txt_file, df, slice(10, 11), 1)
+    insertFootnote(doc, html_file, df, slice(10, 11), 1)
 
     # HR
     insertHR(doc.add_paragraph(), thickness=3)
-    insertHTMLhr(txt_file)
+    insertHTMLhr(html_file)
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

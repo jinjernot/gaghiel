@@ -7,14 +7,14 @@ from docx.enum.text import WD_BREAK
 from docx.enum.table import WD_ALIGN_VERTICAL
 import pandas as pd
 
-def audio_section(doc, file, txt_file):
+def audio_section(doc, file, html_file):
     """Audio QS Only Section"""
 
     # Load xlsx
     df = pd.read_excel(file, sheet_name='QS-Only Audio')
 
     # Add title: AUDIO
-    insertTitle(doc, "AUDIO", txt_file)
+    insertTitle(doc, "AUDIO", html_file)
 
     start_col_idx = 0
     end_col_idx = 1
@@ -49,7 +49,7 @@ def audio_section(doc, file, txt_file):
         html_table += "  </tr>\n"
     html_table += "</table>"
 
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
         txt.write(html_table)
 
     # Insert HR

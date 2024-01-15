@@ -23,6 +23,6 @@ def insertHR(paragraph, thickness=12):
     bottom.set(qn('w:color'), 'auto')
     pBdr.append(bottom)
 
-def insertHTMLhr(txt_file):
-    with open(txt_file, 'a') as txt:
+def insertHTMLhr(html_file):
+    with open(html_file, 'a') as txt:
         txt.write('<hr align="center" SIZE="2" width="100%">\n')

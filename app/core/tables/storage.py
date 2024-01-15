@@ -7,17 +7,17 @@ from app.core.format.hr import *
 from docx.enum.text import WD_BREAK
 import pandas as pd
 
-def storage_section(doc, file, txt_file):
+def storage_section(doc, file, html_file):
     """Storage QS Only Section"""
 
     # Load xlsx
     df = pd.read_excel(file, sheet_name='QS-Only Storage')
 
     # Add title: Storage Reader
-    insertTitle(doc, "STORAGE", txt_file)
+    insertTitle(doc, "STORAGE", html_file)
 
     # Add table
-    insertTable(doc, df, txt_file)
+    insertTable(doc, df, html_file)
 
     # Insert HR
     insertHR(doc.add_paragraph(), thickness=3)

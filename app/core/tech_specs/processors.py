@@ -6,11 +6,11 @@ from docx.enum.text import WD_BREAK
 from docx.enum.table import WD_ALIGN_VERTICAL
 import pandas as pd
 
-def processors_section(doc, txt_file, df):
+def processors_section(doc, html_file, df):
     """Processors techspecs section"""
 
     # Add the title: PROCESSORS
-    insertTitle(doc, "PROCESSORS", txt_file)
+    insertTitle(doc, "PROCESSORS", html_file)
 
     start_col_idx = 6
     end_col_idx = 12
@@ -49,16 +49,16 @@ def processors_section(doc, txt_file, df):
 
     processors_table += '</table>\n'
 
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
         txt.write(processors_table)
 
     run.add_break(WD_BREAK.LINE)
 
     # Footnotes
-    insertFootnote(doc, txt_file, df, slice(73, 80), 6)
+    insertFootnote(doc, html_file, df, slice(73, 80), 6)
 
     # HR
     insertHR(doc.add_paragraph(), thickness=3)
-    insertHTMLhr(txt_file)
+    insertHTMLhr(html_file)
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

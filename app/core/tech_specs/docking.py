@@ -7,11 +7,11 @@ from docx.enum.text import WD_BREAK
 from docx.enum.table import WD_ALIGN_VERTICAL
 import pandas as pd
 
-def docking_section(doc, txt_file, df):
+def docking_section(doc, html_file, df):
     """Docking Table"""
 
     # Add title: DOCKING
-    insertTitle(doc, "DOCKING (Sold Separately)", txt_file)
+    insertTitle(doc, "DOCKING (Sold Separately)", html_file)
 
     start_col_idx = 0
     end_col_idx = 1
@@ -46,11 +46,11 @@ def docking_section(doc, txt_file, df):
         html_table += "  </tr>\n"
     html_table += "</table>"
 
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
         txt.write(html_table)
 
     # Insert HR
     insertHR(doc.add_paragraph(), thickness=3)
-    insertHTMLhr(txt_file)
+    insertHTMLhr(html_file)
     
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

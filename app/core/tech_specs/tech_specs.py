@@ -19,7 +19,7 @@ from app.core.tech_specs.service import service_section
 
 import pandas as pd
 
-def tech_specs_section(doc, file, txt_file):
+def tech_specs_section(doc, file, html_file):
     """TechSpecs Sections"""
 
     # Load sheet into df
@@ -27,21 +27,21 @@ def tech_specs_section(doc, file, txt_file):
     prod_name = df.columns[1]
     
     # Run the functions to build the tech specs section
-    product_name_section(doc, txt_file, prod_name)
-    operating_systems_section(doc, txt_file, df)
-    #processors_section(doc, txt_file, df)
-    #chipset_section(doc, txt_file, df)
-    graphics_section(doc, txt_file, df)
-    display_section(doc, txt_file, df)
-    docking_section(doc, txt_file, df)
-    storage_section(doc, txt_file, df)
-    memory_section(doc, txt_file, df)
-    networking_section(doc, txt_file, df)
-    audio_section(doc, txt_file, df)
-    keyboard_section(doc, txt_file, df)
-    software_section(doc, txt_file, df)
-    power_section(doc, txt_file, df)
-    dimensions_section(doc, txt_file, df)
-    ports_section(doc, txt_file, df)
-    service_section(doc, txt_file, df)
+    product_name_section(doc, html_file, prod_name)
+    operating_systems_section(doc, html_file, df)
+    #processors_section(doc, html_file, df)
+    #chipset_section(doc, html_file, df)
+    graphics_section(doc, html_file, df)
+    display_section(doc, html_file, df)
+    docking_section(doc, html_file, df)
+    storage_section(doc, html_file, df)
+    memory_section(doc, html_file, df)
+    networking_section(doc, html_file, df)
+    audio_section(doc, html_file, df)
+    keyboard_section(doc, html_file, df)
+    software_section(doc, html_file, df)
+    power_section(doc, html_file, df)
+    dimensions_section(doc, html_file, df)
+    ports_section(doc, html_file, df)
+    service_section(doc, html_file, df)
     

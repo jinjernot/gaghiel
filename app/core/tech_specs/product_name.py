@@ -5,7 +5,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 import pandas as pd
 
-def product_name_section(doc, txt_file, prod_name):
+def product_name_section(doc, html_file, prod_name):
     """Product name section"""
 
     paragraph = doc.add_paragraph()
@@ -14,7 +14,7 @@ def product_name_section(doc, txt_file, prod_name):
     run.bold = True
     paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
-    with open(txt_file, 'a') as txt:
+    with open(html_file, 'a') as txt:
         txt.write("<h1><b>Technical Specifications</h1></b>\n")
         txt.write("<h1><b>PRODUCT NAME</h1></b>\n")
         txt.write(f"<p>{prod_name}</p>\n")
@@ -23,4 +23,4 @@ def product_name_section(doc, txt_file, prod_name):
 
     # HR
     insertHR(doc.add_paragraph(), thickness=3)
-    insertHTMLhr(txt_file)
+    insertHTMLhr(html_file)

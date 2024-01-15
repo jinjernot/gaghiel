@@ -24,7 +24,7 @@ def generate_docx():
         try:
             if allowed_file(file.filename):
                 createdocx(file)
-                return send_from_directory('.', 'quickestspecs.docx', as_attachment=True)
+                return send_from_directory('.', 'quickestspecs.zip', as_attachment=True)
         except Exception as e:
             print(e)
             return render_template('error.html'), 500

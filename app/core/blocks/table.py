@@ -1,6 +1,6 @@
 from app.core.format.hr import *
 
-def insertTable(doc, df, txt_file):
+def insertTable(doc, df, html_file):
     for index, row in df.iterrows():
         # Check if the content in column 0 is "Table"
         if row[0] == "Table":
@@ -79,5 +79,5 @@ def insertTable(doc, df, txt_file):
     # Close the table
     html_table += '</table>'
 
-    with open(txt_file, 'a', encoding='utf-8') as txt:
+    with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write(html_table)

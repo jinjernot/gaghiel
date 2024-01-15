@@ -7,17 +7,17 @@ from app.core.format.hr import *
 from docx.enum.text import WD_BREAK
 import pandas as pd
 
-def fingerprint_section(doc, file, txt_file):
+def fingerprint_section(doc, file, html_file):
     """Fingerprint Reader QS Only Section"""
 
     # Load xlsx
     df = pd.read_excel(file, sheet_name='QS-Only Fingerprint Reader')
 
     # Add title: Fingerprint Reader
-    insertTitle(doc, "Fingerprint Reader", txt_file)
+    insertTitle(doc, "Fingerprint Reader", html_file)
 
     # Add table
-    insertTable(doc, df, txt_file)
+    insertTable(doc, df, html_file)
 
     # Insert HR
     insertHR(doc.add_paragraph(), thickness=3)
