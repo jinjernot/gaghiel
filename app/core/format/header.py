@@ -6,11 +6,11 @@ from docx.shared import Pt, Inches
 
 import pandas as pd
 
-def header(doc,xlsx_file):
+def header(doc,file):
     """Generate the Word Header"""
 
     # Get product name
-    df = pd.read_excel(xlsx_file,sheet_name = 'Tech Specs & QS Features') 
+    df = pd.read_excel(file,sheet_name = 'Tech Specs & QS Features') 
     prod_name = df.columns[1]
     header = doc.sections[0].header
     

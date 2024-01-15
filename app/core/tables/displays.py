@@ -7,11 +7,11 @@ from app.core.format.hr import *
 from docx.enum.text import WD_BREAK
 import pandas as pd
 
-def displays_section(doc, xlsx_file, txt_file):
+def displays_section(doc, file, txt_file):
     """Displays QS Only Section"""
 
     # Load xlsx
-    df = pd.read_excel(xlsx_file, sheet_name='QS-Only Displays')
+    df = pd.read_excel(file, sheet_name='QS-Only Displays')
 
     # Add title: Displays
     insertTitle(doc, "DISPLAYS", txt_file)

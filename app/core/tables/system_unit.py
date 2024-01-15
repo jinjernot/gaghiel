@@ -7,11 +7,11 @@ from docx.enum.text import WD_BREAK
 from docx.enum.table import WD_ALIGN_VERTICAL
 import pandas as pd
 
-def system_unit_section(doc, xlsx_file, txt_file):
+def system_unit_section(doc, file, txt_file):
     """System Unit table"""
 
     # Load xlsx
-    df = pd.read_excel(xlsx_file, sheet_name='QS-Only System Unit')
+    df = pd.read_excel(file, sheet_name='QS-Only System Unit')
 
     # Add title: SYSTEM UNIT
     insertTitle(doc, "SYSTEM UNIT", txt_file)

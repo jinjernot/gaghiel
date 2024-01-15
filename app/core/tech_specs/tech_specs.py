@@ -19,11 +19,11 @@ from app.core.tech_specs.service import service_section
 
 import pandas as pd
 
-def tech_specs_section(doc, xlsx_file, txt_file):
+def tech_specs_section(doc, file, txt_file):
     """TechSpecs Sections"""
 
     # Load sheet into df
-    df = pd.read_excel(xlsx_file, sheet_name='Tech Specs & QS Features')
+    df = pd.read_excel(file, sheet_name='Tech Specs & QS Features')
     prod_name = df.columns[1]
     
     # Run the functions to build the tech specs section

@@ -3,7 +3,7 @@ from app.core.format.footer import footer
 
 from docx.shared import Pt
 
-def set_margins(doc, xlsx_file):
+def set_margins(doc, file):
    
     """Set document margins"""
     
@@ -24,10 +24,10 @@ def default_font(doc):
     font.size = Pt(10)
 
 
-def format_document(doc, xlsx_file, imgs_path):
+def format_document(doc, file, imgs_path):
     """Apply formatting to document"""
 
-    header(doc, xlsx_file)
+    header(doc, file)
     footer(doc, imgs_path)
-    set_margins(doc, xlsx_file)
+    set_margins(doc, file)
     default_font(doc)

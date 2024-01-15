@@ -1,25 +1,34 @@
-from flask import Flask, render_template
+from flask import Flask, request, render_template, send_from_directory
 from app.buildDocx import createdocx
-import glob
+import config
 
 app = Flask(__name__)
+app.use_static_for = 'static'
+# Configuration
+app.config.from_object(config)
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['VALID_FILE_EXTENSIONS']
+
 
 @app.route('/quickspecs')
 def index():
     """Homepage with a button to generate DOCX files"""
-    return render_template('index.html')
+    return render_template('index.html')    
 
-@app.route('/quickspecs/generate_docx')
+@app.route('/quickspecs/generate_docx', methods=['POST'])
 def generate_docx():
-    """Endpoint to generate DOCX files"""
-    folder_path = "./xlsx/"
-    imgs_path = "./imgs/"
-    xlsx_files = glob.glob(folder_path + "*.xlsx")
-
-    for xlsx_file in xlsx_files:
-        createdocx(xlsx_file, imgs_path)
-
-    return "DOCX files generated successfully!"
+    
+    if 'MAT' in request.files:
+        file = request.files['MAT']
+        try:
+            if allowed_file(file.filename):
+                createdocx(file)
+                return send_from_directory('.', 'quickestspecs.docx', as_attachment=True)
+        except Exception as e:
+            print(e)
+            return render_template('error.html'), 500
+    return render_template('error.html'), 400
 
 if __name__ == "__main__":
     app.run(debug=True)

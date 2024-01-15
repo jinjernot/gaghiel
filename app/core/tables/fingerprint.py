@@ -7,11 +7,11 @@ from app.core.format.hr import *
 from docx.enum.text import WD_BREAK
 import pandas as pd
 
-def fingerprint_section(doc, xlsx_file, txt_file):
+def fingerprint_section(doc, file, txt_file):
     """Fingerprint Reader QS Only Section"""
 
     # Load xlsx
-    df = pd.read_excel(xlsx_file, sheet_name='QS-Only Fingerprint Reader')
+    df = pd.read_excel(file, sheet_name='QS-Only Fingerprint Reader')
 
     # Add title: Fingerprint Reader
     insertTitle(doc, "Fingerprint Reader", txt_file)

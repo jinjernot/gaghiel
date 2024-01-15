@@ -7,11 +7,11 @@ from app.core.format.hr import *
 from docx.enum.text import WD_BREAK
 import pandas as pd
 
-def network_section(doc, xlsx_file, txt_file):
+def network_section(doc, file, txt_file):
     """Network QS Only Section"""
 
     # Load xlsx
-    df = pd.read_excel(xlsx_file, sheet_name='QS-Only Network')
+    df = pd.read_excel(file, sheet_name='QS-Only Network')
 
     # Add title: Networking
     insertTitle(doc, "NETWORKING / COMMUNICATIONS", txt_file)
