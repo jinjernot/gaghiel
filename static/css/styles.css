@@ -38,10 +38,19 @@
   
   .heading > h2 {
     font-size: 20pt;
+    text-align: center; 
+  }
+
+  .header {
+    background-color: #0096d6; /* Use the desired background color */
+    width: 100%; /* Make the header cover the entire width */
+    padding: 15px; /* Optional: Add padding for some space inside the header */
+    box-sizing: border-box; /* Optional: Include padding and border in the element's total width and height */
+    text-align: center; /* Optional: Center the text horizontally */
+    color: #ffffff; /* Optional: Set text color to white or any contrasting color */
   }
 
   h3 {
-    padding-top: 20px;
     padding-bottom: 5px;
     font-size: 16pt;
   }
@@ -52,36 +61,54 @@
   }
 
   .upload-container {
-    margin: 0 auto;
+    margin: 20px;
     color: black;
+    padding: 20px;
   }
 
-  .custom-button {
-    border: 1px solid #e6e6e6;
-    background-color: #0096d6;
-    color: #fff;  
-    border-radius: 10px;
-    outline: none; 
-    transition: background-color 0.3s ease-in-out; 
-    width: 290px;
-    height: 45px;
-    font-size: 16px;
-  }
   .image-container {
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-top: 20%;
+    padding-top: 5%;
   }
-
-  .custom-button:hover {
-    background-color: #0081b3;
+  
+  .button {
+    appearance: button;
+    backface-visibility: hidden;
+    background-color: #0096d6;
+    border-radius: 6px;
+    border-width: 0;
+    box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-size: 100%;
+    height: 44px;
+    line-height: 1.15;
+    margin: 12px 0 0;
+    outline: none;
+    overflow: hidden;
+    padding: 0 25px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    transform: translateZ(0);
+    transition: all .2s,box-shadow .08s ease-in;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
   }
-
-  .custom-button:focus {
-    border-color: #bfbfbf; 
+  
+  .button:disabled {
+    cursor: default;
   }
-
+  
+  .button:focus {
+    box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+  }
+  
   .custom-input {
     border: 1px solid #e6e6e6;
     border-radius: 10px;
@@ -102,38 +129,14 @@
   }
 
   table {
-    margin: 0 auto;
-    border: 0;
-    
+    margin: 20px auto;
+    border-collapse: collapse; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.333);
   }
-
-  .login {
-    border: 2px solid #0096d6;
-    background-color: #ffffff;
-    padding-left: 100px;
-    padding-right: 100px;
-    padding-top: 100px;
-    padding-bottom: 200px;
-    border-radius: 25px;
+  
+  td, th {
     
-  }
-
-  .menu, .content {
-    padding: 10px; /* Adding some padding for better appearance */
-    flex: 1; /* Let both columns grow to take available space */
-    background-color: #ffffff;
-    border: 1px solid #e6e6e6;;
-}
-
-.menu {
-    flex: 0 0 25%
-}
-
-  .content {
-    width: 75%;
-    vertical-align: top;
-    background-color: #ffffff;
-    padding: 2%;
+    border: 1px solid #ddd;
   }
 
   .container {
@@ -142,43 +145,3 @@
     margin-left: 15%;
     margin-right: 15%;
 }
-  
-  .hero-container {
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 15%;
-    margin-right: 15%;
-    padding: 2%;
-    border: 5px;
-    vertical-align: top
-  }
-
-  .hero-container img {
-      width: 50px;
-      height: 50px;
-      align-items: right;
-  }
-
-  hr {
-    margin: 10px 0;
-    border: none;
-    border-top: 1px solid #ccc;
-  }
-
-  .footer-container {
-    background-color: #ffffff;
-    margin-left: 15%;
-    margin-right: 15%;
-    padding: 1%;
-    text-align: right;
-  }
-  pre {
-    border: 1px solid #0096d6;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #f8f8f8;
-    overflow: auto;
-  }

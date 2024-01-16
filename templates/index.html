@@ -8,17 +8,16 @@
 <body>
     <table>
         <td>
-            <header class="heading">
-                <h1 class="">Quickspecs Tool beta</h1>
+            <header class="header">
+                <h2>DCO Quickspecs Tool beta</h2>
             </header>
-            <br>
 
             <div class="upload-container">
-                <h3 class="heading__title">Upload MAT file:</h3>
+                <h3>Upload MAT file:</h3>
                 <form method="POST" enctype="multipart/form-data" action="{{ url_for('generate_docx') }}">
-                    <input type="file" name="MAT" class="custom-file-input" multiple="true">
+                    <input type="file" name="MAT" class="custom-input" multiple="true">
                     <br>
-                    <input type="submit" value="Upload" class="upload-button">
+                    <input type="submit" value="Upload" class="button">
                 </form>
             </div>
         </td>
