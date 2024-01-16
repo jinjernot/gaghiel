@@ -42,12 +42,12 @@
   }
 
   .header {
-    background-color: #0096d6; /* Use the desired background color */
-    width: 100%; /* Make the header cover the entire width */
-    padding: 15px; /* Optional: Add padding for some space inside the header */
-    box-sizing: border-box; /* Optional: Include padding and border in the element's total width and height */
-    text-align: center; /* Optional: Center the text horizontally */
-    color: #ffffff; /* Optional: Set text color to white or any contrasting color */
+    background-color: #0096d6;
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    color: #ffffff;
   }
 
   h3 {
