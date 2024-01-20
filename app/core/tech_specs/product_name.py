@@ -14,7 +14,7 @@ def product_name_section(doc, html_file, prod_name):
     run.bold = True
     paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
-    with open(html_file, 'a') as txt:
+    with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write("<h1><b>Technical Specifications</h1></b>\n")
         txt.write("<h1><b>PRODUCT NAME</h1></b>\n")
         txt.write(f"<p>{prod_name}</p>\n")

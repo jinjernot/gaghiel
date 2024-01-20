@@ -11,7 +11,8 @@ def audio_section(doc, file, html_file):
     """Audio QS Only Section"""
 
     # Load xlsx
-    df = pd.read_excel(file, sheet_name='QS-Only Audio')
+    #df = pd.read_excel(file, sheet_name='QS-Only Audio')
+    df = pd.read_excel(file.stream, sheet_name='QS-Only Audio', engine='openpyxl')
 
     # Add title: AUDIO
     insertTitle(doc, "AUDIO", html_file)
@@ -49,7 +50,7 @@ def audio_section(doc, file, html_file):
         html_table += "  </tr>\n"
     html_table += "</table>"
 
-    with open(html_file, 'a') as txt:
+    with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write(html_table)
 
     # Insert HR

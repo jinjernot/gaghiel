@@ -46,7 +46,7 @@ def docking_section(doc, html_file, df):
         html_table += "  </tr>\n"
     html_table += "</table>"
 
-    with open(html_file, 'a') as txt:
+    with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write(html_table)
 
     # Insert HR

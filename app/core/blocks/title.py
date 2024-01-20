@@ -10,7 +10,7 @@ def insertTitle(doc, title, html_file):
     #paragraph.add_run().add_break()
 
     # Write the HTML title
-    with open(html_file, 'a') as txt:
+    with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write(f"<b><h1>{title}</h1></b>\n")
 
 def insertSubtitle(doc, html_file, df,  iloc_row, iloc_column):
@@ -22,5 +22,5 @@ def insertSubtitle(doc, html_file, df,  iloc_row, iloc_column):
     #run.add_break(WD_BREAK.LINE)
 
     # Write the HTML subtitle
-    with open(html_file, 'a') as txt:
+    with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write(f"<b><p>{subtitle}</p></b>\n")

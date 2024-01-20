@@ -11,7 +11,8 @@ def options_section(doc, file, html_file):
     """Options QS Only Section"""
 
     # Load xlsx
-    df = pd.read_excel(file, sheet_name='QS-Only Options')
+    #df = pd.read_excel(file, sheet_name='QS-Only Options')
+    df = pd.read_excel(file.stream, sheet_name='QS-Only Options', engine='openpyxl')
 
     # Add title: Options
     insertTitle(doc, "Options", html_file)
@@ -49,7 +50,7 @@ def options_section(doc, file, html_file):
         html_table += "  </tr>\n"
     html_table += "</table>"
 
-    with open(html_file, 'a') as txt:
+    with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write(html_table)
 
     # Insert HR

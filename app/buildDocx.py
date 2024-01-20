@@ -13,14 +13,14 @@ from docx import Document
 from zipfile import ZipFile
 from docx2pdf import convert
 
-imgs_path = "./imgs/"
+imgs_path = "/home/garciagi/qs/imgs/"
 
 def createdocx(file):
     """Create the Quickestspecs"""
     
     # Variables
     doc = Document()
-    html_file = 'quickestspecs.html'
+    html_file = '/home/garciagi/qs/quickestspecs.html'
     format_document(doc, file, imgs_path)
 
     # Quickspecs sections
@@ -34,15 +34,15 @@ def createdocx(file):
     fingerprint_section(doc, file, html_file)
     options_section(doc, file, html_file)
 
-    docx_file = 'quickestspecs.docx'
+    docx_file = '/home/garciagi/qs/quickestspecs.docx'
     doc.save(docx_file)
 
     # Convert DOCX to PDF using docx2pdf
-    convert(docx_file)
+    #convert(docx_file)
 
     # Create a zip file and add specific files to it
-    zip_file_name = 'quickestspecs.zip'
+    zip_file_name = '/home/garciagi/qs/quickestspecs.zip'
     with ZipFile(zip_file_name, 'w') as zipf:
-        zipf.write(html_file)
-        zipf.write(docx_file)
-        zipf.write(docx_file.replace('.docx', '.pdf'))  # Add the generated PDF file to the zip
+        zipf.write(html_file, arcname='quickestspecs.html')
+        zipf.write(docx_file, arcname='quickestspecs.docx')
+     #   zipf.write(docx_file.replace('.docx', '.pdf'))

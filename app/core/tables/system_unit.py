@@ -11,7 +11,10 @@ def system_unit_section(doc, file, html_file):
     """System Unit table"""
 
     # Load xlsx
-    df = pd.read_excel(file, sheet_name='QS-Only System Unit')
+    #df = pd.read_excel(file, sheet_name='QS-Only System Unit')
+    df = pd.read_excel(file.stream, sheet_name='QS-Only Storage', engine='openpyxl')
+
+    
 
     # Add title: SYSTEM UNIT
     insertTitle(doc, "SYSTEM UNIT", html_file)
@@ -49,7 +52,7 @@ def system_unit_section(doc, file, html_file):
         html_table += "  </tr>\n"
     html_table += "</table>"
 
-    with open(html_file, 'a') as txt:
+    with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write(html_table)
 
     # Insert HR

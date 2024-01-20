@@ -49,7 +49,7 @@ def processors_section(doc, html_file, df):
 
     processors_table += '</table>\n'
 
-    with open(html_file, 'a') as txt:
+    with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write(processors_table)
 
     run.add_break(WD_BREAK.LINE)

@@ -11,7 +11,8 @@ def storage_section(doc, file, html_file):
     """Storage QS Only Section"""
 
     # Load xlsx
-    df = pd.read_excel(file, sheet_name='QS-Only Storage')
+    #df = pd.read_excel(file, sheet_name='QS-Only Storage')
+    df = pd.read_excel(file.stream, sheet_name='QS-Only Storage', engine='openpyxl')
 
     # Add title: Storage Reader
     insertTitle(doc, "STORAGE", html_file)

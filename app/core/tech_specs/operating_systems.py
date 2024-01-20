@@ -44,7 +44,7 @@ def operating_systems_section(doc, html_file, df):
     for os in operating_systems:
         html_table += f'<tr>\n<td></td>\n<td>{os}</td>\n</tr>\n'
     html_table += '</table>\n'
-    with open(html_file, 'a') as txt:
+    with open(html_file, 'a', encoding='utf-8') as txt:
             txt.write(html_table)
 
     # Footnotes

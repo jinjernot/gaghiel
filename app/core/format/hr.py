@@ -24,5 +24,5 @@ def insertHR(paragraph, thickness=12):
     pBdr.append(bottom)
 
 def insertHTMLhr(html_file):
-    with open(html_file, 'a') as txt:
+    with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write('<hr align="center" SIZE="2" width="100%">\n')
