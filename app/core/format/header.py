@@ -17,14 +17,18 @@ def header(doc,file):
     header = doc.sections[0].header
     
     # Create header
+    paragraph = header.paragraphs[0]
+    p = paragraph._p 
+    p.getparent().remove(p)
     header_table = header.add_table(rows=1, cols=2, width=Inches(8))
     header_table.columns[0].width = Inches(4)
     header_table.columns[1].width = Inches(4)
     header_table.alignment = WD_TABLE_ALIGNMENT.CENTER
+
     
     # Set the header title
     header_paragraph = header_table.cell(0, 0).paragraphs[0]
-    header_run = header_paragraph.add_run("QuickSpecs")
+    header_run = header_paragraph.add_run("Quickspecs")
     header_run.font.size = Pt(27)
     header_run.font.bold = True
 

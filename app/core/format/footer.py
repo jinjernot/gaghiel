@@ -1,4 +1,5 @@
 from app.core.format.hr import *
+from app.core.format.table import table_column_widths
 
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -32,19 +33,21 @@ def add_page_number(paragraph):
 def footer(doc, imgs_path):
     footer = doc.sections[0].footer
     insertHR(footer.add_paragraph(), thickness=10)
-    footer_table = footer.add_table(rows=1, cols=3, width=Inches(8)) 
+    table = footer.add_table(rows=1, cols=3, width=Inches(8))
 
-    footer_table.columns[0].width = Inches(1)
-    footer_table.columns[1].width = Inches(6)
-    footer_table.columns[2].width = Inches(1)
+    table_column_widths(table, (Inches(1), Inches(6), Inches(1)))
 
-    footer_table.rows[0].height = Inches(.4)
-    footer_table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    table.columns[0].width = Inches(1)
+    table.columns[1].width = Inches(6)
+    table.columns[2].width = Inches(1)
 
-    footer_paragraph = footer_table.cell(0, 0).paragraphs[0]
+    table.rows[0].height = Inches(.4)
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
+
+    footer_paragraph = table.cell(0, 0).paragraphs[0]
     footer_paragraph.add_run().add_picture(imgs_path + "hp-logo.png", width=Inches(.4), height=Inches(.4))
-    footer_paragraph = footer_table.cell(0, 1).paragraphs[0]
-    footer_table.cell(0, 1).paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+    footer_paragraph = table.cell(0, 1).paragraphs[0]
+    table.cell(0, 1).paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
 
     footer_paragraph.add_run("Not all configuration components are available in all regions/countries.")
     footer_paragraph.add_run().add_break()
@@ -56,7 +59,7 @@ def footer(doc, imgs_path):
     for run in footer_paragraph.runs:
         run.font.size = Pt(8)
 
-    footer_paragraph = footer_table.cell(0, 2).paragraphs[0]
+    footer_paragraph = table.cell(0, 2).paragraphs[0]
     footer_paragraph.text = "Page "
     add_page_number(footer_paragraph)
     for run in footer_paragraph.runs:

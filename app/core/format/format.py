@@ -4,9 +4,8 @@ from app.core.format.footer import footer
 from docx.shared import Pt
 
 def set_margins(doc, file):
-   
     """Set document margins"""
-    
+
     sections = doc.sections
     for section in sections:
         section.left_margin = Pt(20)  
@@ -22,7 +21,6 @@ def default_font(doc):
     font = default_style.font
     font.name = 'HP Simplified'
     font.size = Pt(10)
-
 
 def format_document(doc, file, imgs_path):
     """Apply formatting to document"""

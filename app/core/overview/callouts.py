@@ -1,8 +1,6 @@
-from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
-from docx.enum.table import WD_TABLE_ALIGNMENT
-from docx.enum.table import WD_ALIGN_VERTICAL
 from docx.enum.section import WD_SECTION
+from app.core.format.table import table_column_widths
 from docx.shared import Pt, Inches
 import pandas as pd
 import os
@@ -51,6 +49,7 @@ def callout_section(doc, html_file, prod_name, imgs_path, df):
     run.bold = True
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
+    # Add Table "Front"
     start_col_idx = 1
     end_col_idx = 4
     start_row_idx = 4
@@ -62,7 +61,9 @@ def callout_section(doc, html_file, prod_name, imgs_path, df):
     num_rows, num_cols = data_range.shape
     table = doc.add_table(rows=num_rows, cols=num_cols)
 
-    table.alignment = WD_ALIGN_VERTICAL.CENTER
+    table_column_widths(table, (Inches(.5), Inches(3.5), Inches(.5), Inches(3.5)))
+
+    table.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
     for row_idx in range(num_rows):
         for col_idx in range(num_cols):
@@ -95,18 +96,19 @@ def callout_section(doc, html_file, prod_name, imgs_path, df):
     # Right image HTML subtitle
     with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write(img_html_code2 + '\n')
-        txt.write("<b><p>Right</p></b>\n")
+        txt.write("<b><p>Sides</p></b>\n")
 
     # Add Right subtitle
     paragraph = doc.add_paragraph()
-    run = paragraph.add_run("Right")
+    run = paragraph.add_run("Sides")
     run.font.size = Pt(12)
     run.bold = True
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
+    # add table 'Sides'
     start_col_idx = 1
     end_col_idx = 4
-    start_row_idx = 10
+    start_row_idx = 11
     end_row_idx = 22
 
     data_range = df.iloc[start_row_idx:end_row_idx+1, start_col_idx:end_col_idx+1]
@@ -115,7 +117,9 @@ def callout_section(doc, html_file, prod_name, imgs_path, df):
     num_rows, num_cols = data_range.shape
     table = doc.add_table(rows=num_rows, cols=num_cols)
 
-    table.alignment = WD_ALIGN_VERTICAL.CENTER
+    table_column_widths(table, (Inches(.5), Inches(3.5), Inches(.5), Inches(3.5)))
+
+    table.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
     for row_idx in range(num_rows):
         for col_idx in range(num_cols):
