@@ -3,10 +3,26 @@ from docx.enum.section import WD_SECTION
 from app.core.format.table import table_column_widths
 from docx.shared import Pt, Inches
 import pandas as pd
+import requests
+from io import BytesIO
+import hashlib
 import os
 
+def download_image(url):
+    """Download image from URL and return the image data."""
+    response = requests.get(url)
+    if response.status_code == 200:
+        return BytesIO(response.content)
+    else:
+        return None
 
-def callout_section(doc, html_file, prod_name, imgs_path, df):
+def get_temp_filename(url, suffix=".png"):
+    """Generate a unique temporary file name based on the URL."""
+    hash_object = hashlib.md5(url.encode())
+    return f"{hash_object.hexdigest()}{suffix}"
+
+
+def callout_section(doc, file, html_file, prod_name, imgs_path, df):
     """Add Callout Section"""
 
     # Add the product name
@@ -27,22 +43,43 @@ def callout_section(doc, html_file, prod_name, imgs_path, df):
         txt.write("<h1><b>Overview</h1></b>\n")
         txt.write(f"<p style='font-size:14pt;'><strong>{prod_name}</strong></p>\n")
 
-    # Image paths
-    img_path = os.path.join(imgs_path, 'image001.png')
-    img_path2 = os.path.join(imgs_path, 'image002.png')
+    # Assuming 'file' is the path to your Excel file
+    df = pd.read_excel(file, sheet_name='Callouts')
+
+    # Get image URLs from the DataFrame
+    img_url1 = df.iloc[4, 0]  # Assuming column 0, row 5
+    img_url2 = df.iloc[11, 0]  # Assuming column 0, row 12
+    print (img_url1, img_url2)
+
+    # Download images
+    img_data1 = download_image(img_url1)
+    img_data2 = download_image(img_url2)
+
+    # Generate unique temporary file names
+    img_filename1 = get_temp_filename(img_url1)
+    img_filename2 = get_temp_filename(img_url2)
+
+    # Save images to temporary files
+    with open(img_filename1, "wb") as img_file1:
+        img_file1.write(img_data1.getvalue())
+
+    with open(img_filename2, "wb") as img_file2:
+        img_file2.write(img_data2.getvalue())
+
+    # Insert images into the Word document
+    doc.add_picture(img_filename1, width=Inches(6))
+    doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
     # Image HTML Tags
-    img_html_code = f'<img src="{img_path}" alt="Product Image" width="702" height="561">'
-    img_html_code2 = f'<img src="{img_path2}" alt="Product Image" width="702" height="561">'
+    img_html_code = f'<img src="{img_url1}" alt="Product Image" width="702" height="561">'
+    img_html_code2 = f'<img src="{img_url2}" alt="Product Image" width="702" height="561">'
 
     # Left image HTML subtitle
     with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write(img_html_code + '\n')
         txt.write("<b><p>Front</p></b>\n")
-    # Add  left image to docx
-    doc.add_picture(img_path, width=Inches(6))
 
-    # Add Left subtitle
+    # Add Front subtitle
     paragraph = doc.add_paragraph()
     run = paragraph.add_run("Front")
     run.font.size = Pt(12)
@@ -70,7 +107,10 @@ def callout_section(doc, html_file, prod_name, imgs_path, df):
             value = data_range.iat[row_idx, col_idx]
             cell = table.cell(row_idx, col_idx)
             if not pd.isna(value):
-                cell.text = str(value)
+                if isinstance(value, (int, float)):
+                    cell.text = str(int(value))
+                else:
+                    cell.text = str(value)
 
     html_table = '<table class="MsoNormalTable" cellSpacing="3" cellPadding="0" width="728" border="0">\n'
     for row_idx in range(num_rows):
@@ -91,7 +131,7 @@ def callout_section(doc, html_file, prod_name, imgs_path, df):
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
     # add docx image
-    doc.add_picture(img_path2, width=Inches(6))
+    doc.add_picture(img_filename2, width=Inches(6))
 
     # Right image HTML subtitle
     with open(html_file, 'a', encoding='utf-8') as txt:
@@ -126,7 +166,10 @@ def callout_section(doc, html_file, prod_name, imgs_path, df):
             value = data_range.iat[row_idx, col_idx]
             cell = table.cell(row_idx, col_idx)
             if not pd.isna(value):
-                cell.text = str(value)
+                if isinstance(value, (int, float)):
+                    cell.text = str(int(value))
+                else:
+                    cell.text = str(value)
 
     html_table = '<table class="MsoNormalTable" cellSpacing="3" cellPadding="0" width="728" border="0">\n'
     for row_idx in range(num_rows):

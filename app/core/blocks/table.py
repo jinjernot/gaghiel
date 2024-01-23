@@ -34,7 +34,11 @@ def insertTable(doc, df, html_file):
             for paragraph in cell_0.paragraphs:
                 for run in paragraph.runs:
                     run.font.bold = True
-                # Insert HR
+                
+            # Remove the first row from the table
+            table.rows[0]._element.getparent().remove(table.rows[0]._element)
+
+            # Insert HR
             insertHR(doc.add_paragraph(), thickness=3)
 
     html_table = '<table class="MsoNormalTable" cellSpacing="3" cellPadding="0" width="728" border="0">\n'
@@ -50,7 +54,7 @@ def insertTable(doc, df, html_file):
             
             # Populate header cells for column 1 and 2
             html_table += '<th><b>{}</b></th>'.format(df.columns[0])
-            html_table += '<th><b>{}</b></th>'.format(df.columns[1])
+            html_table += '<th><b>{}</b></th>'
             
             # Close the header row
             html_table += '</tr>\n'
@@ -68,7 +72,7 @@ def insertTable(doc, df, html_file):
                 html_table += '<td><b>{}</b></td>'.format(df.iloc[i, 0])
                 
                 # Populate column 2 and set text to bold
-                html_table += '<td><b>{}</b></td>'.format(df.iloc[i, 1])
+                html_table += '<td><b>{}</b></td>'
                 
                 # Close the row
                 html_table += '</tr>\n'

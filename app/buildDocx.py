@@ -15,6 +15,7 @@ from docx import Document
 from zipfile import ZipFile
 from docx2pdf import convert
 
+
 #imgs_path = "/home/garciagi/qs/imgs/"
 imgs_path = "./imgs/"
 
@@ -56,3 +57,4 @@ def createdocx(file):
         zipf.write(html_file, arcname='quickestspecs.html')
         zipf.write(docx_file, arcname='quickestspecs.docx')
      #   zipf.write(docx_file.replace('.docx', '.pdf'))
+        

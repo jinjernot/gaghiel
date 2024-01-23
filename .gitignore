@@ -4,3 +4,5 @@ __pycache__
 verga
 *.txt
 xlsx
+*.zip
+*html
