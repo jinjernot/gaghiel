@@ -1,6 +1,7 @@
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.enum.table import WD_ALIGN_VERTICAL
 from docx.enum.section import WD_SECTION
 from docx.shared import Pt, Inches
 import pandas as pd
@@ -39,52 +40,48 @@ def callout_section(doc, html_file, prod_name, imgs_path, df):
     # Left image HTML subtitle
     with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write(img_html_code + '\n')
-        txt.write("<b><p>Left</p></b>\n")
+        txt.write("<b><p>Front</p></b>\n")
     # Add  left image to docx
     doc.add_picture(img_path, width=Inches(6))
 
     # Add Left subtitle
     paragraph = doc.add_paragraph()
-    run = paragraph.add_run("Left")
+    run = paragraph.add_run("Front")
     run.font.size = Pt(12)
     run.bold = True
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
-    # Get callout data and store it into a DF
-    callouts = df.iloc[11:31, 6].tolist()
-    callouts = [tag for tag in callouts if pd.notna(tag)]
-    total_rows = (len(callouts) + 1) // 2
+    start_col_idx = 1
+    end_col_idx = 4
+    start_row_idx = 4
+    end_row_idx = 9
 
-    # Create docx table
-    callout_table = doc.add_table(rows=total_rows, cols=2)
-    callout_table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    data_range = df.iloc[start_row_idx:end_row_idx+1, start_col_idx:end_col_idx+1]
+    data_range = data_range.dropna(how='all')
 
-    # Populate docx table
-    for row_index in range(total_rows):
-        for col_index in range(2):
-            list_index = row_index * 2 + col_index
-            if list_index < len(callouts):
-                callout_table.cell(row_index, col_index).text = str(callouts[list_index])
-    for row in callout_table.rows:
-        for cell in row.cells:
-            cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
-            for run in cell.paragraphs[0].runs:
-                run.font.size = Pt(10)
+    num_rows, num_cols = data_range.shape
+    table = doc.add_table(rows=num_rows, cols=num_cols)
 
-    # HTML table
-    table_html = '<table border="1" style="border-collapse: collapse;">\n'
-    for i in range(0, len(callouts), 2):
-        row_html = f'<tr>\n<td>{callouts[i]}</td>\n'
-        if i + 1 < len(callouts):
-            row_html += f'<td>{callouts[i + 1]}</td>\n'
-        else:
-            row_html += '<td></td>\n'
-        row_html += '</tr>\n'
-        table_html += row_html
-    table_html += '</table>\n'
+    table.alignment = WD_ALIGN_VERTICAL.CENTER
+
+    for row_idx in range(num_rows):
+        for col_idx in range(num_cols):
+            value = data_range.iat[row_idx, col_idx]
+            cell = table.cell(row_idx, col_idx)
+            if not pd.isna(value):
+                cell.text = str(value)
+
+    html_table = '<table class="MsoNormalTable" cellSpacing="3" cellPadding="0" width="728" border="0">\n'
+    for row_idx in range(num_rows):
+        html_table += "  <tr>\n"
+        for col_idx in range(num_cols):
+            value = data_range.iat[row_idx, col_idx]
+            html_table += f"    <td>{value}</td>\n"
+        html_table += "  </tr>\n"
+    html_table += "</table>"
 
     with open(html_file, 'a', encoding='utf-8') as txt:
-        txt.write(table_html)
+        txt.write(html_table)
 
     # add HTML <hr>
     with open(html_file, 'a', encoding='utf-8') as txt:
@@ -107,42 +104,37 @@ def callout_section(doc, html_file, prod_name, imgs_path, df):
     run.bold = True
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
-    # Get callout data and store it into a DF
-    tags_to_process_back = df.iloc[40:60, 6].tolist()
-    filtered_tags2 = [tag for tag in tags_to_process_back if pd.notna(tag)]
-    total_rows = (len(filtered_tags2) + 1) // 2 
+    start_col_idx = 1
+    end_col_idx = 4
+    start_row_idx = 10
+    end_row_idx = 22
 
-    # Create docx table
-    callout_table2 = doc.add_table(rows=total_rows, cols=2)
-    callout_table2.alignment = WD_TABLE_ALIGNMENT.CENTER
+    data_range = df.iloc[start_row_idx:end_row_idx+1, start_col_idx:end_col_idx+1]
+    data_range = data_range.dropna(how='all')
 
-    # Populate table
-    for row_index in range(total_rows):
-        for col_index in range(2):
-            list_index = row_index * 2 + col_index
-            if list_index < len(filtered_tags2):
-                callout_table2.cell(row_index, col_index).text = str(filtered_tags2[list_index])
-    for row in callout_table2.rows:
-        for cell in row.cells:
-            cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
-            for run in cell.paragraphs[0].runs:
-                run.font.size = Pt(10)
+    num_rows, num_cols = data_range.shape
+    table = doc.add_table(rows=num_rows, cols=num_cols)
 
-    # HTML table
-    table_html2 = '<table border="1" style="border-collapse: collapse;">\n'
-    for i in range(0, len(filtered_tags2), 2):
-        row_html = f'<tr>\n<td>{filtered_tags2[i]}</td>\n'
-        if i + 1 < len(filtered_tags2):
-            row_html += f'<td>{filtered_tags2[i + 1]}</td>\n'
-        else:
-            row_html += '<td></td>\n'
-        row_html += '</tr>\n'
-        table_html2 += row_html
-    table_html2 += '</table>\n'
+    table.alignment = WD_ALIGN_VERTICAL.CENTER
+
+    for row_idx in range(num_rows):
+        for col_idx in range(num_cols):
+            value = data_range.iat[row_idx, col_idx]
+            cell = table.cell(row_idx, col_idx)
+            if not pd.isna(value):
+                cell.text = str(value)
+
+    html_table = '<table class="MsoNormalTable" cellSpacing="3" cellPadding="0" width="728" border="0">\n'
+    for row_idx in range(num_rows):
+        html_table += "  <tr>\n"
+        for col_idx in range(num_cols):
+            value = data_range.iat[row_idx, col_idx]
+            html_table += f"    <td>{value}</td>\n"
+        html_table += "  </tr>\n"
+    html_table += "</table>"
 
     with open(html_file, 'a', encoding='utf-8') as txt:
-        txt.write(table_html2)
-
+        txt.write(html_table)
     # add HTML <hr>
     with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write('<hr align="center" SIZE="2" width="100%">\n')

@@ -3,24 +3,29 @@ from app.core.overview.overview import overview_section
 from app.core.format.format import format_document
 from app.core.tables.system_unit import system_unit_section
 from app.core.tables.displays import displays_section
-from app.core.tables.options import options_section
 from app.core.tables.audio import audio_section
 from app.core.tables.fingerprint import fingerprint_section
 from app.core.tables.storage import storage_section
 from app.core.tables.network import network_section
+from app.core.tables.options import options_section
+from app.core.tables.change_log import change_log_section
+
 import pandas as pd
 from docx import Document
 from zipfile import ZipFile
 from docx2pdf import convert
 
-imgs_path = "/home/garciagi/qs/imgs/"
+#imgs_path = "/home/garciagi/qs/imgs/"
+imgs_path = "./imgs/"
 
 def createdocx(file):
     """Create the Quickestspecs"""
     
     # Variables
     doc = Document()
-    html_file = '/home/garciagi/qs/quickestspecs.html'
+    #html_file = '/home/garciagi/qs/quickestspecs.html'
+    html_file = 'quickestspecs.html'
+
     format_document(doc, file, imgs_path)
 
     # Quickspecs sections
@@ -33,15 +38,20 @@ def createdocx(file):
     audio_section(doc, file, html_file)
     fingerprint_section(doc, file, html_file)
     options_section(doc, file, html_file)
+    change_log_section(doc, file, html_file)
 
-    docx_file = '/home/garciagi/qs/quickestspecs.docx'
+    #docx_file = '/home/garciagi/qs/quickestspecs.docx'
+    docx_file = 'quickestspecs.docx'
+
     doc.save(docx_file)
 
     # Convert DOCX to PDF using docx2pdf
     #convert(docx_file)
 
     # Create a zip file and add specific files to it
-    zip_file_name = '/home/garciagi/qs/quickestspecs.zip'
+    #zip_file_name = '/home/garciagi/qs/quickestspecs.zip'
+    zip_file_name = 'quickestspecs.zip'
+
     with ZipFile(zip_file_name, 'w') as zipf:
         zipf.write(html_file, arcname='quickestspecs.html')
         zipf.write(docx_file, arcname='quickestspecs.docx')

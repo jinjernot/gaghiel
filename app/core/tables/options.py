@@ -11,8 +11,8 @@ def options_section(doc, file, html_file):
     """Options QS Only Section"""
 
     # Load xlsx
-    #df = pd.read_excel(file, sheet_name='QS-Only Options')
-    df = pd.read_excel(file.stream, sheet_name='QS-Only Options', engine='openpyxl')
+    df = pd.read_excel(file, sheet_name='QS-Only Options')
+    #df = pd.read_excel(file.stream, sheet_name='QS-Only Options', engine='openpyxl')
 
     # Add title: Options
     insertTitle(doc, "Options", html_file)

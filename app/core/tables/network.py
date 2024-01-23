@@ -11,8 +11,8 @@ def network_section(doc, file, html_file):
     """Network QS Only Section"""
 
     # Load xlsx
-    #df = pd.read_excel(file, sheet_name='QS-Only Network')
-    df = pd.read_excel(file.stream, sheet_name='QS-Only Network', engine='openpyxl')
+    df = pd.read_excel(file, sheet_name='QS-Only Network')
+    #df = pd.read_excel(file.stream, sheet_name='QS-Only Network', engine='openpyxl')
 
     # Add title: Networking
     insertTitle(doc, "NETWORKING / COMMUNICATIONS", html_file)

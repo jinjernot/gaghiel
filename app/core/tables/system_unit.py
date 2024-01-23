@@ -11,8 +11,8 @@ def system_unit_section(doc, file, html_file):
     """System Unit table"""
 
     # Load xlsx
-    #df = pd.read_excel(file, sheet_name='QS-Only System Unit')
-    df = pd.read_excel(file.stream, sheet_name='QS-Only Storage', engine='openpyxl')
+    df = pd.read_excel(file, sheet_name='QS-Only System Unit')
+    #df = pd.read_excel(file.stream, sheet_name='QS-Only Storage', engine='openpyxl')
 
     
 
