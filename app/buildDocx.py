@@ -16,16 +16,16 @@ from zipfile import ZipFile
 from docx2pdf import convert
 
 
-#imgs_path = "/home/garciagi/qs/imgs/"
-imgs_path = "./imgs/"
+imgs_path = "/home/garciagi/qs/imgs/"
+#imgs_path = "./imgs/"
 
 def createdocx(file):
-    """Create the Quickestspecs"""
+    """Create the quickspecs"""
     
     # Variables
     doc = Document()
-    #html_file = '/home/garciagi/qs/quickestspecs.html'
-    html_file = 'quickestspecs.html'
+    html_file = '/home/garciagi/qs/quickspecs.html'
+    #html_file = 'quickspecs.html'
 
     format_document(doc, file, imgs_path)
 
@@ -41,8 +41,8 @@ def createdocx(file):
     options_section(doc, file, html_file)
     change_log_section(doc, file, html_file)
 
-    #docx_file = '/home/garciagi/qs/quickestspecs.docx'
-    docx_file = 'quickestspecs.docx'
+    docx_file = '/home/garciagi/qs/quickspecs.docx'
+    #docx_file = 'quickspecs.docx'
 
     doc.save(docx_file)
 
@@ -50,11 +50,11 @@ def createdocx(file):
     #convert(docx_file)
 
     # Create a zip file and add specific files to it
-    #zip_file_name = '/home/garciagi/qs/quickestspecs.zip'
-    zip_file_name = 'quickestspecs.zip'
+    zip_file_name = '/home/garciagi/qs/quickspecs.zip'
+    #zip_file_name = 'quickspecs.zip'
 
     with ZipFile(zip_file_name, 'w') as zipf:
-        zipf.write(html_file, arcname='quickestspecs.html')
-        zipf.write(docx_file, arcname='quickestspecs.docx')
+        zipf.write(html_file, arcname='quickspecs.html')
+        zipf.write(docx_file, arcname='quickspecs.docx')
      #   zipf.write(docx_file.replace('.docx', '.pdf'))
         

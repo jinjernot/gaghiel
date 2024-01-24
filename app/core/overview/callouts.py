@@ -43,13 +43,17 @@ def callout_section(doc, file, html_file, prod_name, imgs_path, df):
         txt.write("<h1><b>Overview</h1></b>\n")
         txt.write(f"<p style='font-size:14pt;'><strong>{prod_name}</strong></p>\n")
 
-    # Assuming 'file' is the path to your Excel file
-    df = pd.read_excel(file, sheet_name='Callouts')
+    # Read the doc
+    #df = pd.read_excel(file, sheet_name='Callouts')
+    df = pd.read_excel(file.stream, sheet_name='Callouts', engine='openpyxl')
+
+    # Set the target directory
+    target_directory = '/home/garciagi/qs'
 
     # Get image URLs from the DataFrame
     img_url1 = df.iloc[4, 0]  # Assuming column 0, row 5
     img_url2 = df.iloc[11, 0]  # Assuming column 0, row 12
-    print (img_url1, img_url2)
+    print(img_url1, img_url2)
 
     # Download images
     img_data1 = download_image(img_url1)
@@ -59,15 +63,18 @@ def callout_section(doc, file, html_file, prod_name, imgs_path, df):
     img_filename1 = get_temp_filename(img_url1)
     img_filename2 = get_temp_filename(img_url2)
 
-    # Save images to temporary files
-    with open(img_filename1, "wb") as img_file1:
+    # Save images to the specified directory
+    img_filepath1 = os.path.join(target_directory, img_filename1)
+    img_filepath2 = os.path.join(target_directory, img_filename2)
+
+    with open(img_filepath1, "wb") as img_file1:
         img_file1.write(img_data1.getvalue())
 
-    with open(img_filename2, "wb") as img_file2:
+    with open(img_filepath2, "wb") as img_file2:
         img_file2.write(img_data2.getvalue())
 
     # Insert images into the Word document
-    doc.add_picture(img_filename1, width=Inches(6))
+    doc.add_picture(img_filepath1, width=Inches(6))
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
     # Image HTML Tags
@@ -131,7 +138,7 @@ def callout_section(doc, file, html_file, prod_name, imgs_path, df):
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
     # add docx image
-    doc.add_picture(img_filename2, width=Inches(6))
+    doc.add_picture(img_filepath2, width=Inches(6))
 
     # Right image HTML subtitle
     with open(html_file, 'a', encoding='utf-8') as txt:

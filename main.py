@@ -11,7 +11,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['VALID_FILE_EXTENSIONS']
 
 
-@app.route('/quickspecs')
+@app.route('/app3')
 def index():
     """Homepage with a button to generate DOCX files"""
     return render_template('index.html')    
@@ -24,7 +24,7 @@ def generate_docx():
         try:
             if allowed_file(file.filename):
                 createdocx(file)
-                return send_from_directory('.', 'quickestspecs.zip', as_attachment=True)
+                return send_from_directory('.', 'quickspecs.zip', as_attachment=True)
         except Exception as e:
             print(e)
             return render_template('error.html'), 500
