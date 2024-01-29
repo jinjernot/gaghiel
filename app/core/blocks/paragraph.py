@@ -13,19 +13,25 @@ def insertParagraph(doc, html_file, df, iloc_row, iloc_column):
 def insertList(doc, html_file, df, iloc_range, iloc_column):
     # Get the data
     items = df.iloc[iloc_range, iloc_column].tolist()
-    #Remove N/A 
-    items  = [data for data in items if pd.notna(data)]
+    # Remove N/A 
+    items = [data for data in items if pd.notna(data)]
 
     # Create a paragraph
     paragraph = doc.add_paragraph()
 
     # Add each item to the paragraph with a line break
-    for data in items:
+    for index, data in enumerate(items):
         run = paragraph.add_run(data)
-        run.add_break(WD_BREAK.LINE)
+
+        # Check if it's not the last item before adding the line break
+        if index < len(items) - 1:
+            run.add_break(WD_BREAK.LINE)
 
         with open(html_file, 'a', encoding='utf-8') as txt:
-            txt.write(f"<p>{data}</p>\n")
+            txt.write(f"<p>{data}</p>")
+            # Check if it's not the last item before adding the line break in HTML
+            if index < len(items) - 1:
+                txt.write('\n')
 
 def insertFootnote(doc, html_file, df, iloc_range, iloc_column):
     # Get the data
@@ -37,15 +43,22 @@ def insertFootnote(doc, html_file, df, iloc_range, iloc_column):
     paragraph = doc.add_paragraph()
 
     # Add each footnote to the paragraph with a line break, set font
-    for note in footnote:
+    for index, note in enumerate(footnote):
         run = paragraph.add_run(note)
         # Set color to Blue
         run.font.color.rgb = RGBColor(0, 0, 153)
-        run.add_break(WD_BREAK.LINE)
+        
+        # Check if it's not the last item before adding the line break
+        if index < len(footnote) - 1:
+            run.add_break(WD_BREAK.LINE)
 
     html_footnotes = '<div style="color: rgb(0, 0, 153);">\n'
-    for note in footnote:
-        html_footnotes += f'  <span>{note}</span>\n'
+    for index, note in enumerate(footnote):
+        html_footnotes += f'  <span>{note}</span>'
+        # Check if it's not the last item before closing the <span> tag
+        if index < len(footnote) - 1:
+            html_footnotes += '\n'
     html_footnotes += '</div>\n'
+
     with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write(html_footnotes)

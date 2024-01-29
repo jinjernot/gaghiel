@@ -3,7 +3,7 @@ from app.core.overview.at_a_glance import ataglance_section
 
 import pandas as pd
 
-def overview_section(doc, file, html_file, imgs_path):
+def overview_section(doc, file, html_file):
     """Add Overview section"""
     
     # Load sheet into df
@@ -12,5 +12,5 @@ def overview_section(doc, file, html_file, imgs_path):
 
     prod_name = df.columns[1]
     # Run the functions to build the overview section
-    callout_section(doc, file, html_file, prod_name, imgs_path, df)
+    callout_section(doc, file, html_file, prod_name, df)
     #ataglance_section(doc, html_file, df)

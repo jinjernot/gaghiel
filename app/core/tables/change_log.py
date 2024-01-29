@@ -46,4 +46,5 @@ def change_log_section(doc, file, html_file):
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.LINE)
     insertParagraph(doc, html_file, df, 15, 1)
+    insertParagraph(doc, html_file, df, 16, 1)
     # Insert HR

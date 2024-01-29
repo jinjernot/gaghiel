@@ -20,7 +20,7 @@ def ports_section(doc, html_file, df):
     insertList(doc, html_file, df, slice(307, 311), 1)
 
     # Footnotes
-    insertFootnote(doc, html_file, df, slice(312, 315), 1)
+    insertFootnote(doc, html_file, df, slice(313, 315), 1)
 
     # HR
     insertHR(doc.add_paragraph(), thickness=3)

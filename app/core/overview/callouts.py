@@ -16,13 +16,12 @@ def download_image(url):
     else:
         return None
 
-def get_temp_filename(url, suffix=".png"):
-    """Generate a unique temporary file name based on the URL."""
-    hash_object = hashlib.md5(url.encode())
-    return f"{hash_object.hexdigest()}{suffix}"
+def get_temp_filename(counter, suffix=".png"):
+    """Generate a fixed temporary file name with a three-digit counter."""
+    return f"image{counter:03d}{suffix}"
 
 
-def callout_section(doc, file, html_file, prod_name, imgs_path, df):
+def callout_section(doc, file, html_file, prod_name, df):
     """Add Callout Section"""
 
     # Add the product name
@@ -55,13 +54,19 @@ def callout_section(doc, file, html_file, prod_name, imgs_path, df):
     img_url2 = df.iloc[11, 0]  # Assuming column 0, row 12
     print(img_url1, img_url2)
 
+    # Initialize image counter
+    img_counter = 1
+
     # Download images
     img_data1 = download_image(img_url1)
     img_data2 = download_image(img_url2)
 
-    # Generate unique temporary file names
-    img_filename1 = get_temp_filename(img_url1)
-    img_filename2 = get_temp_filename(img_url2)
+    # Generate fixed temporary file names
+    img_filename1 = get_temp_filename(img_counter)
+    img_filename2 = get_temp_filename(img_counter + 1)
+
+    # Increment image counter for the next iteration
+    img_counter += 2
 
     # Save images to the specified directory
     img_filepath1 = os.path.join(target_directory, img_filename1)
@@ -73,9 +78,12 @@ def callout_section(doc, file, html_file, prod_name, imgs_path, df):
     with open(img_filepath2, "wb") as img_file2:
         img_file2.write(img_data2.getvalue())
 
-    # Insert images into the Word document
-    doc.add_picture(img_filepath1, width=Inches(6))
-    doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
+    paragraph_with_image = doc.add_paragraph()
+    run = paragraph_with_image.add_run()
+    run.add_picture(os.path.join(target_directory, img_filename1), width=Inches(5))
+    
+    # Center the paragraph
+    paragraph_with_image.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
     # Image HTML Tags
     img_html_code = f'<img src="{img_url1}" alt="Product Image" width="702" height="561">'
@@ -137,8 +145,12 @@ def callout_section(doc, file, html_file, prod_name, imgs_path, df):
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
-    # add docx image
-    doc.add_picture(img_filepath2, width=Inches(6))
+    paragraph_with_image = doc.add_paragraph()
+    run = paragraph_with_image.add_run()
+    run.add_picture(os.path.join(target_directory, img_filename2), width=Inches(5))
+
+    # Center the paragraph
+    paragraph_with_image.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
     # Right image HTML subtitle
     with open(html_file, 'a', encoding='utf-8') as txt:

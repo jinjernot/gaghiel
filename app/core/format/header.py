@@ -28,7 +28,7 @@ def header(doc,file):
     
     # Set the header title
     header_paragraph = header_table.cell(0, 0).paragraphs[0]
-    header_run = header_paragraph.add_run("Quickspecs")
+    header_run = header_paragraph.add_run("QuickSpecs")
     header_run.font.size = Pt(27)
     header_run.font.bold = True
 

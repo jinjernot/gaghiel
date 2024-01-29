@@ -30,7 +30,7 @@ def createdocx(file):
     format_document(doc, file, imgs_path)
 
     # Quickspecs sections
-    overview_section(doc, file, html_file, imgs_path)
+    overview_section(doc, file, html_file)
     tech_specs_section(doc, file, html_file)
     system_unit_section(doc, file, html_file)
     displays_section(doc, file, html_file)
@@ -56,5 +56,7 @@ def createdocx(file):
     with ZipFile(zip_file_name, 'w') as zipf:
         zipf.write(html_file, arcname='quickspecs.html')
         zipf.write(docx_file, arcname='quickspecs.docx')
+        zipf.write("/home/garciagi/qs/image001.png", arcname='image001.png')
+        zipf.write("/home/garciagi/qs/image002.png", arcname='image002.png')
      #   zipf.write(docx_file.replace('.docx', '.pdf'))
         
