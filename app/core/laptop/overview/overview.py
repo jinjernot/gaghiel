@@ -1,5 +1,5 @@
-from app.core.overview.callouts import callout_section
-from app.core.overview.at_a_glance import ataglance_section
+from app.core.laptop.overview.callouts import callout_section
+from app.core.laptop.overview.at_a_glance import ataglance_section
 
 import pandas as pd
 

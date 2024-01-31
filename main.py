@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, send_from_directory
-from app.buildDocx import createdocx
+from app.core.laptop.build_laptop import createdocx
 import config
 
 app = Flask(__name__)
