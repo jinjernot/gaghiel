@@ -11,8 +11,8 @@ def displays_section(doc, file, html_file):
     """Displays QS Only Section"""
 
     # Load xlsx
-    #df = pd.read_excel(file, sheet_name='QS-Only Displays')
-    df = pd.read_excel(file.stream, sheet_name='QS-Only Displays', engine='openpyxl')
+    df = pd.read_excel(file, sheet_name='QS-Only Displays')
+    #df = pd.read_excel(file.stream, sheet_name='QS-Only Displays', engine='openpyxl')
 
     # Add title: Displays
     insertTitle(doc, "DISPLAYS", html_file)

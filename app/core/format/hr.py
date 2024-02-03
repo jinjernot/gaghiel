@@ -25,4 +25,6 @@ def insertHR(paragraph, thickness=12):
 
 def insertHTMLhr(html_file):
     with open(html_file, 'a', encoding='utf-8') as txt:
+        txt.write('<div class="MsoNormal" style="TEXT-ALIGN: center; LINE-HEIGHT: 115%" align="center"><span lang="EN-US">\n')
         txt.write('<hr align="center" SIZE="2" width="100%">\n')
+        txt.write('</span></div>')

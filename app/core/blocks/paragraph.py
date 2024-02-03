@@ -52,13 +52,17 @@ def insertFootnote(doc, html_file, df, iloc_range, iloc_column):
         if index < len(footnote) - 1:
             run.add_break(WD_BREAK.LINE)
 
-    html_footnotes = '<div style="color: rgb(0, 0, 153);">\n'
+    html_footnotes = '<tr>\n'
     for index, note in enumerate(footnote):
-        html_footnotes += f'  <span>{note}</span>'
+        html_footnotes += f'<p class="MsoNormal" style="LINE-HEIGHT: 115%"><span lang="EN-US" style="COLOR: #000099">{note}</span></p>'
         # Check if it's not the last item before closing the <span> tag
         if index < len(footnote) - 1:
             html_footnotes += '\n'
-    html_footnotes += '</div>\n'
+    html_footnotes += '</tr>\n'
 
     with open(html_file, 'a', encoding='utf-8') as txt:
+        txt.write('<td style="WIDTH: 15.75pt; PADDING-BOTTOM: 0.75pt; PADDING-TOP: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-RIGHT: 0.75pt" vAlign="top" width="21">')
+        txt.write('<p class="MsoNormal" style="LINE-HEIGHT: 115%"><span lang="EN-US" style="COLOR: #000099">&nbsp;</span></p></td>')
+        txt.write('<td style="WIDTH: 519.8pt; PADDING-BOTTOM: 0.75pt; PADDING-TOP: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-RIGHT: 0.75pt" vAlign="top" width="693" colSpan="2">')
+
         txt.write(html_footnotes)

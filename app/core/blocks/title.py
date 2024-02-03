@@ -11,7 +11,7 @@ def insertTitle(doc, title, html_file):
 
     # Write the HTML title
     with open(html_file, 'a', encoding='utf-8') as txt:
-        txt.write(f"<b><h1>{title}</h1></b>\n")
+        txt.write(f'<h2 style="LINE-HEIGHT: 115%"><span lang="EN-US">{title}</span></h2>\n')
 
 def insertSubtitle(doc, html_file, df,  iloc_row, iloc_column):
     # Add the subtitle to the Word document
@@ -23,4 +23,4 @@ def insertSubtitle(doc, html_file, df,  iloc_row, iloc_column):
 
     # Write the HTML subtitle
     with open(html_file, 'a', encoding='utf-8') as txt:
-        txt.write(f"<b><p>{subtitle}</p></b>\n")
+        txt.write(f'<p class="MsoNormal" style="LINE-HEIGHT: 115%"><b><span lang="EN-US">{subtitle}</span></b></p></td>\n')
