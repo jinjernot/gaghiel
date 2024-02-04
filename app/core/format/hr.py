@@ -25,6 +25,10 @@ def insertHR(paragraph, thickness=12):
 
 def insertHTMLhr(html_file):
     with open(html_file, 'a', encoding='utf-8') as txt:
+        txt.write('<tr style="HEIGHT: 15pt">\n')
+        txt.write('<td style="HEIGHT: 15pt; WIDTH: 537.25pt; PADDING-BOTTOM: 0.85pt; PADDING-TOP: 0.85pt; PADDING-LEFT: 0.85pt; PADDING-RIGHT: 0.85pt" vAlign="top" width="716" colSpan="4">\n')
         txt.write('<div class="MsoNormal" style="TEXT-ALIGN: center; LINE-HEIGHT: 115%" align="center"><span lang="EN-US">\n')
         txt.write('<hr align="center" SIZE="2" width="100%">\n')
-        txt.write('</span></div>')
+        txt.write('</span></div>\n')
+        txt.write('<p class="MsoNormal" style="LINE-HEIGHT: 115%"></p></td></tr></tbody></table>')
+

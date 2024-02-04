@@ -28,7 +28,7 @@ def insertList(doc, html_file, df, iloc_range, iloc_column):
             run.add_break(WD_BREAK.LINE)
 
         with open(html_file, 'a', encoding='utf-8') as txt:
-            txt.write(f"<p>{data}</p>")
+            txt.write(f'<p class="MsoNormal" style="LINE-HEIGHT: 115%"><span lang="EN-US">{data}</span></p>')
             # Check if it's not the last item before adding the line break in HTML
             if index < len(items) - 1:
                 txt.write('\n')
@@ -58,11 +58,15 @@ def insertFootnote(doc, html_file, df, iloc_range, iloc_column):
         # Check if it's not the last item before closing the <span> tag
         if index < len(footnote) - 1:
             html_footnotes += '\n'
-    html_footnotes += '</tr>\n'
+    html_footnotes += '</td></tr>\n'
 
     with open(html_file, 'a', encoding='utf-8') as txt:
+        txt.write('<tr>')
         txt.write('<td style="WIDTH: 15.75pt; PADDING-BOTTOM: 0.75pt; PADDING-TOP: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-RIGHT: 0.75pt" vAlign="top" width="21">')
         txt.write('<p class="MsoNormal" style="LINE-HEIGHT: 115%"><span lang="EN-US" style="COLOR: #000099">&nbsp;</span></p></td>')
         txt.write('<td style="WIDTH: 519.8pt; PADDING-BOTTOM: 0.75pt; PADDING-TOP: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-RIGHT: 0.75pt" vAlign="top" width="693" colSpan="2">')
-
+        txt.write('<p class="MsoNormal" style="LINE-HEIGHT: 115%"><span lang="EN-US" style="COLOR: black">&nbsp;</span></p></td></tr>')
+        txt.write('<tr>')
+        txt.write('<td style="WIDTH: 15.75pt; PADDING-BOTTOM: 0.75pt; PADDING-TOP: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-RIGHT: 0.75pt" vAlign="top" width="21">')
+        txt.write('<td style="WIDTH: 519.8pt; PADDING-BOTTOM: 0.75pt; PADDING-TOP: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-RIGHT: 0.75pt" vAlign="top" width="693" colSpan="2">')
         txt.write(html_footnotes)
