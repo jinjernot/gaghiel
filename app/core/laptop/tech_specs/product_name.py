@@ -5,8 +5,14 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 import pandas as pd
 
-def product_name_section(doc, html_file, prod_name):
+def product_name_section(doc, file, html_file):
     """Product name section"""
+
+    # Get product name
+    df = pd.read_excel(file, sheet_name='Callouts')
+    #df = pd.read_excel(file.stream, sheet_name='Tech Specs & QS Features', engine='openpyxl')
+    prod_name = df.columns[1]
+
 
     paragraph = doc.add_paragraph()
     run = paragraph.add_run("PRODUCT NAME")

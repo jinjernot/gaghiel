@@ -11,7 +11,8 @@ def operating_systems_section(doc, html_file, df):
 
     # Add the title: OPERATING SYSTEMS
     insertTitle(doc, "OPERATING SYSTEMS", html_file)
-    operating_systems = df.iloc[3:8, 1].tolist()
+    
+    operating_systems = df.iloc[0:7, 1].tolist()
     operating_systems = [os for os in operating_systems if pd.notna(os)]
 
     total_rows = (len(operating_systems))

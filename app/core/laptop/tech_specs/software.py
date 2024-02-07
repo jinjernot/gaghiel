@@ -9,22 +9,23 @@ def software_section(doc, html_file, df):
 
     # Add the title: SOFTWARE AND SECURITY
     insertTitle(doc, "SOFTWARE AND SECURITY", html_file)
+    insertList(doc, html_file, df, "Software")
 
     # Software
-    insertSubtitle(doc, html_file, df, 173, 1)
-    insertList(doc, html_file, df, slice(175, 191),1)
+    #insertSubtitle(doc, html_file, df, 173, 1)
+    #insertList(doc, html_file, df, slice(175, 191),1)
 
     # Manageability Features
-    insertSubtitle(doc, html_file, df, 191, 1)
-    insertList(doc, html_file, df, slice(193, 200), 1)
+    #insertSubtitle(doc, html_file, df, 191, 1)
+    #insertList(doc, html_file, df, slice(193, 200), 1)
 
     # Security Management
-    insertSubtitle(doc, html_file, df, 203, 1)
-    insertList(doc, html_file, df, slice(202, 212), 1)
+    #insertSubtitle(doc, html_file, df, 203, 1)
+    #insertList(doc, html_file, df, slice(202, 212), 1)
 
     # Security- TPM
-    insertSubtitle(doc, html_file, df, 212, 1)
-    insertList(doc, html_file, df, slice(214, 223), 1)
+    #insertSubtitle(doc, html_file, df, 212, 1)
+    #insertList(doc, html_file, df, slice(214, 223), 1)
 
     # TCG TPM 2.0
     #insertSubtitle(doc, html_file, df, 215, 1)
@@ -35,23 +36,23 @@ def software_section(doc, html_file, df):
     #insertList(doc, html_file, df, slice(219, 221), 1)
 
     # BIOS
-    insertSubtitle(doc, html_file, df, 224, 1)
-    insertList(doc, html_file, df, slice(226, 232), 1)
+    #insertSubtitle(doc, html_file, df, 224, 1)
+    #insertList(doc, html_file, df, slice(226, 232), 1)
 
     # Smartcard Reader
-    insertSubtitle(doc, html_file, df, 232, 1)
-    insertList(doc, html_file, df, slice(233, 235), 1)
+    #insertSubtitle(doc, html_file, df, 232, 1)
+    #insertList(doc, html_file, df, slice(233, 235), 1)
 
     # IPv6 Support
-    insertSubtitle(doc, html_file, df, 236, 1)
-    insertList(doc, html_file, df, slice(237, 238), 1)
+    #insertSubtitle(doc, html_file, df, 236, 1)
+    #insertList(doc, html_file, df, slice(237, 238), 1)
 
     # FirstNet Certified
-    insertSubtitle(doc, html_file, df, 238, 1)
-    insertList(doc, html_file, df, slice(239, 243), 1)
+    #insertSubtitle(doc, html_file, df, 238, 1)
+    #insertList(doc, html_file, df, slice(239, 243), 1)
 
     # Footnotes
-    insertFootnote(doc, html_file, df, slice(245, 261), 1)
+    #insertFootnote(doc, html_file, df, slice(245, 261), 1)
 
 
     # HR

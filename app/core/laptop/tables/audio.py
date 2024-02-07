@@ -19,7 +19,7 @@ def audio_section(doc, file, html_file):
 
     start_col_idx = 0
     end_col_idx = 1
-    start_row_idx = 5
+    start_row_idx = 3
     end_row_idx = 12
 
     data_range = df.iloc[start_row_idx:end_row_idx+1, start_col_idx:end_col_idx+1]

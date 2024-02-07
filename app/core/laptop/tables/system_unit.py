@@ -20,7 +20,7 @@ def system_unit_section(doc, file, html_file):
 
     start_col_idx = 0
     end_col_idx = 1
-    start_row_idx = 4
+    start_row_idx = 2
     end_row_idx = 41
 
     data_range = df.iloc[start_row_idx:end_row_idx+1, start_col_idx:end_col_idx+1]

@@ -1,4 +1,3 @@
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.shared import Pt
 
 def insertTitle(doc, title, html_file):

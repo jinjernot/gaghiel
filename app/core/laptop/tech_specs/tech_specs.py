@@ -25,18 +25,23 @@ def tech_specs_section(doc, file, html_file):
     # Load sheet into df
     df = pd.read_excel(file, sheet_name='Tech Specs & QS Features')
     #df = pd.read_excel(file.stream, sheet_name='Tech Specs & QS Features', engine='openpyxl')
-    
-    # Get product name
-    prod_name = df.columns[1]
-    
+
+    # Remove extra spaces from the end of each value and convert all columns to strings
+    df = df.applymap(lambda x: str(x).strip() if isinstance(x, str) else x)
+
+    # Remove rows where all values are NaN
+    df.dropna(how='all', inplace=True)
+
+    df.to_excel("verga.xlsx", index=False)
+
     # Run the functions to build the tech specs section
-    product_name_section(doc, html_file, prod_name)
+    product_name_section(doc, file, html_file)
     operating_systems_section(doc, html_file, df)
     #processors_section(doc, html_file, df)
     #chipset_section(doc, html_file, df)
     graphics_section(doc, html_file, df)
     display_section(doc, html_file, df)
-    docking_section(doc, html_file, df)
+    #docking_section(doc, html_file, df)
     storage_section(doc, html_file, df)
     memory_section(doc, html_file, df)
     networking_section(doc, html_file, df)
@@ -46,5 +51,5 @@ def tech_specs_section(doc, file, html_file):
     power_section(doc, html_file, df)
     dimensions_section(doc, html_file, df)
     ports_section(doc, html_file, df)
-    service_section(doc, html_file, df)
+    #service_section(doc, html_file, df)
     

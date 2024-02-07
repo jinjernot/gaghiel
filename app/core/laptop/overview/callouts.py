@@ -61,7 +61,6 @@ def callout_section(doc, file, html_file, prod_name, df):
     # Get image URLs from the DataFrame
     img_url1 = df.iloc[4, 0]  # Assuming column 0, row 5
     img_url2 = df.iloc[11, 0]  # Assuming column 0, row 12
-    print(img_url1, img_url2)
 
     # Initialize image counter
     img_counter = 1

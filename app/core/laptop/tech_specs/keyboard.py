@@ -9,25 +9,26 @@ def keyboard_section(doc, html_file, df):
 
     insertTitle(doc, "KEYBOARDS / POINTING DEVICES / BUTTONS & FUNCTION KEYS", html_file)
 
+    insertList(doc, html_file, df, "Keyboard")
     # Keyboard
-    insertSubtitle(doc, html_file, df, 144, 1)
-    insertList(doc, html_file, df, slice(145, 148),1)
+    #insertSubtitle(doc, html_file, df, 144, 1)
+    #insertList(doc, html_file, df, slice(145, 148),1)
 
     # Pointing Device
-    insertSubtitle(doc, html_file, df, 148, 1)
-    insertList(doc, html_file, df, slice(149, 151), 1)
+    #insertSubtitle(doc, html_file, df, 148, 1)
+    #insertList(doc, html_file, df, slice(149, 151), 1)
 
     # Function Keys
-    insertSubtitle(doc, html_file, df, 151, 1)
-    insertList(doc, html_file, df, slice(153, 165), 1)
+    #insertSubtitle(doc, html_file, df, 151, 1)
+    #insertList(doc, html_file, df, slice(153, 165), 1)
 
     # Hidden Function Keys
-    insertSubtitle(doc, html_file, df, 166, 1)
-    insertParagraph(doc, html_file, df, 167, 1)
+    #insertSubtitle(doc, html_file, df, 166, 1)
+    #insertParagraph(doc, html_file, df, 167, 1)
 
 
     # Footnotes
-    insertFootnote(doc, html_file, df, slice(170, 171), 1)
+    #insertFootnote(doc, html_file, df, slice(170, 171), 1)
 
 
     insertHR(doc.add_paragraph(), thickness=3)

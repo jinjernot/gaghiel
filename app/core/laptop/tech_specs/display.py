@@ -10,13 +10,17 @@ def display_section(doc, html_file, df):
     # Add the title: DISPLAY
     insertTitle(doc, "DISPLAY", html_file)   
 
+    # Integrated
+    #insertSubtitle(doc, html_file, df, 13, 1)
+    insertList(doc, html_file, df, "Non-Touch")
+
     # Non-Touch
-    insertSubtitle(doc, html_file, df, 26, 1)
-    insertList(doc, html_file, df, slice(27, 31), 1)
+    #insertSubtitle(doc, html_file, df, 26, 1)
+    #insertList(doc, html_file, df, slice(27, 31), 1)
 
     # Touch
-    insertSubtitle(doc, html_file, df, 31, 1)
-    insertList(doc, html_file, df, slice(32, 33), 1)
+    #insertSubtitle(doc, html_file, df, 31, 1)
+    #insertList(doc, html_file, df, slice(32, 33), 1)
 
     # Display Port
     #insertSubtitle(doc, html_file, df, 155, 1)
@@ -27,11 +31,11 @@ def display_section(doc, html_file, df):
     #insertList(doc, html_file, df, slice(159, 161), 1)
 
     # Display Size
-    insertSubtitle(doc, html_file, df, 33, 1)
-    insertList(doc, html_file, df, slice(34, 35), 1)
+    #insertSubtitle(doc, html_file, df, 33, 1)
+    #insertList(doc, html_file, df, slice(34, 35), 1)
 
     # Footnotes
-    insertFootnote(doc, html_file, df, slice(37, 41), 1)
+    #insertFootnote(doc, html_file, df, slice(37, 41), 1)
 
     # HR
     insertHR(doc.add_paragraph(), thickness=3)

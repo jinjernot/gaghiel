@@ -11,19 +11,19 @@ def graphics_section(doc, html_file, df):
     insertTitle(doc, "GRAPHICS", html_file)
 
     # Integrated
-    insertSubtitle(doc, html_file, df, 13, 1)
-    insertList(doc, html_file, df, slice(14, 16), 1)
+    #insertSubtitle(doc, html_file, df, 13, 1)
+    insertList(doc, html_file, df, "Integrated")
 
     # Discrete
-    insertSubtitle(doc, html_file, df, 16, 1)
-    insertList(doc, html_file, df, slice(17, 18), 1)
+    # insertSubtitle(doc, html_file, df, 16, 1)
+    # insertList(doc, html_file, df, slice(17, 18), 1)
 
     # Supports
-    insertSubtitle(doc, html_file, df, 18, 1)
-    insertList(doc, html_file, df, slice(19, 21), 1)
+    # insertSubtitle(doc, html_file, df, 18, 1)
+    # insertList(doc, html_file, df, slice(19, 21), 1)
 
     # Footnotes
-    insertFootnote(doc, html_file, df, slice(22, 24), 1)
+    # insertFootnote(doc, html_file, df, slice(22, 24), 1)
 
     # HR
     insertHR(doc.add_paragraph(), thickness=3)
