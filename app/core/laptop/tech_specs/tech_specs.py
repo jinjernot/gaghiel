@@ -24,13 +24,20 @@ def tech_specs_section(doc, file, html_file):
 
     # Load sheet into df
     df = pd.read_excel(file, sheet_name='Tech Specs & QS Features')
-    #df = pd.read_excel(file.stream, sheet_name='Tech Specs & QS Features', engine='openpyxl')
+    # df = pd.read_excel(file.stream, sheet_name='Tech Specs & QS Features', engine='openpyxl')
 
     # Remove extra spaces from the end of each value and convert all columns to strings
     df = df.applymap(lambda x: str(x).strip() if isinstance(x, str) else x)
 
-    # Remove rows where all values are NaN
-    df.dropna(how='all', inplace=True)
+    # Filter out rows where the "Value" column is empty
+    df_filtered = df.dropna(subset=[df.columns[1]])
+
+    # Save the filtered DataFrame to a new Excel file
+    output_file = 'filtered_tech_specs.xlsx'
+    df_filtered.to_excel(output_file, index=False)
+
+    df = pd.read_excel(output_file, sheet_name='Sheet1')
+
 
     df.to_excel("verga.xlsx", index=False)
 
