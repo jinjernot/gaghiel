@@ -15,7 +15,7 @@ def displays_section(doc, file, html_file):
     #df = pd.read_excel(file.stream, sheet_name='QS-Only Displays', engine='openpyxl')
 
     # Add title: Displays
-    insertTitle(doc, "DISPLAYS", html_file)
+    insertTitle(doc, "Displays", html_file)
 
     # Add table
     insertTable(doc, df, html_file)

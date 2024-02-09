@@ -8,8 +8,8 @@ def dimensions_section(doc, html_file, df):
     """Dimensions techspecs section"""
 
     # Add title
-    insertTitle(doc, "WEIGHTS & DIMENSIONS", html_file)
-    insertList(doc, html_file, df, "Product Weight")
+    #insertTitle(doc, "WEIGHTS & DIMENSIONS", html_file)
+    insertList(doc, html_file, df, "Weight & Dimensions")
 
     
     # Product Weight

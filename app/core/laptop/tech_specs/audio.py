@@ -6,10 +6,10 @@ from docx.enum.text import WD_BREAK
 
 def audio_section(doc, html_file, df):
     
-    insertTitle(doc, "AUDIO / MULTIMEDIA", html_file)
+    #insertTitle(doc, "AUDIO / MULTIMEDIA", html_file)
 
 
-    insertList(doc, html_file, df, "Audio")
+    insertList(doc, html_file, df, "Audio/Multimedia")
     # Audio
     #insertSubtitle(doc, html_file, df, 121, 1)
     #insertList(doc, html_file, df, slice(122, 126),1)

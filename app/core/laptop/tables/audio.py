@@ -15,7 +15,7 @@ def audio_section(doc, file, html_file):
     #df = pd.read_excel(file.stream, sheet_name='QS-Only Audio', engine='openpyxl')
 
     # Add title: AUDIO
-    insertTitle(doc, "AUDIO", html_file)
+    insertTitle(doc, "Audio", html_file)
 
     start_col_idx = 0
     end_col_idx = 1

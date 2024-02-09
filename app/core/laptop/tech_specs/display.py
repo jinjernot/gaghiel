@@ -8,11 +8,11 @@ def display_section(doc, html_file, df):
     """Display techspecs section"""
 
     # Add the title: DISPLAY
-    insertTitle(doc, "DISPLAY", html_file)   
+   # insertTitle(doc, "DISPLAY", html_file)   
 
     # Integrated
     #insertSubtitle(doc, html_file, df, 13, 1)
-    insertList(doc, html_file, df, "Non-Touch")
+    insertList(doc, html_file, df, "Display")
 
     # Non-Touch
     #insertSubtitle(doc, html_file, df, 26, 1)

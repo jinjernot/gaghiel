@@ -4,58 +4,46 @@ from app.core.format.hr import *
 
 from docx.enum.text import WD_BREAK
 from docx.enum.table import WD_ALIGN_VERTICAL
+
 import pandas as pd
 
-def processors_section(doc, html_file, df):
+def processors_section(doc, file, html_file):
     """Processors techspecs section"""
 
+    df = pd.read_excel(file, sheet_name='QS-Only Processors')
+
     # Add the title: PROCESSORS
-    insertTitle(doc, "PROCESSORS", html_file)
+    insertTitle(doc, "Processors", html_file)
 
-    start_col_idx = 6
-    end_col_idx = 12
-    start_row_idx = 52
-    end_row_idx = 60
+    # Define the criteria to filter the rows
+    criteria_values = ["Processor", "Cores", "Threads", "L3 Cache", "Max Boost Frequency", "Base Frequency", "Pro"]
 
-    data_range = df.iloc[start_row_idx:end_row_idx+1, start_col_idx:end_col_idx+1]
-    data_range = data_range.dropna(how='all')
+    # Filter the dataframe based on the values in the third row
+    third_row = df.iloc[1]  # Selecting the third row
+    filtered_df = df.loc[:, third_row.isin(criteria_values)]  # Filtering columns based on criteria
 
-    num_rows, num_cols = data_range.shape
-    table = doc.add_table(rows=num_rows, cols=num_cols)
+    # Remove the first row
+    filtered_df = filtered_df.iloc[1:]
 
-    table.alignment = WD_ALIGN_VERTICAL.CENTER
+    # Replace "NaN" string values with an empty string
+    filtered_df = filtered_df.fillna('')
 
-    for row_idx in range(num_rows):
-        for col_idx in range(num_cols):
-            value = data_range.iat[row_idx, col_idx]
-            cell = table.cell(row_idx, col_idx)
+    # Convert filtered dataframe to a list of lists (data) for table
+    data = filtered_df.values.tolist()
 
-            if not pd.isna(value):
-                cell.text = str(value)
+    # Add the data as a table to the document
+    table = doc.add_table(rows=1, cols=len(data[0]))
+    table.autofit = True
 
-    for cell in table.rows[0].cells:
-        for paragraph in cell.paragraphs:
-            for run in paragraph.runs:
-                run.font.bold = True
+    # Add table data
+    for row in data:
+        row_cells = table.add_row().cells
+        for i, cell in enumerate(row):
+            row_cells[i].text = str(cell)
 
-    processors_table = '<table border="1" style="border-collapse: collapse;">\n'
-
-    for row_idx in range(data_range.shape[0]):
-        processors_table += '  <tr>\n'
-        for col_idx in range(data_range.shape[1]):
-            value = data_range.iat[row_idx, col_idx]
-            processors_table += f'    <td>{value}</td>\n' if not pd.isna(value) else '    <td></td>\n'
-        processors_table += '  </tr>\n'
-
-    processors_table += '</table>\n'
-
-    with open(html_file, 'a', encoding='utf-8') as txt:
-        txt.write(processors_table)
-
-    run.add_break(WD_BREAK.LINE)
-
-    # Footnotes
-    insertFootnote(doc, html_file, df, slice(73, 80), 6)
+    # Remove the first row
+    if len(table.rows) > 1:  # Ensure there are rows to delete
+        table.rows[0]._element.getparent().remove(table.rows[0]._element)
 
     # HR
     insertHR(doc.add_paragraph(), thickness=3)

@@ -8,8 +8,8 @@ def software_section(doc, html_file, df):
     """Software and security techspecs section"""
 
     # Add the title: SOFTWARE AND SECURITY
-    insertTitle(doc, "SOFTWARE AND SECURITY", html_file)
-    insertList(doc, html_file, df, "Software")
+    #insertTitle(doc, "SOFTWARE AND SECURITY", html_file)
+    insertList(doc, html_file, df, "Software and Security")
 
     # Software
     #insertSubtitle(doc, html_file, df, 173, 1)

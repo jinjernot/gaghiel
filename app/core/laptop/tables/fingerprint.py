@@ -20,8 +20,8 @@ def fingerprint_section(doc, file, html_file):
 
     start_col_idx = 0
     end_col_idx = 1
-    start_row_idx = 1
-    end_row_idx = 12
+    start_row_idx = 0
+    end_row_idx = 30
 
     data_range = df.iloc[start_row_idx:end_row_idx+1, start_col_idx:end_col_idx+1]
     data_range = data_range.dropna(how='all')
@@ -53,11 +53,6 @@ def fingerprint_section(doc, file, html_file):
 
     with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write(html_table)
-
-    # Insert HR
-    insertHR(doc.add_paragraph(), thickness=3)
-
-    doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
     # Insert HR
     insertHR(doc.add_paragraph(), thickness=3)

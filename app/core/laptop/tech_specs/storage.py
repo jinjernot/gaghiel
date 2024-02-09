@@ -7,9 +7,9 @@ from docx.enum.text import WD_BREAK
 def storage_section(doc, html_file, df):
     """Storage techspecs section"""
 
-    insertTitle(doc, "STORAGE AND DRIVES", html_file)
+    #insertTitle(doc, "STORAGE AND DRIVES", html_file)
 
-    insertList(doc, html_file, df, "Primary Storage")
+    insertList(doc, html_file, df, "Storage and Drives")
     # Primary Storage
     #insertSubtitle(doc, html_file, df, 67, 1)
     #insertList(doc, html_file, df, slice(68, 76), 1)

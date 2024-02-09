@@ -16,7 +16,7 @@ def system_unit_section(doc, file, html_file):
    
 
     # Add title: SYSTEM UNIT
-    insertTitle(doc, "SYSTEM UNIT", html_file)
+    insertTitle(doc, "System Unit", html_file)
 
     start_col_idx = 0
     end_col_idx = 1

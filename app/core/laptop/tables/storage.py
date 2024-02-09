@@ -15,7 +15,7 @@ def storage_section(doc, file, html_file):
     #df = pd.read_excel(file.stream, sheet_name='QS-Only Storage', engine='openpyxl')
 
     # Add title: Storage Reader
-    insertTitle(doc, "STORAGE", html_file)
+    insertTitle(doc, "Storage", html_file)
 
     # Add table
     insertTable(doc, df, html_file)

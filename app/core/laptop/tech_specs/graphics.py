@@ -7,23 +7,21 @@ from docx.enum.text import WD_BREAK
 def graphics_section(doc, html_file, df):
     """Graphics techspecs section"""
     
-    # Add the title: GRAPHICS
-    insertTitle(doc, "GRAPHICS", html_file)
+    insertList(doc, html_file, df, "Graphics")
 
-    # Integrated
-    #insertSubtitle(doc, html_file, df, 13, 1)
-    insertList(doc, html_file, df, "Integrated")
+    # List of words to be bolded
+    bold_words = ["Integrated", "Supports"]
 
-    # Discrete
-    # insertSubtitle(doc, html_file, df, 16, 1)
-    # insertList(doc, html_file, df, slice(17, 18), 1)
+    # Iterate through the paragraphs in the document
+    for paragraph in doc.paragraphs:
+        # Iterate through the runs in each paragraph
+        for run in paragraph.runs:
+            # Iterate through the bold words list
+            for word in bold_words:
+                # If the word is found in the run text, make it bold
+                if word.lower() in run.text.lower():
+                    run.bold = True
 
-    # Supports
-    # insertSubtitle(doc, html_file, df, 18, 1)
-    # insertList(doc, html_file, df, slice(19, 21), 1)
-
-    # Footnotes
-    # insertFootnote(doc, html_file, df, slice(22, 24), 1)
 
     # HR
     insertHR(doc.add_paragraph(), thickness=3)

@@ -9,8 +9,8 @@ def ports_section(doc, html_file, df):
     """Ports techspecs section"""
 
     # Add title: PORTS
-    insertTitle(doc, "PORTS", html_file)
-    insertList(doc, html_file, df, "Left side")
+    #insertTitle(doc, "PORTS", html_file)
+    insertList(doc, html_file, df, "Ports/Slots")
 
     # Left side
     #insertSubtitle(doc, html_file, df, 301, 1)

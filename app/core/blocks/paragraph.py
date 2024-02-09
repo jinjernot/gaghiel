@@ -1,4 +1,5 @@
 from docx.enum.text import WD_BREAK
+from docx.shared import Pt
 from docx.shared import RGBColor
 import pandas as pd
 
@@ -29,7 +30,6 @@ def insertList(doc, html_file, df, start_value):
     
     # Find the index of the start_value
     start_index = df.index[df.iloc[:, 1] == start_value].tolist()[0]
-    print("Start index:", start_index)
 
     # Find the index of the next occurrence of "Value" after the start_value index
     next_value_indices = df.iloc[start_index:, 1][df.iloc[start_index:, 1] == 'Value'].index.tolist()
@@ -37,11 +37,9 @@ def insertList(doc, html_file, df, start_value):
         print("Error: 'Value' not found after", start_value)
         return
     next_value_index = next_value_indices[0]
-    print("Next value index:", next_value_index)
     
     # Get the data between the start_value and "Value" from the second column
     items = df.iloc[start_index:next_value_index, 1].tolist()
-    print("Items:", items)
     
     # Remove "Footnotes" if it exists and separate values after it
     if 'Footnotes' in items:
@@ -54,8 +52,14 @@ def insertList(doc, html_file, df, start_value):
     # Create a paragraph for items before "Footnotes"
     paragraph = doc.add_paragraph()
     
+    # Set the font size to 12 points and make the text bold for the first title
+    run = paragraph.add_run(start_value)
+    paragraph = doc.add_paragraph()
+    run.font.size = Pt(12)
+    run.bold = True
+
     # Add each item to the paragraph with a line break
-    for index, data in enumerate(items):
+    for index, data in enumerate(items[1:], start=1):  # Start from the second item
         run = paragraph.add_run(data)
         
         # Check if it's not the last item before adding the line break

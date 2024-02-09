@@ -11,44 +11,35 @@ def docking_section(doc, html_file, df):
     """Docking Table"""
 
     # Add title: DOCKING
-    insertTitle(doc, "DOCKING (Sold Separately)", html_file)
+    insertTitle(doc, "Docking (Sold Separately)", html_file)
 
-    start_col_idx = 0
-    end_col_idx = 1
-    start_row_idx = 42
-    end_row_idx = 62
+    for index, row in df.iterrows():
+        # Check if the content in column 0 is "Table"
+        if row[1] == "Docking":
+            # Add a table with 2 columns to the Word document
+            table = doc.add_table(rows=1, cols=2)
+            
+            # Populate columns 0 and 1 with values from the DataFrame
+            for i in range(index + 1, len(df)):
+                if df.iloc[i, 0] == "Container Name":
+                    break  # Exit the loop when encountering the next "Table"
+                else:
+                    # Populate column 0 and set text to bold
+                    cell_0 = table.add_row().cells[0]
+                    cell_0.text = str(df.iloc[i, 0])
+                    for paragraph in cell_0.paragraphs:
+                        for run in paragraph.runs:
+                            run.font.bold = True
 
-    data_range = df.iloc[start_row_idx:end_row_idx+1, start_col_idx:end_col_idx+1]
-    data_range = data_range.dropna(how='all')
+                    # Populate column 1 and set text to bold
+                    cell_1 = table.rows[-1].cells[1]
+                    cell_1.text = str(df.iloc[i, 1])
 
-    num_rows, num_cols = data_range.shape
-    table = doc.add_table(rows=num_rows, cols=num_cols)
-
-    table.alignment = WD_ALIGN_VERTICAL.CENTER
-
-    for row_idx in range(num_rows):
-        for col_idx in range(num_cols):
-            value = data_range.iat[row_idx, col_idx]
-            cell = table.cell(row_idx, col_idx)
-            if not pd.isna(value):
-                cell.text = str(value)
-    for cell in table.rows[0].cells:
-        for paragraph in cell.paragraphs:
-            for run in paragraph.runs:
-                run.font.bold = True
-
-    html_table = '<table class="MsoNormalTable" cellSpacing="3" cellPadding="0" width="728" border="0">\n'
-    for row_idx in range(num_rows):
-        html_table += "  <tr>\n"
-        for col_idx in range(num_cols):
-            value = data_range.iat[row_idx, col_idx]
-            html_table += f"    <td>{value}</td>\n"
-        html_table += "  </tr>\n"
-    html_table += "</table>"
-
-    with open(html_file, 'a', encoding='utf-8') as txt:
-        txt.write(html_table)
-
+            # Remove the first row from the table
+            table.rows[0]._element.getparent().remove(table.rows[0]._element)
+            
+            # Add a paragraph break after the table
+            doc.add_paragraph()
     # Insert HR
     insertHR(doc.add_paragraph(), thickness=3)
     insertHTMLhr(html_file)

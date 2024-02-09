@@ -8,9 +8,9 @@ def networking_section(doc, html_file, df):
     """Network techspecs section"""
 
     # Add the title: NETWORKINGS
-    insertTitle(doc, "NETWORKING", html_file)
+    #insertTitle(doc, "NETWORKING", html_file)
 
-    insertList(doc, html_file, df, "Ethernet")
+    insertList(doc, html_file, df, "Networking /Communications")
 
     # Wlan
     #insertSubtitle(doc, html_file, df, 100, 1)

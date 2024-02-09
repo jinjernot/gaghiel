@@ -7,9 +7,9 @@ from docx.enum.text import WD_BREAK
 
 def keyboard_section(doc, html_file, df):
 
-    insertTitle(doc, "KEYBOARDS / POINTING DEVICES / BUTTONS & FUNCTION KEYS", html_file)
+    #insertTitle(doc, "KEYBOARDS / POINTING DEVICES / BUTTONS & FUNCTION KEYS", html_file)
 
-    insertList(doc, html_file, df, "Keyboard")
+    insertList(doc, html_file, df, "Keyboards/Pointing Devices/Buttons & Function Keys")
     # Keyboard
     #insertSubtitle(doc, html_file, df, 144, 1)
     #insertList(doc, html_file, df, slice(145, 148),1)

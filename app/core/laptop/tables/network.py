@@ -15,7 +15,7 @@ def network_section(doc, file, html_file):
     #df = pd.read_excel(file.stream, sheet_name='QS-Only Network', engine='openpyxl')
 
     # Add title: Networking
-    insertTitle(doc, "NETWORKING / COMMUNICATIONS", html_file)
+    insertTitle(doc, "Networking / Communications", html_file)
 
     # Add table
     insertTable(doc, df, html_file)

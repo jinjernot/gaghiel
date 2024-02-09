@@ -8,8 +8,8 @@ def power_section(doc, html_file, df):
     """Power techspecs section"""
 
     # Add the title: POWER
-    insertTitle(doc, "POWER", html_file)
-    insertList(doc, html_file, df, "Power Supply")
+    #insertTitle(doc, "POWER", html_file)
+    insertList(doc, html_file, df, "Power")
     # Power Supply
     #insertSubtitle(doc, html_file, df, 263, 1)
     #insertList(doc, html_file, df, slice(264, 267),1)

@@ -1,6 +1,6 @@
 from app.core.laptop.tech_specs.product_name import product_name_section
 from app.core.laptop.tech_specs.operating_systems import operating_systems_section
-#from app.core.laptop.tech_specs.processors import processors_section
+from app.core.laptop.tech_specs.processors import processors_section
 #from app.core.laptop.tech_specs.chipset import chipset_section
 from app.core.laptop.tech_specs.graphics import graphics_section
 from app.core.laptop.tech_specs.display import display_section
@@ -38,17 +38,16 @@ def tech_specs_section(doc, file, html_file):
 
     df = pd.read_excel(output_file, sheet_name='Sheet1')
 
-
-    df.to_excel("verga.xlsx", index=False)
+    df.to_excel("data.xlsx", index=False)
 
     # Run the functions to build the tech specs section
     product_name_section(doc, file, html_file)
     operating_systems_section(doc, html_file, df)
-    #processors_section(doc, html_file, df)
+    processors_section(doc, file, html_file)
     #chipset_section(doc, html_file, df)
     graphics_section(doc, html_file, df)
     display_section(doc, html_file, df)
-    #docking_section(doc, html_file, df)
+    docking_section(doc, html_file, df)
     storage_section(doc, html_file, df)
     memory_section(doc, html_file, df)
     networking_section(doc, html_file, df)

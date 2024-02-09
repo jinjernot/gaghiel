@@ -12,7 +12,6 @@ def options_section(doc, file, html_file):
 
     # Load xlsx
     df = pd.read_excel(file, sheet_name='QS-Only Options')
-    #df = pd.read_excel(file.stream, sheet_name='QS-Only Options', engine='openpyxl')
 
     # Add title: Options
     insertTitle(doc, "Options", html_file)
@@ -26,20 +25,24 @@ def options_section(doc, file, html_file):
     data_range = data_range.dropna(how='all')
 
     num_rows, num_cols = data_range.shape
-    table = doc.add_table(rows=num_rows, cols=num_cols)
+    table = doc.add_table(rows=num_rows+1, cols=num_cols)  # Adding 1 for the header row
 
     table.alignment = WD_ALIGN_VERTICAL.CENTER
 
-    for row_idx in range(num_rows):
+    # Adding table headers as the first row
+    for col_idx in range(num_cols):
+        header = df.columns[col_idx]
+        cell = table.cell(0, col_idx)
+        cell.text = header
+        cell.paragraphs[0].runs[0].font.bold = True
+
+    # Populating table cells with data
+    for row_idx in range(1, num_rows+1):  # Start from the second row for data
         for col_idx in range(num_cols):
-            value = data_range.iat[row_idx, col_idx]
+            value = data_range.iat[row_idx-1, col_idx]  # Adjust row index
             cell = table.cell(row_idx, col_idx)
             if not pd.isna(value):
                 cell.text = str(value)
-    for cell in table.rows[0].cells:
-        for paragraph in cell.paragraphs:
-            for run in paragraph.runs:
-                run.font.bold = True
 
     html_table = '<table class="MsoNormalTable" cellSpacing="3" cellPadding="0" width="728" border="0">\n'
     for row_idx in range(num_rows):

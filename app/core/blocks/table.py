@@ -58,6 +58,7 @@ def insertTable(doc, df, html_file):
                 
             # Remove the first row from the table
             table.rows[0]._element.getparent().remove(table.rows[0]._element)
+            # Replace "NaN" string values with an empty string
             
             # Process footnotes, if any
             if footnotes:

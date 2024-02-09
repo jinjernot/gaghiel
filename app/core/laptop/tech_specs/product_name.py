@@ -15,7 +15,7 @@ def product_name_section(doc, file, html_file):
 
 
     paragraph = doc.add_paragraph()
-    run = paragraph.add_run("PRODUCT NAME")
+    run = paragraph.add_run("Product Name")
     run.font.size = Pt(12)
     run.bold = True
     paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
