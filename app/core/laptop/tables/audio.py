@@ -28,7 +28,6 @@ def audio_section(doc, file, html_file):
     num_rows, num_cols = data_range.shape
     table = doc.add_table(rows=num_rows, cols=num_cols)
 
-    table.alignment = WD_ALIGN_VERTICAL.CENTER
 
     for row_idx in range(num_rows):
         for col_idx in range(num_cols):

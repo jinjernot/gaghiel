@@ -1,6 +1,7 @@
 from docx.enum.text import WD_BREAK
 from docx.shared import Pt
 from docx.shared import RGBColor
+from app.core.format.hr import *
 import pandas as pd
 
 def insertParagraph(doc, html_file, df, iloc_row, iloc_column):
@@ -69,6 +70,14 @@ def insertList(doc, html_file, df, start_value):
     # Process footnotes after the items have been added
     if footnotes:
         processFootnotes(doc, footnotes)
+
+    # Add the Horizontal Line
+    insertHR(doc.add_paragraph(), thickness=3)
+    insertHTMLhr(html_file)
+
+    # Add the Break Page
+    doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
+
 
 def insertFootnote(doc, html_file, df, iloc_range, iloc_column):
     # Get the data

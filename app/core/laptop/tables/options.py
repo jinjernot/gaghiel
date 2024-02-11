@@ -27,8 +27,6 @@ def options_section(doc, file, html_file):
     num_rows, num_cols = data_range.shape
     table = doc.add_table(rows=num_rows+1, cols=num_cols)  # Adding 1 for the header row
 
-    table.alignment = WD_ALIGN_VERTICAL.CENTER
-
     # Adding table headers as the first row
     for col_idx in range(num_cols):
         header = df.columns[col_idx]

@@ -19,13 +19,14 @@ def createdocx(file):
     #html_file = '/home/garciagi/qs/quickspecs.html'
     html_file = 'quickspecs.html'
 
-    format_document(doc, file, imgs_path)
+
 
     # Quickspecs sections
     overview_section(doc, file, html_file)
     tech_specs_section(doc, file, html_file)
     table_section(doc, file, html_file)
 
+    format_document(doc, file, imgs_path)
     #docx_file = '/home/garciagi/qs/quickspecs.docx'
     docx_file = 'quickspecs.docx'
 

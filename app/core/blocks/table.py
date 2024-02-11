@@ -1,6 +1,9 @@
 from app.core.format.hr import *
 from docx.enum.text import WD_BREAK
 from docx.shared import RGBColor
+from app.core.format.table import table_column_widths
+from docx.shared import Pt, Inches
+
 
 def processFootnotes(doc, footnotes):
     # Create a new paragraph for footnotes with blue font color
@@ -23,6 +26,8 @@ def insertTable(doc, df, html_file):
         if row[0] == "Table":
             # Add a table with 3 columns to the Word document
             table = doc.add_table(rows=1, cols=3)
+
+            table_column_widths(table, (Inches(5), Inches(3), Inches(3)))
             
             # Populate columns 1 and 2 with values from the DataFrame
             for i in range(index + 1, len(df)):
