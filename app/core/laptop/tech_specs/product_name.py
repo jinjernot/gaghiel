@@ -9,8 +9,8 @@ def product_name_section(doc, file, html_file):
     """Product name section"""
 
     # Get product name
-    df = pd.read_excel(file, sheet_name='Callouts')
-    #df = pd.read_excel(file.stream, sheet_name='Tech Specs & QS Features', engine='openpyxl')
+    #df = pd.read_excel(file, sheet_name='Callouts')
+    df = pd.read_excel(file.stream, sheet_name='Callouts', engine='openpyxl')
     prod_name = df.columns[1]
 
 

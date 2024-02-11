@@ -2,16 +2,18 @@
 from app.core.blocks.paragraph import *
 from app.core.blocks.title import *
 from app.core.format.hr import *
-
+from docx.shared import Pt, Inches
 from docx.enum.text import WD_BREAK
 from docx.enum.table import WD_ALIGN_VERTICAL
+from app.core.format.table import table_column_widths
 import pandas as pd
 
 def options_section(doc, file, html_file):
     """Options QS Only Section"""
 
     # Load xlsx
-    df = pd.read_excel(file, sheet_name='QS-Only Options')
+    #df = pd.read_excel(file, sheet_name='QS-Only Options')
+    df = pd.read_excel(file.stream, sheet_name='QS-Only Options', engine='openpyxl')
 
     # Add title: Options
     insertTitle(doc, "Options", html_file)
@@ -26,6 +28,9 @@ def options_section(doc, file, html_file):
 
     num_rows, num_cols = data_range.shape
     table = doc.add_table(rows=num_rows+1, cols=num_cols)  # Adding 1 for the header row
+
+    table_column_widths(table, (Inches(2), Inches(4), Inches(2)))
+
 
     # Adding table headers as the first row
     for col_idx in range(num_cols):

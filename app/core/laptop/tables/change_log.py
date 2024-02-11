@@ -1,18 +1,18 @@
 from app.core.blocks.paragraph import *
 from app.core.blocks.title import *
 from app.core.format.hr import *
-
+from app.core.format.table import table_column_widths
 from docx.enum.text import WD_BREAK
 from docx.enum.table import WD_ALIGN_VERTICAL
-from docx.shared import Pt
+from docx.shared import Inches
 import pandas as pd
 
 def change_log_section(doc, file, html_file):
     """Changelog table"""
 
     # Load xlsx
-    df = pd.read_excel(file, sheet_name='Changelog')
-    #df = pd.read_excel(file.stream, sheet_name='Changelog', engine='openpyxl')
+    #df = pd.read_excel(file, sheet_name='Changelog')
+    df = pd.read_excel(file.stream, sheet_name='Changelog', engine='openpyxl')
 
     # Add title: Changelog
     insertTitle(doc, "Changelog", html_file)
@@ -27,6 +27,8 @@ def change_log_section(doc, file, html_file):
 
     num_rows, num_cols = data_range.shape
     table = doc.add_table(rows=num_rows, cols=num_cols, style='Table Grid')
+
+    table_column_widths(table, (Inches(2), Inches(2), Inches(2), Inches(2)))
 
     table.alignment = WD_ALIGN_VERTICAL.CENTER
 

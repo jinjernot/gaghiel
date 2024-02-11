@@ -16,15 +16,14 @@ from app.core.laptop.tech_specs.dimensions import dimensions_section
 from app.core.laptop.tech_specs.ports import ports_section
 from app.core.laptop.tech_specs.service import service_section
 
-
 import pandas as pd
 
 def tech_specs_section(doc, file, html_file):
     """TechSpecs Section"""
 
     # Load sheet into df
-    df = pd.read_excel(file, sheet_name='Tech Specs & QS Features')
-    # df = pd.read_excel(file.stream, sheet_name='Tech Specs & QS Features', engine='openpyxl')
+    #df = pd.read_excel(file, sheet_name='Tech Specs & QS Features')
+    df = pd.read_excel(file.stream, sheet_name='Tech Specs & QS Features', engine='openpyxl')
 
     # Remove extra spaces from the end of each value and convert all columns to strings
     df = df.applymap(lambda x: str(x).strip() if isinstance(x, str) else x)
@@ -33,18 +32,19 @@ def tech_specs_section(doc, file, html_file):
     df_filtered = df.dropna(subset=[df.columns[1]])
 
     # Save the filtered DataFrame to a new Excel file
-    output_file = 'filtered_tech_specs.xlsx'
+    #output_file = 'filtered_tech_specs.xlsx'
+    output_file = '/home/garciagi/qs/filtered_tech_specs.xlsx'
     df_filtered.to_excel(output_file, index=False)
 
-    df = pd.read_excel(output_file, sheet_name='Sheet1')
-
-    df.to_excel("data.xlsx", index=False)
+    df = pd.read_excel(output_file, sheet_name='Sheet1', engine='openpyxl')
+    df = df.astype(str)
+    print(df)
+    #df.to_excel("data.xlsx", index=False)
 
     # Run the functions to build the tech specs section
     product_name_section(doc, file, html_file)
-    operating_systems_section(doc, html_file, df)
+    #operating_systems_section(doc, html_file, df)
     processors_section(doc, file, html_file)
-    #chipset_section(doc, html_file, df)
     graphics_section(doc, html_file, df)
     display_section(doc, html_file, df)
     docking_section(doc, html_file, df)

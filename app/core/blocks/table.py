@@ -24,10 +24,16 @@ def insertTable(doc, df, html_file):
     for index, row in df.iterrows():
         # Check if the content in column 0 is "Table"
         if row[0] == "Table":
+            # Calculate the width of the page
+            page_width = doc.sections[0].page_width - doc.sections[0].left_margin - doc.sections[0].right_margin
+            
             # Add a table with 3 columns to the Word document
             table = doc.add_table(rows=1, cols=3)
 
-            table_column_widths(table, (Inches(5), Inches(3), Inches(3)))
+            # Set the width of each column
+            column_widths = (Inches(2), Inches(2), Inches(4))
+            for column, width in zip(table.columns, column_widths):
+                column.width = width
             
             # Populate columns 1 and 2 with values from the DataFrame
             for i in range(index + 1, len(df)):

@@ -2,8 +2,9 @@
 from app.core.blocks.paragraph import *
 from app.core.blocks.title import *
 from app.core.format.hr import *
-
+from docx.shared import Inches
 from docx.enum.text import WD_BREAK
+from app.core.format.table import table_column_widths
 
 def docking_section(doc, html_file, df):
     """Docking Table"""
@@ -16,6 +17,7 @@ def docking_section(doc, html_file, df):
         if row[1] == "Docking":
             # Add a table with 2 columns to the Word document
             table = doc.add_table(rows=1, cols=2)
+            table_column_widths(table, (Inches(3), Inches(5)))
             
             # Populate columns 0 and 1 with values from the DataFrame
             for i in range(index + 1, len(df)):

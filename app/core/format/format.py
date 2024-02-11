@@ -29,7 +29,9 @@ def default_font(doc):
     font.size = Pt(10)
 
 def bold_font(doc):
-    bold_words = read_bold_words_from_json('app/core/format/bold_words.json')
+    #bold_words = read_bold_words_from_json('app/core/format/bold_words.json')
+    bold_words = read_bold_words_from_json('/home/garciagi/qs/app/core/format/bold_words.json')
+    
     # Iterate through the paragraphs in the document
     for paragraph in doc.paragraphs:
         # Iterate through the runs in each paragraph
