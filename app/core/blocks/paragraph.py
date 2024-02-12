@@ -41,7 +41,6 @@ def insertList(doc, html_file, df, start_value):
     
     # Get the data between the start_value and "Value" from the second column
     items = df.iloc[start_index:next_value_index, 1].tolist()
-    print(items)
     
     # Remove "Footnotes" if it exists and separate values after it
     if 'Footnotes' in items:
