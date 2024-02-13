@@ -16,7 +16,7 @@ def processors_section(doc, file, html_file):
     insertTitle(doc, "Processors", html_file)
 
     # Define the criteria to filter the rows
-    criteria_values = ["Processor", "Cores", "Threads", "L3 Cache", "Max Boost Frequency", "Base Frequency", "Pro"]
+    criteria_values = ["Processor [3,4]", "Cores", "Threads", "L3 Cache", "Max Boost Frequency [5]", "Base Frequency", "Pro"]
 
     # Filter the dataframe based on the values in the third row
     third_row = df.iloc[1]  # Selecting the third row
