@@ -1,3 +1,4 @@
+import pandas as pd
 from app.core.format.hr import *
 from docx.enum.text import WD_BREAK
 from docx.shared import RGBColor
@@ -21,6 +22,13 @@ def processFootnotes(doc, footnotes):
             
 def insertTable(doc, df, html_file):
     footnotes = []  # To store footnotes temporarily
+    
+    # Remove NaN values from the DataFrame
+    df.fillna('', inplace=True)
+    
+    # Remove rows with only empty strings
+    df.dropna(how='all', inplace=True)
+    
     for index, row in df.iterrows():
         # Check if the content in column 0 is "Table"
         if row[0] == "Table":
@@ -69,7 +77,6 @@ def insertTable(doc, df, html_file):
                 
             # Remove the first row from the table
             table.rows[0]._element.getparent().remove(table.rows[0]._element)
-            # Replace "NaN" string values with an empty string
             
             # Process footnotes, if any
             if footnotes:
