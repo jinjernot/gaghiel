@@ -1,10 +1,10 @@
 *.docx*
 __pycache__
 *.pdf
-verga
 *.txt
 xlsx
 *.zip
 *html
 docs
 test
+gaghiel_env
