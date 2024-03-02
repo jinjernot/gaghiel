@@ -4,7 +4,6 @@ from app.core.blocks.title import *
 from app.core.format.hr import *
 from docx.shared import Pt, Inches
 from docx.enum.text import WD_BREAK
-from docx.enum.table import WD_ALIGN_VERTICAL
 from app.core.format.table import table_column_widths
 import pandas as pd
 

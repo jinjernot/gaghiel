@@ -1,5 +1,4 @@
 from app.core.laptop.overview.callouts import callout_section
-from app.core.laptop.overview.at_a_glance import ataglance_section
 
 import pandas as pd
 
@@ -13,4 +12,3 @@ def overview_section(doc, file, html_file):
     prod_name = df.columns[1]
     # Run the functions to build the overview section
     callout_section(doc, file, html_file, prod_name, df)
-    #ataglance_section(doc, html_file, df)

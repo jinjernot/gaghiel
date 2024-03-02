@@ -5,7 +5,6 @@ from app.core.blocks.table import *
 from app.core.format.hr import *
 
 from docx.enum.text import WD_BREAK
-from docx.enum.table import WD_ALIGN_VERTICAL
 import pandas as pd
 
 def fingerprint_section(doc, file, html_file):
