@@ -76,6 +76,7 @@ def insert_list(doc, html_file, df, start_value):
     paragraph = doc.add_paragraph()
     run.font.size = Pt(12)
     run.bold = True
+    run.add_break(WD_BREAK.LINE)
 
     for index, data in enumerate(items[1:], start=1):
         run = paragraph.add_run(data)
@@ -83,6 +84,7 @@ def insert_list(doc, html_file, df, start_value):
         if index < len(items) - 1:
             run.add_break(WD_BREAK.LINE)
     
+    run.add_break(WD_BREAK.LINE)
     process_footnotes(doc, footnotes)
 
     insert_horizontal_line(doc.add_paragraph(), thickness=3)

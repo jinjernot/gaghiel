@@ -38,7 +38,6 @@ def tech_specs_section(doc, file, html_file):
 
     df = pd.read_excel(output_file, sheet_name='Sheet1', engine='openpyxl')
     df = df.astype(str)
-    print(df)
     #df.to_excel("data.xlsx", index=False)
 
     # Run the functions to build the tech specs section

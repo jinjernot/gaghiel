@@ -40,3 +40,6 @@ def header(doc,file):
     header_paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
     insert_horizontal_line(header.add_paragraph(), thickness=30)
+
+    # Add a break line at the end of the header
+    header.add_paragraph()

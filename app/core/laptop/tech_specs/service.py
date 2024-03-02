@@ -12,7 +12,7 @@ def service_section(doc, html_file, df):
     insert_title(doc, "SERVICE AND SUPPORT", html_file)
 
     # Service and Support
-    #insertParagraph(doc, html_file, df, 317, 1)
+    #insert_paragraph(doc, html_file, df, 317, 1)
 
     # Footnotes
     #insertFootnote(doc, html_file, df, slice(320, 321), 1)

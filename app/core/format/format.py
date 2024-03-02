@@ -1,5 +1,6 @@
 from app.core.format.header import header
 from app.core.format.footer import footer
+from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT
 import json
 
 from docx.shared import Pt
@@ -76,3 +77,13 @@ def format_document(doc, file, imgs_path):
     set_margins(doc)
     set_default_font(doc)
     apply_bold_font(doc, bold_words)
+
+    # Apply cell spacing to all tables
+    for table in doc.tables:
+        table.style.paragraph_format.space_before = Pt(0)
+        table.style.paragraph_format.space_after = Pt(0)
+        for row in table.rows:
+            for cell in row.cells:
+                for paragraph in cell.paragraphs:
+                    paragraph.style.paragraph_format.space_before = Pt(0)
+                    paragraph.style.paragraph_format.space_after = Pt(0)
