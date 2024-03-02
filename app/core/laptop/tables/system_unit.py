@@ -16,7 +16,7 @@ def system_unit_section(doc, file, html_file):
    
 
     # Add title: SYSTEM UNIT
-    insertTitle(doc, "System Unit", html_file)
+    insert_title(doc, "System Unit", html_file)
 
     start_col_idx = 0
     end_col_idx = 1
@@ -53,6 +53,6 @@ def system_unit_section(doc, file, html_file):
         txt.write(html_table)
 
     # Insert HR
-    insertHR(doc.add_paragraph(), thickness=3)
+    insert_horizontal_line(doc.add_paragraph(), thickness=3)
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

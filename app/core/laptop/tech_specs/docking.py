@@ -10,7 +10,7 @@ def docking_section(doc, html_file, df):
     """Docking Table"""
 
     # Add title: DOCKING
-    insertTitle(doc, "Docking (Sold Separately)", html_file)
+    insert_title(doc, "Docking (Sold Separately)", html_file)
 
     for index, row in df.iterrows():
         # Check if the content in column 0 is "Table"
@@ -41,7 +41,7 @@ def docking_section(doc, html_file, df):
             # Add a paragraph break after the table
             doc.add_paragraph()
     # Insert HR
-    insertHR(doc.add_paragraph(), thickness=3)
-    insertHTMLhr(html_file)
+    insert_horizontal_line(doc.add_paragraph(), thickness=3)
+    insert_html_horizontal_line(html_file)
     
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

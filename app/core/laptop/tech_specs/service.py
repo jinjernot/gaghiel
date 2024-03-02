@@ -9,7 +9,7 @@ def service_section(doc, html_file, df):
     """Service and support techspecs section"""
 
     # Add the title: SERVICE AND SUPPORT
-    insertTitle(doc, "SERVICE AND SUPPORT", html_file)
+    insert_title(doc, "SERVICE AND SUPPORT", html_file)
 
     # Service and Support
     #insertParagraph(doc, html_file, df, 317, 1)
@@ -18,7 +18,7 @@ def service_section(doc, html_file, df):
     #insertFootnote(doc, html_file, df, slice(320, 321), 1)
 
     # HR
-    insertHR(doc.add_paragraph(), thickness=3)
-    insertHTMLhr(html_file)
+    insert_horizontal_line(doc.add_paragraph(), thickness=3)
+    insert_html_horizontal_line(html_file)
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

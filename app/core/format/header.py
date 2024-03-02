@@ -39,4 +39,4 @@ def header(doc,file):
     header_run2.font.bold = True
     header_paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
-    insertHR(header.add_paragraph(), thickness=30)
+    insert_horizontal_line(header.add_paragraph(), thickness=30)

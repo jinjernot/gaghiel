@@ -1,9 +1,14 @@
 from docx.oxml.shared import OxmlElement
 from docx.oxml.ns import qn
 
-def insertHR(paragraph, thickness=12):
-    """Insert horizontal line"""
+def insert_horizontal_line(paragraph, thickness=12):
+    """
+    Insert a horizontal line into the given paragraph.
 
+    Parameters:
+        paragraph (docx.text.paragraph.Paragraph): The paragraph object.
+        thickness (int): The thickness of the horizontal line.
+    """
     p = paragraph._p
     pPr = p.get_or_add_pPr()
     pBdr = OxmlElement('w:pBdr')
@@ -23,7 +28,13 @@ def insertHR(paragraph, thickness=12):
     bottom.set(qn('w:color'), 'auto')
     pBdr.append(bottom)
 
-def insertHTMLhr(html_file):
+def insert_html_horizontal_line(html_file):
+    """
+    Insert a horizontal line into the HTML file.
+
+    Parameters:
+        html_file (str): The path to the HTML file.
+    """
     with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write('<tr style="HEIGHT: 15pt">\n')
         txt.write('<td style="HEIGHT: 15pt; WIDTH: 537.25pt; PADDING-BOTTOM: 0.85pt; PADDING-TOP: 0.85pt; PADDING-LEFT: 0.85pt; PADDING-RIGHT: 0.85pt" vAlign="top" width="716" colSpan="4">\n')
@@ -31,4 +42,3 @@ def insertHTMLhr(html_file):
         txt.write('<hr align="center" SIZE="2" width="100%">\n')
         txt.write('</span></div>\n')
         txt.write('<p class="MsoNormal" style="LINE-HEIGHT: 115%"></p></td></tr></tbody></table>')
-

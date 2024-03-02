@@ -16,7 +16,7 @@ def fingerprint_section(doc, file, html_file):
     df = pd.read_excel(file.stream, sheet_name='QS-Only Fingerprint Reader', engine='openpyxl')
 
     # Add title: Fingerprint Reader
-    insertTitle(doc, "Fingerprint Reader", html_file)
+    insert_title(doc, "Fingerprint Reader", html_file)
 
     start_col_idx = 0
     end_col_idx = 1
@@ -53,6 +53,6 @@ def fingerprint_section(doc, file, html_file):
         txt.write(html_table)
 
     # Insert HR
-    insertHR(doc.add_paragraph(), thickness=3)
+    insert_horizontal_line(doc.add_paragraph(), thickness=3)
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

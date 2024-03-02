@@ -4,12 +4,20 @@ import config
 
 app = Flask(__name__)
 app.use_static_for = 'static'
+
 # Configuration
 app.config.from_object(config)
+
+###############################
+### Validate file extension ###
+###############################
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['VALID_FILE_EXTENSIONS']
 
+###############################
+### Validate file extension ###
+###############################
 
 @app.route('/app3')
 def index():

@@ -13,7 +13,7 @@ def processors_section(doc, file, html_file):
     df = pd.read_excel(file.stream, sheet_name='QS-Only Processors', engine='openpyxl')
 
     # Add the title: PROCESSORS
-    insertTitle(doc, "Processors", html_file)
+    insert_title(doc, "Processors", html_file)
 
     # Define the criteria to filter the rows
     criteria_values = ["Processor [3,4]", "Cores", "Threads", "L3 Cache", "Max Boost Frequency [5]", "Base Frequency", "Pro"]
@@ -46,7 +46,7 @@ def processors_section(doc, file, html_file):
         table.rows[0]._element.getparent().remove(table.rows[0]._element)
 
     # HR
-    insertHR(doc.add_paragraph(), thickness=3)
-    insertHTMLhr(html_file)
+    insert_horizontal_line(doc.add_paragraph(), thickness=3)
+    insert_html_horizontal_line(html_file)
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

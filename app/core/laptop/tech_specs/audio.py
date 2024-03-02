@@ -1,7 +1,7 @@
-from app.core.blocks.paragraph import insertList
+from app.core.blocks.paragraph import insert_list
 
 def audio_section(doc, html_file, df):
     """Audio techspecs section"""
 
     # Function to insert the list of values
-    insertList(doc, html_file, df, "Audio/Multimedia")
+    insert_list(doc, html_file, df, "Audio/Multimedia")

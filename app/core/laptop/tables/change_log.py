@@ -15,7 +15,7 @@ def change_log_section(doc, file, html_file):
     df = pd.read_excel(file.stream, sheet_name='Changelog', engine='openpyxl')
 
     # Add title: Changelog
-    insertTitle(doc, "Changelog", html_file)
+    insert_title(doc, "Changelog", html_file)
 
     start_col_idx = 1
     end_col_idx = 4

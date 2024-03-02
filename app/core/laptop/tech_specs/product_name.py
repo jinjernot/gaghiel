@@ -39,5 +39,5 @@ def product_name_section(doc, file, html_file):
     paragraph = doc.add_paragraph(prod_name)
 
     # HR
-    insertHR(doc.add_paragraph(), thickness=3)
-    insertHTMLhr(html_file)
+    insert_horizontal_line(doc.add_paragraph(), thickness=3)
+    insert_html_horizontal_line(html_file)

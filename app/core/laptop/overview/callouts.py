@@ -154,8 +154,8 @@ def callout_section(doc, file, html_file, prod_name, df):
         txt.write(html_table)
 
     # Insert HR
-    insertHR(doc.add_paragraph(), thickness=3)
-    insertHTMLhr(html_file)
+    insert_horizontal_line(doc.add_paragraph(), thickness=3)
+    insert_html_horizontal_line(html_file)
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
@@ -222,8 +222,8 @@ def callout_section(doc, file, html_file, prod_name, df):
         txt.write(html_table)
 
     # Insert HR
-    insertHR(doc.add_paragraph(), thickness=3)
-    insertHTMLhr(html_file)
+    insert_horizontal_line(doc.add_paragraph(), thickness=3)
+    insert_html_horizontal_line(html_file)
 
     doc.add_page_break()
     section = doc.sections[-1]

@@ -32,7 +32,7 @@ def add_page_number(paragraph):
 
 def footer(doc, imgs_path):
     footer = doc.sections[0].footer
-    insertHR(footer.add_paragraph(), thickness=10)
+    insert_horizontal_line(footer.add_paragraph(), thickness=10)
     table = footer.add_table(rows=1, cols=3, width=Inches(8))
 
     table_column_widths(table, (Inches(1), Inches(6), Inches(1)))

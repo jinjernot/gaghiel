@@ -6,7 +6,7 @@ def ataglance_section(doc, html_file, df):
     """At a glance section"""
 
     # Add the title: At a glance 
-    insertTitle(doc, "At a glance ", html_file)
+    insert_title(doc, "At a glance ", html_file)
 
     with open(html_file, 'a', encoding='utf-8') as txt:
         txt.write("<tbody>\n")

@@ -1,12 +1,19 @@
 from docx.shared import Pt
 
-def insertTitle(doc, title, html_file):
+def insert_title(doc, title, html_file):
+    """
+    Insert a title into the Word document and corresponding HTML file.
+
+    Parameters:
+        doc (docx.Document): The Word document object.
+        title (str): The title text.
+        html_file (str): The path to the HTML file.
+    """
     # Add the title to the Word document
     paragraph = doc.add_paragraph()
     run = paragraph.add_run(title)
     run.font.size = Pt(12)
     run.bold = True
-    #paragraph.add_run().add_break()
 
     # Write the HTML title
     with open(html_file, 'a', encoding='utf-8') as txt:
@@ -17,14 +24,23 @@ def insertTitle(doc, title, html_file):
         txt.write('<td style="WIDTH: 18.45pt; PADDING-BOTTOM: 0.85pt; PADDING-TOP: 0.85pt; PADDING-LEFT: 0.85pt; PADDING-RIGHT: 0.85pt" vAlign="top" width="25">\n')
         txt.write('<p class="MsoNormal" style="LINE-HEIGHT: 115%"><span lang="EN-US">&nbsp;</span></p></td>\n')
 
-def insertSubtitle(doc, html_file, df,  iloc_row, iloc_column):
+def insert_subtitle(doc, html_file, df, iloc_row, iloc_column):
+    """
+    Insert a subtitle into the Word document and corresponding HTML file.
+
+    Parameters:
+        doc (docx.Document): The Word document object.
+        html_file (str): The path to the HTML file.
+        df (pandas.DataFrame): The DataFrame containing subtitle data.
+        iloc_row (int): The row index in the DataFrame.
+        iloc_column (int): The column index in the DataFrame.
+    """
     # Add the subtitle to the Word document
     paragraph = doc.add_paragraph()
     subtitle = df.iloc[iloc_row, iloc_column]
     run = paragraph.add_run(subtitle)
     run.bold = True
-    #run.add_break(WD_BREAK.LINE)
 
     # Write the HTML subtitle
     with open(html_file, 'a', encoding='utf-8') as txt:
-        txt.write(f'<p class="MsoNormal" style="LINE-HEIGHT: 115%"><b><span lang="EN-US">{subtitle}</span></b></p></td>\n')
+        txt.write(f'<p class="MsoNormal" style="LINE-HEIGHT: 115%"><b><span lang="EN-US">{subtitle}</span></b></p>\n')
