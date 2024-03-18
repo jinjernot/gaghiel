@@ -15,10 +15,6 @@ app.config.from_object(config)
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['VALID_FILE_EXTENSIONS']
 
-###############################
-### Validate file extension ###
-###############################
-
 @app.route('/app3')
 def index():
     """Homepage with a button to generate DOCX files"""

@@ -11,8 +11,8 @@ def change_log_section(doc, file, html_file):
     """Changelog table"""
 
     # Load xlsx
-    #df = pd.read_excel(file, sheet_name='Changelog')
-    df = pd.read_excel(file.stream, sheet_name='Changelog', engine='openpyxl')
+    df = pd.read_excel(file, sheet_name='Changelog')
+    #df = pd.read_excel(file.stream, sheet_name='Changelog', engine='openpyxl')
 
     # Add title: Changelog
     insert_title(doc, "Changelog", html_file)

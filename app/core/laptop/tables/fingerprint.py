@@ -11,8 +11,8 @@ def fingerprint_section(doc, file, html_file):
     """Fingerprint Reader QS Only Section"""
 
     # Load xlsx
-    #df = pd.read_excel(file, sheet_name='QS-Only Fingerprint Reader')
-    df = pd.read_excel(file.stream, sheet_name='QS-Only Fingerprint Reader', engine='openpyxl')
+    df = pd.read_excel(file, sheet_name='QS-Only Fingerprint Reader')
+    #df = pd.read_excel(file.stream, sheet_name='QS-Only Fingerprint Reader', engine='openpyxl')
 
     # Add title: Fingerprint Reader
     insert_title(doc, "Fingerprint Reader", html_file)
