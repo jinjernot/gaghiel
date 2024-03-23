@@ -27,7 +27,7 @@ def callout_section(doc, file, html_file, prod_name, df):
     # Add the product name
     prodname_paragraph = doc.add_paragraph()
     run = prodname_paragraph.add_run(prod_name)
-    run.font.size = Pt(12)
+    run.font.size = Pt(14)
     run.bold = True
     prodname_paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
 

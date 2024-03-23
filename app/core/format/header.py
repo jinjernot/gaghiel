@@ -30,12 +30,11 @@ def header(doc,file):
     header_paragraph = header_table.cell(0, 0).paragraphs[0]
     header_run = header_paragraph.add_run("QuickSpecs")
     header_run.font.size = Pt(27)
-    header_run.font.bold = True
 
     # Add the product name to the header
     header_paragraph = header_table.cell(0, 1).paragraphs[0]
     header_run2 = header_paragraph.add_run(prod_name)
-    header_run2.font.size = Pt(12)
+    header_run2.font.size = Pt(14)
     header_run2.font.bold = True
     header_paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 

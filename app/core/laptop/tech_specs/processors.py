@@ -1,10 +1,15 @@
+import pandas as pd
+import docx
 from app.core.blocks.paragraph import *
 from app.core.blocks.title import *
 from app.core.format.hr import *
-
 from docx.enum.text import WD_BREAK
 
-import pandas as pd
+def table_column_widths(table, widths):
+    """Set the column widths for a table."""
+    for row in table.rows:
+        for idx, width in enumerate(widths):
+            row.cells[idx].width = width
 
 def processors_section(doc, file, html_file):
     """Processors techspecs section"""
@@ -16,7 +21,7 @@ def processors_section(doc, file, html_file):
     insert_title(doc, "Processors", html_file)
 
     # Define the criteria to filter the rows
-    criteria_values = ["Processor [3,4]", "Cores", "Threads", "L3 Cache", "Max Boost Frequency [5]", "Base Frequency", "Pro"]
+    criteria_values = ["Processor", "Cores", "Threads", "L3 Cache", "Max Boost\nFrequency", "Base Frequency", "Pro"]
 
     # Filter the dataframe based on the values in the third row
     third_row = df.iloc[1]  # Selecting the third row
@@ -37,6 +42,10 @@ def processors_section(doc, file, html_file):
 
     # Add table data
     for row in data:
+        # Check if the row is empty
+        if not any(row):
+            break  # Exit the loop if the row is empty
+        
         row_cells = table.add_row().cells
         for i, cell in enumerate(row):
             row_cells[i].text = str(cell)
@@ -44,6 +53,11 @@ def processors_section(doc, file, html_file):
     # Remove the first row
     if len(table.rows) > 1:  # Ensure there are rows to delete
         table.rows[0]._element.getparent().remove(table.rows[0]._element)
+
+    # Set the column widths of the table
+    table_column_widths(table, [docx.shared.Inches(2)] * len(data[0]))  # Set each column width to 1 inch
+
+    doc.add_paragraph()        
 
     # HR
     insert_horizontal_line(doc.add_paragraph(), thickness=3)

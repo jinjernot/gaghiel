@@ -72,7 +72,7 @@ def insert_list(doc, html_file, df, start_value):
         footnotes = []
 
     paragraph = doc.add_paragraph()
-    run = paragraph.add_run(start_value)
+    run = paragraph.add_run(start_value.upper()) 
     paragraph = doc.add_paragraph()
     run.font.size = Pt(12)
     run.bold = True

@@ -60,7 +60,9 @@ def apply_bold_font(doc, bold_words):
                 if word in run.text:
                     index = run.text.find(word)
                     if index != -1 and (index == 0 or run.text[index - 1] == '\n'):
-                        run.bold = True
+                        word_end_index = index + len(word)
+                        if word_end_index == len(run.text) or run.text[word_end_index] == '\n':
+                            run.bold = True
 
 def format_document(doc, file, imgs_path):
     """

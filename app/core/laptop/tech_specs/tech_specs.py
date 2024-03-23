@@ -1,7 +1,6 @@
 from app.core.laptop.tech_specs.product_name import product_name_section
 from app.core.laptop.tech_specs.operating_systems import operating_systems_section
 from app.core.laptop.tech_specs.processors import processors_section
-#from app.core.laptop.tech_specs.chipset import chipset_section
 from app.core.laptop.tech_specs.graphics import graphics_section
 from app.core.laptop.tech_specs.display import display_section
 from app.core.laptop.tech_specs.docking import docking_section
@@ -56,5 +55,5 @@ def tech_specs_section(doc, file, html_file):
     power_section(doc, html_file, df)
     dimensions_section(doc, html_file, df)
     ports_section(doc, html_file, df)
-    #service_section(doc, html_file, df)
+    service_section(doc, html_file, df)
     

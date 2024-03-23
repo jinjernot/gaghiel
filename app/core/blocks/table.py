@@ -1,9 +1,7 @@
-import pandas as pd
 from app.core.format.hr import *
 from docx.enum.text import WD_BREAK
 from docx.shared import RGBColor
-from app.core.format.table import table_column_widths
-from docx.shared import Pt, Inches
+from docx.shared import Inches
 
 
 def process_footnotes(doc, footnotes):
