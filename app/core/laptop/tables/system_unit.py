@@ -1,7 +1,7 @@
-
 from app.core.blocks.paragraph import *
 from app.core.blocks.title import *
 from app.core.format.hr import *
+from docx.shared import Inches
 
 from docx.enum.text import WD_BREAK
 import pandas as pd
@@ -11,8 +11,7 @@ def system_unit_section(doc, file, html_file):
 
     # Load xlsx
     df = pd.read_excel(file, sheet_name='QS-Only System Unit')
-    #df = pd.read_excel(file.stream, sheet_name='QS-Only System Unit', engine='openpyxl')
-   
+    # df = pd.read_excel(file.stream, sheet_name='QS-Only System Unit', engine='openpyxl')
 
     # Add title: SYSTEM UNIT
     insert_title(doc, "System Unit", html_file)
@@ -34,6 +33,17 @@ def system_unit_section(doc, file, html_file):
             cell = table.cell(row_idx, col_idx)
             if not pd.isna(value):
                 cell.text = str(value)
+
+    # Define column widths
+    column_widths = (Inches(3), Inches(5))  # Example widths, adjust as needed
+
+    # Set column widths
+    table_column_widths(table, column_widths)
+
+    # Bold the first column
+    for row in table.rows:
+        row.cells[0].paragraphs[0].runs[0].font.bold = True
+
     for cell in table.rows[0].cells:
         for paragraph in cell.paragraphs:
             for run in paragraph.runs:
@@ -55,3 +65,10 @@ def system_unit_section(doc, file, html_file):
     insert_horizontal_line(doc.add_paragraph(), thickness=3)
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
+
+
+def table_column_widths(table, widths):
+    """Set the column widths for a table."""
+    for row in table.rows:
+        for idx, width in enumerate(widths):
+            row.cells[idx].width = width

@@ -1,10 +1,16 @@
-
 from app.core.blocks.paragraph import *
 from app.core.blocks.title import *
 from app.core.format.hr import *
 from docx.shared import Inches
 from docx.enum.text import WD_BREAK
 from app.core.format.table import table_column_widths
+
+def table_column_widths(table, widths):
+        """Set the column widths for a table."""
+        for row in table.rows:
+            for idx, width in enumerate(widths):
+                row.cells[idx].width = width
+
 
 def docking_section(doc, html_file, df):
     """Docking Table"""
@@ -17,8 +23,13 @@ def docking_section(doc, html_file, df):
         if row[1] == "Docking":
             # Add a table with 2 columns to the Word document
             table = doc.add_table(rows=1, cols=2)
-            table_column_widths(table, (Inches(3), Inches(5)))
-            
+
+            # Define column widths
+            column_widths = (Inches(3), Inches(5))  # Example widths, adjust as needed
+
+            # Set column widths
+            table_column_widths(table, column_widths)
+
             # Populate columns 0 and 1 with values from the DataFrame
             for i in range(index + 1, len(df)):
                 if df.iloc[i, 0] == "Container Name":
@@ -40,6 +51,7 @@ def docking_section(doc, html_file, df):
             
             # Add a paragraph break after the table
             doc.add_paragraph()
+
     # Insert HR
     insert_horizontal_line(doc.add_paragraph(), thickness=3)
     insert_html_horizontal_line(html_file)

@@ -15,7 +15,6 @@ def processors_section(doc, file, html_file):
     """Processors techspecs section"""
 
     df = pd.read_excel(file, sheet_name='QS-Only Processors')
-    #df = pd.read_excel(file.stream, sheet_name='QS-Only Processors', engine='openpyxl')
 
     # Add the title: PROCESSORS
     insert_title(doc, "Processors", html_file)
@@ -57,10 +56,28 @@ def processors_section(doc, file, html_file):
     # Set the column widths of the table
     table_column_widths(table, [docx.shared.Inches(2)] * len(data[0]))  # Set each column width to 1 inch
 
-    doc.add_paragraph()        
+    doc.add_paragraph()
+
+
+    # After adding the table, continue processing the DataFrame
+    footnotes_index = df[df.eq('Footnotes').any(axis=1)].index.tolist()
+    if footnotes_index:
+        footnotes_index = footnotes_index[0]  # Assuming there's only one "Footnotes" row
+        footnotes_data = df.iloc[footnotes_index + 1:]  # Get data after "Footnotes" row
+        footnotes_data = footnotes_data.dropna(how='all')  # Drop rows with all NaN values
+        
+        # Iterate over rows of footnotes_data and add them to the document
+        for _, row in footnotes_data.iterrows():
+            row_values = row.dropna().tolist()
+            if row_values:
+                # Add row values as a paragraph with specified font color
+                paragraph = doc.add_paragraph(" - ".join(map(str, row_values)))
+                for run in paragraph.runs:
+                    run.font.color.rgb = RGBColor(0, 0, 153)  # Set font color to blue    
 
     # HR
     insert_horizontal_line(doc.add_paragraph(), thickness=3)
     insert_html_horizontal_line(html_file)
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
+
