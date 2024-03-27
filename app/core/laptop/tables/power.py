@@ -11,8 +11,8 @@ def power_section(doc, file, html_file):
     """Power QS Only Section"""
 
     # Load xlsx
-    df = pd.read_excel(file, sheet_name='QS-Only Storage')
-    #df = pd.read_excel(file.stream, sheet_name='QS-Only Power', engine='openpyxl')
+    #df = pd.read_excel(file, sheet_name='QS-Only Storage')
+    df = pd.read_excel(file.stream, sheet_name='QS-Only Power', engine='openpyxl')
 
     # Add title: Power
     insert_title(doc, "Power", html_file)

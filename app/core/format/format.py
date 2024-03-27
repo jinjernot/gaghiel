@@ -1,6 +1,5 @@
 from app.core.format.header import header
 from app.core.format.footer import footer
-from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT
 import json
 
 from docx.shared import Pt
@@ -73,8 +72,8 @@ def format_document(doc, file, imgs_path):
         file (str): The path to the Word document.
         imgs_path (str): The path to the images directory.
     """
-    #bold_words = read_bold_words_from_json('/home/garciagi/qs/app/core/format/bold_words.json')
-    bold_words = read_bold_words_from_json('app/core/format/bold_words.json')
+    bold_words = read_bold_words_from_json('/home/garciagi/qs/app/core/format/bold_words.json')
+    #bold_words = read_bold_words_from_json('app/core/format/bold_words.json')
     header(doc, file)
     footer(doc, imgs_path)
     set_margins(doc)

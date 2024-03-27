@@ -5,12 +5,11 @@ from docx.shared import Inches
 from docx.enum.text import WD_BREAK
 from app.core.format.table import table_column_widths
 
-def table_column_widths(table, widths):
-        """Set the column widths for a table."""
-        for row in table.rows:
-            for idx, width in enumerate(widths):
-                row.cells[idx].width = width
 
+def table_column_widths(table, widths):
+    """Set the column widths for a table."""
+    for idx, width in enumerate(widths):
+        table.columns[idx].width = width
 
 def docking_section(doc, html_file, df):
     """Docking Table"""
@@ -19,16 +18,13 @@ def docking_section(doc, html_file, df):
     insert_title(doc, "Docking (Sold Separately)", html_file)
 
     for index, row in df.iterrows():
-        # Check if the content in column 0 is "Table"
+        # Check if the content in column 0 is "Docking"
         if row[1] == "Docking":
             # Add a table with 2 columns to the Word document
             table = doc.add_table(rows=1, cols=2)
 
-            # Define column widths
-            column_widths = (Inches(3), Inches(5))  # Example widths, adjust as needed
-
-            # Set column widths
-            table_column_widths(table, column_widths)
+            # Set the column widths
+            table_column_widths(table, [Inches(3), Inches(5)])
 
             # Populate columns 0 and 1 with values from the DataFrame
             for i in range(index + 1, len(df)):

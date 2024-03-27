@@ -2,6 +2,7 @@
 from app.core.blocks.paragraph import *
 from app.core.blocks.title import *
 from app.core.format.hr import *
+from docx.shared import Inches
 
 from docx.enum.text import WD_BREAK
 import pandas as pd
@@ -10,8 +11,8 @@ def audio_section(doc, file, html_file):
     """Audio QS Only Section"""
 
     # Load xlsx
-    df = pd.read_excel(file, sheet_name='QS-Only Audio')
-    #df = pd.read_excel(file.stream, sheet_name='QS-Only Audio', engine='openpyxl')
+    #df = pd.read_excel(file, sheet_name='QS-Only Audio')
+    df = pd.read_excel(file.stream, sheet_name='QS-Only Audio', engine='openpyxl')
 
     # Add title: AUDIO
     insert_title(doc, "Audio", html_file)
@@ -26,6 +27,12 @@ def audio_section(doc, file, html_file):
 
     num_rows, num_cols = data_range.shape
     table = doc.add_table(rows=num_rows, cols=num_cols)
+
+    # Define column widths
+    column_widths = (Inches(3), Inches(5))
+
+    # Set column widths
+    table_column_widths(table, column_widths)
 
 
     for row_idx in range(num_rows):
@@ -55,3 +62,10 @@ def audio_section(doc, file, html_file):
     insert_horizontal_line(doc.add_paragraph(), thickness=3)
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
+
+
+def table_column_widths(table, widths):
+    """Set the column widths for a table."""
+    for row in table.rows:
+        for idx, width in enumerate(widths):
+            row.cells[idx].width = width

@@ -10,8 +10,8 @@ def system_unit_section(doc, file, html_file):
     """System Unit table"""
 
     # Load xlsx
-    df = pd.read_excel(file, sheet_name='QS-Only System Unit')
-    # df = pd.read_excel(file.stream, sheet_name='QS-Only System Unit', engine='openpyxl')
+    #df = pd.read_excel(file, sheet_name='QS-Only System Unit')
+    df = pd.read_excel(file.stream, sheet_name='QS-Only System Unit', engine='openpyxl')
 
     # Add title: SYSTEM UNIT
     insert_title(doc, "System Unit", html_file)
@@ -27,18 +27,18 @@ def system_unit_section(doc, file, html_file):
     num_rows, num_cols = data_range.shape
     table = doc.add_table(rows=num_rows, cols=num_cols)
 
+    # Define column widths
+    column_widths = (Inches(3), Inches(5))
+
+    # Set column widths
+    table_column_widths(table, column_widths)
+
     for row_idx in range(num_rows):
         for col_idx in range(num_cols):
             value = data_range.iat[row_idx, col_idx]
             cell = table.cell(row_idx, col_idx)
             if not pd.isna(value):
                 cell.text = str(value)
-
-    # Define column widths
-    column_widths = (Inches(3), Inches(5))  # Example widths, adjust as needed
-
-    # Set column widths
-    table_column_widths(table, column_widths)
 
     # Bold the first column
     for row in table.rows:

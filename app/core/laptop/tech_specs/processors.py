@@ -14,7 +14,8 @@ def table_column_widths(table, widths):
 def processors_section(doc, file, html_file):
     """Processors techspecs section"""
 
-    df = pd.read_excel(file, sheet_name='QS-Only Processors')
+    #df = pd.read_excel(file, sheet_name='QS-Only Processors')
+    df = pd.read_excel(file.stream, sheet_name='QS-Only Processors', engine='openpyxl')
 
     # Add the title: PROCESSORS
     insert_title(doc, "Processors", html_file)
