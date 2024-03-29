@@ -5,7 +5,6 @@ from app.core.format.format import format_document
 
 from docx import Document
 from zipfile import ZipFile
-#from docx2pdf import convert
 
 
 imgs_path = "/home/garciagi/qs/imgs/"
@@ -18,8 +17,6 @@ def createdocx(file):
     doc = Document()
     html_file = '/home/garciagi/qs/quickspecs.html'
     #html_file = 'quickspecs.html'
-
-
 
     # Quickspecs sections
     overview_section(doc, file, html_file)
@@ -46,5 +43,3 @@ def createdocx(file):
         #zipf.write("image002.png", arcname='image002.png')        
         zipf.write("/home/garciagi/qs/image001.png", arcname='image001.png')
         zipf.write("/home/garciagi/qs/image002.png", arcname='image002.png')
-     #   zipf.write(docx_file.replace('.docx', '.pdf'))
-        

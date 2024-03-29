@@ -1,12 +1,11 @@
-from app.core.blocks.paragraph import *
-from app.core.blocks.title import *
-from app.core.format.hr import *
-
-from docx.enum.text import WD_BREAK
-
+from app.core.blocks.paragraph import insert_list
 
 def service_section(doc, html_file, df):
     """Service and support techspecs section"""
 
-    # Function to insert the list of values
-    insert_list(doc, html_file, df, "Service and Support")
+    try:
+        # Function to insert the list of values
+        insert_list(doc, html_file, df, "Service and Support")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return str(e)

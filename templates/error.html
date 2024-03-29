@@ -8,15 +8,16 @@
 
 <header class="heading">
     <h2 class="">ERROR</h2>
-    <h1 class="">Invalid file</h1>
-
-    
+    <h1 class="">{{ error_title }}</h1> <!-- Render error title dynamically -->
 </header>
 
 <div class="image-container">
-<img src="{{ url_for('static', filename='images/favicon.png') }}" alt="" width="50" height="50">
+    <img src="{{ url_for('static', filename='images/favicon.png') }}" alt="" width="50" height="50">
 </div>
+
+<div class="error-message">
+    <p>{{ error_message }}</p> <!-- Render error message dynamically -->
+</div>
+
 </body>
 </html>
-
-

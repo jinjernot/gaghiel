@@ -31,7 +31,8 @@ def generate_docx():
                 return send_from_directory('.', 'quickspecs.zip', as_attachment=True)
         except Exception as e:
             print(e)
-            return render_template('error.html'), 500
+            error_message = str(e)  # Convert the exception to a string for display
+            return render_template('error.html', error_message=error_message), 500
     return render_template('error.html'), 400
 
 if __name__ == "__main__":
