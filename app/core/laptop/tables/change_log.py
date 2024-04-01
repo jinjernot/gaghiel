@@ -1,9 +1,10 @@
+from app.core.format.table import table_column_widths
 from app.core.blocks.paragraph import *
 from app.core.blocks.title import *
 from app.core.format.hr import *
-from app.core.format.table import table_column_widths
-from docx.enum.text import WD_BREAK
+
 from docx.enum.table import WD_ALIGN_VERTICAL
+from docx.enum.text import WD_BREAK
 from docx.shared import Inches
 import pandas as pd
 

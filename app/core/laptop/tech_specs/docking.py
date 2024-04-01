@@ -1,10 +1,10 @@
+from app.core.format.table import table_column_widths
 from app.core.blocks.paragraph import *
 from app.core.blocks.title import *
 from app.core.format.hr import *
-from docx.shared import Inches
-from docx.enum.text import WD_BREAK
-from app.core.format.table import table_column_widths
 
+from docx.enum.text import WD_BREAK
+from docx.shared import Inches
 
 def table_column_widths(table, widths):
     """Set the column widths for a table."""

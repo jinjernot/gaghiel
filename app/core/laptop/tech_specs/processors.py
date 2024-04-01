@@ -1,9 +1,11 @@
-import pandas as pd
-import docx
+
 from app.core.blocks.paragraph import *
 from app.core.blocks.title import *
 from app.core.format.hr import *
+
 from docx.enum.text import WD_BREAK
+import pandas as pd
+import docx
 
 def table_column_widths(table, widths):
     """Set the column widths for a table."""

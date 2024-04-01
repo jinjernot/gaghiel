@@ -2,6 +2,7 @@ from app.core.blocks.paragraph import *
 from app.core.blocks.title import *
 from app.core.format.hr import *
 from docx.shared import Inches
+
 from docx.enum.text import WD_BREAK
 import pandas as pd
 

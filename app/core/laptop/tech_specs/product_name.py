@@ -1,8 +1,7 @@
 from app.core.format.hr import *
 
-from docx.shared import Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-
+from docx.shared import Pt
 import pandas as pd
 
 def product_name_section(doc, file, html_file):
