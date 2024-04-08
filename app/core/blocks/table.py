@@ -20,7 +20,7 @@ def process_footnotes(doc, footnotes):
         run = paragraph.add_run(data)
         run.font.color.rgb = RGBColor(0, 0, 153)
         
-        if index < len(footnotes) - 1:
+        if index < len(footnotes) - 1 and footnotes[index + 1].strip():  # Check if the next footnote is not empty
             run.add_break(WD_BREAK.LINE)
 
 def insert_table(doc, df, html_file):
