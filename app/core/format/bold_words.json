@@ -42,6 +42,7 @@
       "Product Dimensions (w x d x h)",
       "Pallet Dimensions (w x d x h)",
       "Left side",
-      "Right side"
+      "Right side",
+      "Processor Family"
     ]
   }
