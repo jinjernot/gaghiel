@@ -12,6 +12,9 @@ def network_section(doc, file, html_file):
     try:
         # Load xlsx
         df = pd.read_excel(file.stream, sheet_name='QS-Only Network', engine='openpyxl')
+        
+        # Replace "_x000D_" with an empty string in the DataFrame
+        df = df.replace("_x000D_", "", regex=True)
 
         # Add title: Networking
         insert_title(doc, "NETWORKING / COMMUNICATION", html_file)
