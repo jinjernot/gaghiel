@@ -29,7 +29,7 @@ def processors_section(doc, file, html_file):
         # Filter to keep columns that have data in the third row
         filtered_df = df.loc[:, ~third_row.isna()]
 
-        # Remove the first row
+        # Remove the rows
         filtered_df = filtered_df.iloc[3:]
 
         # Replace "NaN" string values with an empty string
@@ -67,9 +67,6 @@ def processors_section(doc, file, html_file):
                 for run in paragraph.runs:
                     run.font.bold = True
                     
-        # Set the column widths of the table
-        table_column_widths(table, [docx.shared.Inches(2)] * len(data[0]))  # Set each column width to 2 inches
-
         doc.add_paragraph()
 
         # After adding the table, continue processing the DataFrame
@@ -90,10 +87,15 @@ def processors_section(doc, file, html_file):
 
         # HR
         insert_horizontal_line(doc.add_paragraph(), thickness=3)
-        insert_html_horizontal_line(html_file)
 
         doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
     except Exception as e:
         print(f"An error occurred: {e}")
         return str(e)
+    
+def table_column_widths(table, widths):
+    """Set the column widths for a table."""
+    for row in table.rows:
+        for idx, width in enumerate(widths):
+            row.cells[idx].width = width

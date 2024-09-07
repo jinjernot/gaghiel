@@ -48,6 +48,24 @@ def system_unit_section(doc, file, html_file):
             for paragraph in cell.paragraphs:
                 for run in paragraph.runs:
                     run.font.bold = True
+                               
+        doc.add_paragraph()
+
+        # After adding the table, continue processing the DataFrame
+        footnotes_index = df[df.eq('Footnotes').any(axis=1)].index.tolist()
+        if footnotes_index:
+            footnotes_index = footnotes_index[0]  # Assuming there's only one "Footnotes" row
+            footnotes_data = df.iloc[footnotes_index + 1:]  # Get data after "Footnotes" row
+            footnotes_data = footnotes_data.dropna(how='all')  # Drop rows with all NaN values
+            
+            # Iterate over rows of footnotes_data and add them to the document
+            for _, row in footnotes_data.iterrows():
+                row_values = row.dropna().tolist()
+                if row_values:
+                    # Add row values as a paragraph with specified font color
+                    paragraph = doc.add_paragraph(" - ".join(map(str, row_values)))
+                    for run in paragraph.runs:
+                        run.font.color.rgb = RGBColor(0, 0, 153)  # Set font color to blue    
 
         html_table = '<table class="MsoNormalTable" cellSpacing="3" cellPadding="0" width="728" border="0">\n'
         for row_idx in range(num_rows):
