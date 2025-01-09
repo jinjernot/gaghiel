@@ -18,7 +18,7 @@ def processors_section(doc, file, html_file):
 
     try:
         # Read Excel file
-        df = pd.read_excel(file.stream, sheet_name='QS-Only Processors', engine='openpyxl')
+        df = pd.read_excel(file.stream, sheet_name='Processors', engine='openpyxl')
 
         # Add title
         insert_title(doc, "Processors", html_file)
