@@ -24,6 +24,7 @@
       "Manageability Features",
       "Security Management",
       "Security- TPM",
+      "Security Feature ",
       "1st Source",
       "BIOS",
       "IPv6 Support",
@@ -43,6 +44,10 @@
       "Pallet Dimensions (w x d x h)",
       "Left side",
       "Right side",
-      "Processor Family"
+      "Processor Family",
+      "Speaker Power",
+      "Smartcard Reader",
+      "Does the BIOS implement the ISO/IEC 19678:2015 (formerly NIST 800-147) guidelines?:s",
+      "Class:"
     ]
   }
