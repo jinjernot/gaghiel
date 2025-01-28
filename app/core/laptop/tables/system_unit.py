@@ -6,7 +6,7 @@ from docx.shared import Inches
 from docx.enum.text import WD_BREAK
 import pandas as pd
 
-def system_unit_section(doc, file, html_file):
+def system_unit_section(doc, file):
     """System Unit table"""
 
     try:
@@ -14,7 +14,7 @@ def system_unit_section(doc, file, html_file):
         df = pd.read_excel(file.stream, sheet_name='QS-Only System Unit', engine='openpyxl')
 
         # Add title: SYSTEM UNIT
-        insert_title(doc, "SYSTEM UNIT", html_file)
+        insert_title(doc, "SYSTEM UNIT")
 
         start_col_idx = 0
         end_col_idx = 1
@@ -66,18 +66,6 @@ def system_unit_section(doc, file, html_file):
                     paragraph = doc.add_paragraph(" - ".join(map(str, row_values)))
                     for run in paragraph.runs:
                         run.font.color.rgb = RGBColor(0, 0, 153)  # Set font color to blue    
-
-        html_table = '<table class="MsoNormalTable" cellSpacing="3" cellPadding="0" width="728" border="0">\n'
-        for row_idx in range(num_rows):
-            html_table += "  <tr>\n"
-            for col_idx in range(num_cols):
-                value = data_range.iat[row_idx, col_idx]
-                html_table += f"    <td>{value}</td>\n"
-            html_table += "  </tr>\n"
-        html_table += "</table>"
-
-        with open(html_file, 'a', encoding='utf-8') as txt:
-            txt.write(html_table)
 
         # Insert HR
         insert_horizontal_line(doc.add_paragraph(), thickness=3)

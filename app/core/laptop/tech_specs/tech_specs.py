@@ -17,7 +17,7 @@ from app.core.laptop.tech_specs.service import service_section
 
 import pandas as pd
 
-def tech_specs_section(doc, file, html_file):
+def tech_specs_section(doc, file):
     """TechSpecs Section"""
 
     try:
@@ -39,22 +39,22 @@ def tech_specs_section(doc, file, html_file):
         df = df.astype(str)
 
         # Run the functions to build the tech specs section
-        product_name_section(doc, file, html_file)
-        operating_systems_section(doc, html_file, df)
-        processors_section(doc, file, html_file)
-        graphics_section(doc, html_file, df)
-        display_section(doc, html_file, df)
-        docking_section(doc, html_file, df)
-        storage_section(doc, html_file, df)
-        memory_section(doc, html_file, df)
-        networking_section(doc, html_file, df)
-        audio_section(doc, html_file, df)
-        keyboard_section(doc, html_file, df)
-        software_section(doc, html_file, df)
-        power_section(doc, html_file, df)
-        dimensions_section(doc, html_file, df)
-        ports_section(doc, html_file, df)
-        service_section(doc, html_file, df)
+        product_name_section(doc, file)
+        operating_systems_section(doc, df)
+        processors_section(doc, file)
+        graphics_section(doc, df)
+        display_section(doc, df)
+        docking_section(doc, df)
+        storage_section(doc, df)
+        memory_section(doc, df)
+        networking_section(doc, df)
+        audio_section(doc, df)
+        keyboard_section(doc, df)
+        software_section(doc, df)
+        power_section(doc, df)
+        dimensions_section(doc, df)
+        ports_section(doc, df)
+        service_section(doc, df)
 
     except Exception as e:
         print(f"An error occurred: {e}")

@@ -3,13 +3,12 @@ from docx.shared import Pt
 from docx.shared import RGBColor
 from app.core.format.hr import *
 
-def insert_paragraph(doc, html_file, df, iloc_row, iloc_column):
+def insert_paragraph(doc, df, iloc_row, iloc_column):
     """
-    Insert a paragraph into both the Word document and an HTML file.
+    Insert a paragraph into both the Word document.
 
     Parameters:
         doc (docx.Document): The Word document object.
-        html_file (str): The path to the HTML file.
         df (pandas.DataFrame): The DataFrame containing the data.
         iloc_row (int): The row index in the DataFrame.
         iloc_column (int): The column index in the DataFrame.
@@ -17,9 +16,6 @@ def insert_paragraph(doc, html_file, df, iloc_row, iloc_column):
     data = df.iloc[iloc_row, iloc_column]
     paragraph = doc.add_paragraph()
     paragraph.add_run(data)
-
-    with open(html_file, 'a', encoding='utf-8') as txt:
-        txt.write(f"<p>{data}</p>\n")
 
 def process_footnotes(doc, footnotes):
     """
@@ -40,13 +36,12 @@ def process_footnotes(doc, footnotes):
         if index < len(footnotes) - 1:
             run.add_break(WD_BREAK.LINE)
 
-def insert_list(doc, html_file, df, start_value):
+def insert_list(doc, df, start_value):
     """
-    Insert a list into the Word document and HTML file.
+    Insert a list into the Word document.
 
     Parameters:
         doc (docx.Document): The Word document object.
-        html_file (str): The path to the HTML file.
         df (pandas.DataFrame): The DataFrame containing the data.
         start_value (str): The starting value for the list.
     """
@@ -89,17 +84,15 @@ def insert_list(doc, html_file, df, start_value):
     process_footnotes(doc, footnotes)
 
     insert_horizontal_line(doc.add_paragraph(), thickness=3)
-    insert_html_horizontal_line(html_file)
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
     
     
-def insert_footnote(doc, html_file, df, iloc_range, iloc_column):
+def insert_footnote(doc, df, iloc_range, iloc_column):
     """
-    Insert a footnote into both the Word document and the HTML file.
+    Insert a footnote into both the Word document.
 
     Parameters:
         doc (docx.Document): The Word document object.
-        html_file (str): The path to the HTML file.
         df (pandas.DataFrame): The DataFrame containing the data.
         iloc_range (slice): The slice range for selecting footnotes.
         iloc_column (int): The column index in the DataFrame.
@@ -114,21 +107,3 @@ def insert_footnote(doc, html_file, df, iloc_range, iloc_column):
         
         if index < len(footnote) - 1:
             run.add_break(WD_BREAK.LINE)
-
-    html_footnotes = '<tr>\n'
-    for index, note in enumerate(footnote):
-        html_footnotes += f'<p class="MsoNormal" style="LINE-HEIGHT: 115%"><span lang="EN-US" style="COLOR: #000099">{note}</span></p>'
-        if index < len(footnote) - 1:
-            html_footnotes += '\n'
-    html_footnotes += '</td></tr>\n'
-
-    with open(html_file, 'a', encoding='utf-8') as txt:
-        txt.write('<tr>')
-        txt.write('<td style="WIDTH: 15.75pt; PADDING-BOTTOM: 0.75pt; PADDING-TOP: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-RIGHT: 0.75pt" vAlign="top" width="21">')
-        txt.write('<p class="MsoNormal" style="LINE-HEIGHT: 115%"><span lang="EN-US" style="COLOR: #000099">&nbsp;</span></p></td>')
-        txt.write('<td style="WIDTH: 519.8pt; PADDING-BOTTOM: 0.75pt; PADDING-TOP: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-RIGHT: 0.75pt" vAlign="top" width="693" colSpan="2">')
-        txt.write('<p class="MsoNormal" style="LINE-HEIGHT: 115%"><span lang="EN-US" style="COLOR: black">&nbsp;</span></p></td></tr>')
-        txt.write('<tr>')
-        txt.write('<td style="WIDTH: 15.75pt; PADDING-BOTTOM: 0.75pt; PADDING-TOP: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-RIGHT: 0.75pt" vAlign="top" width="21">')
-        txt.write('<td style="WIDTH: 519.8pt; PADDING-BOTTOM: 0.75pt; PADDING-TOP: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-RIGHT: 0.75pt" vAlign="top" width="693" colSpan="2">')
-        txt.write(html_footnotes)

@@ -23,14 +23,13 @@ def process_footnotes(doc, footnotes):
         if index < len(footnotes) - 1 and footnotes[index + 1].strip():  # Check if the next footnote is not empty
             run.add_break(WD_BREAK.LINE)
 
-def insert_table(doc, df, html_file):
+def insert_table(doc, df):
     """
-    Insert tables into the Word document and corresponding HTML file.
+    Insert tables into the Word document.
 
     Parameters:
         doc (docx.Document): The Word document object.
         df (pandas.DataFrame): The DataFrame containing the table data.
-        html_file (str): The path to the HTML file.
     """
     footnotes = []  # To store footnotes temporarily
     
@@ -48,7 +47,6 @@ def insert_table(doc, df, html_file):
             column_widths = (Inches(2), Inches(2), Inches(4))
             for column, width in zip(table.columns, column_widths):
                 column.width = width
-            
             for i in range(index + 1, len(df)):
                 if df.iloc[i, 0] == "Table":
                     break
@@ -65,7 +63,6 @@ def insert_table(doc, df, html_file):
                     for paragraph in cell_1.paragraphs:
                         for run in paragraph.runs:
                             run.font.bold = True
-
                     cell_2 = table.rows[-1].cells[2]
                     cell_2.text = str(df.iloc[i, 1])
 
@@ -74,38 +71,9 @@ def insert_table(doc, df, html_file):
             for paragraph in cell_0.paragraphs:
                 for run in paragraph.runs:
                     run.font.bold = True
-                
             table.rows[0]._element.getparent().remove(table.rows[0]._element)
             
             if footnotes:
                 process_footnotes(doc, footnotes)
                 footnotes = []
-
             doc.add_paragraph()
-
-    # Generating HTML table
-    html_table = '<table class="MsoNormalTable" cellSpacing="3" cellPadding="0" width="728" border="0">\n'
-    
-    for index, row in df.iterrows():
-        if row[0] == "Table":
-            start_row_index = index + 1
-            html_table += '<tr>'
-            html_table += '<th><b>{}</b></th>'.format(df.columns[0])
-            html_table += '<th><b>{}</b></th>'
-            html_table += '</tr>\n'
-            end_row_index = start_row_index
-            while end_row_index < len(df) and df.iloc[end_row_index, 0] != "Table":
-                end_row_index += 1
-                
-            for i in range(start_row_index, end_row_index):
-                html_table += '<tr>'
-                html_table += '<td><b>{}</b></td>'.format(df.iloc[i, 0])
-                html_table += '<td><b>{}</b></td>'
-                html_table += '</tr>\n'
-            
-            html_table += '<tr><td colspan="2"><b>{}</b></td></tr>\n'.format(row[1])
-
-    html_table += '</table>'
-
-    with open(html_file, 'a', encoding='utf-8') as txt:
-        txt.write(html_table)

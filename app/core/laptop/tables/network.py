@@ -6,7 +6,7 @@ from app.core.format.hr import *
 from docx.enum.text import WD_BREAK
 import pandas as pd
 
-def network_section(doc, file, html_file):
+def network_section(doc, file):
     """Network QS Only Section"""
 
     try:
@@ -17,10 +17,10 @@ def network_section(doc, file, html_file):
         df = df.replace("_x000D_", "", regex=True)
 
         # Add title: Networking
-        insert_title(doc, "NETWORKING / COMMUNICATION", html_file)
+        insert_title(doc, "NETWORKING / COMMUNICATION")
 
         # Add table
-        insert_table(doc, df, html_file)
+        insert_table(doc, df)
 
         # Insert HR
         insert_horizontal_line(doc.add_paragraph(), thickness=3)

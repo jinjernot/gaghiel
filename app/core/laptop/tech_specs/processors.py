@@ -13,7 +13,7 @@ def table_column_widths(table, widths):
         for idx, width in enumerate(widths):
             row.cells[idx].width = width
 
-def processors_section(doc, file, html_file):
+def processors_section(doc, file):
     """Processors techspecs section"""
 
     try:
@@ -21,7 +21,7 @@ def processors_section(doc, file, html_file):
         df = pd.read_excel(file.stream, sheet_name='Processors', engine='openpyxl')
 
         # Add title
-        insert_title(doc, "Processors", html_file)
+        insert_title(doc, "Processors")
 
         # Dynamically fetch the column names from the third row (index 2) that have data
         third_row = df.iloc[3]  # Selecting the third row (index 2, but 1-based)
@@ -45,8 +45,8 @@ def processors_section(doc, file, html_file):
         # Add table data
         for row in data:
             # Check if the row is empty
-            if not any(row):
-                break  # Exit the loop if the row is empty
+            if 'Footnotes' in row:
+                break  # Exit the loop if footnote row is reached
             
             row_cells = table.add_row().cells
             for i, cell in enumerate(row):

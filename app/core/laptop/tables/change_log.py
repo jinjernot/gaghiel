@@ -8,7 +8,7 @@ from docx.enum.text import WD_BREAK
 from docx.shared import Inches
 import pandas as pd
 
-def change_log_section(doc, file, html_file):
+def change_log_section(doc, file):
     """Changelog table"""
 
     try:
@@ -16,7 +16,7 @@ def change_log_section(doc, file, html_file):
         df = pd.read_excel(file.stream, sheet_name='Changelog', engine='openpyxl')
 
         # Add title: Changelog
-        insert_title(doc, "CHANGELOG", html_file)
+        insert_title(doc, "CHANGELOG")
 
         start_col_idx = 1
         end_col_idx = 4
@@ -47,8 +47,8 @@ def change_log_section(doc, file, html_file):
                                 run.font.bold = True
 
         doc.add_paragraph().add_run().add_break(WD_BREAK.LINE)
-        insert_paragraph(doc, html_file, df, 15, 1)
-        insert_paragraph(doc, html_file, df, 16, 1)
+        insert_paragraph(doc, df, 15, 1)
+        insert_paragraph(doc, df, 16, 1)
         # Insert HR
 
     except Exception as e:

@@ -7,7 +7,7 @@ from docx.shared import Inches
 from docx.enum.text import WD_BREAK
 import pandas as pd
 
-def options_section(doc, file, html_file):
+def options_section(doc, file):
     """Options QS Only Section"""
 
     try:
@@ -15,7 +15,7 @@ def options_section(doc, file, html_file):
         df = pd.read_excel(file.stream, sheet_name='QS-Only Options', engine='openpyxl')
 
         # Add title: Options
-        insert_title(doc, "OPTIONS", html_file)
+        insert_title(doc, "OPTIONS")
 
         start_col_idx = 0
         end_col_idx = 2
@@ -44,18 +44,6 @@ def options_section(doc, file, html_file):
                 cell = table.cell(row_idx, col_idx)
                 if not pd.isna(value):
                     cell.text = str(value)
-
-        html_table = '<table class="MsoNormalTable" cellSpacing="3" cellPadding="0" width="728" border="0">\n'
-        for row_idx in range(num_rows):
-            html_table += "  <tr>\n"
-            for col_idx in range(num_cols):
-                value = data_range.iat[row_idx, col_idx]
-                html_table += f"    <td>{value}</td>\n"
-            html_table += "  </tr>\n"
-        html_table += "</table>"
-
-        with open(html_file, 'a', encoding='utf-8') as txt:
-            txt.write(html_table)
 
         # Insert HR
         insert_horizontal_line(doc.add_paragraph(), thickness=3)

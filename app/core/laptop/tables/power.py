@@ -6,7 +6,7 @@ from app.core.format.hr import *
 from docx.enum.text import WD_BREAK
 import pandas as pd
 
-def power_section(doc, file, html_file):
+def power_section(doc, file):
     """Power QS Only Section"""
 
     try:
@@ -14,10 +14,10 @@ def power_section(doc, file, html_file):
         df = pd.read_excel(file.stream, sheet_name='QS-Only Power', engine='openpyxl')
 
         # Add title: Power
-        insert_title(doc, "POWER", html_file)
+        insert_title(doc, "POWER")
 
         # Add table
-        insert_table(doc, df, html_file)
+        insert_table(doc, df)
 
         # Insert HR
         insert_horizontal_line(doc.add_paragraph(), thickness=3)

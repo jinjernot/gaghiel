@@ -21,7 +21,7 @@ def get_temp_filename(counter, suffix=".png"):
     return f"image{counter:03d}{suffix}"
 
 
-def callout_section(doc, file, html_file, prod_name, df):
+def callout_section(doc, file, prod_name, df):
     """Add Callout Section"""
 
     # Add the product name
@@ -35,21 +35,6 @@ def callout_section(doc, file, html_file, prod_name, df):
     with open("/home/garciagi/qs/app/core/format/styles.txt", 'r', encoding='utf-8') as external_txt:
     #with open("app/core/format/styles.txt", 'r', encoding='utf-8') as external_txt:
         external_text = external_txt.read()
-
-    # add HTML Headers
-    with open(html_file, 'a', encoding='utf-8') as txt:
-        txt.write(f'<html><head><title>{prod_name}</title>\n')
-        txt.write('<meta content="text/html; charset=utf-8" http-equiv="Content-Type">\n')
-        txt.write('<meta name="Generator" content="Microsoft Word 15 (filtered)">\n')
-        # Add external text to HTML
-        txt.write(f'{external_text}\n')
-        txt.write('</head>\n')
-
-        #Add title and product name
-        txt.write('<body lang="ES-MX" style="WORD-WRAP: break-word" vLink="#990099" link="#0096d6"><qsnav heading="Overview"><a name="Overview"></a>\n')
-        txt.write('<p class="title">Overview</p></qsnav>\n')
-        txt.write('<div class="section">\n')
-        txt.write(f'<p class="MsoNormal" style="LINE-HEIGHT: 115%"><b><span lang="EN-US" style="FONT-SIZE: 14pt; LINE-HEIGHT: 115%">{prod_name}</span></b></p>\n')
 
     # Read the doc
     #df = pd.read_excel(file, sheet_name='Callouts')
@@ -94,22 +79,6 @@ def callout_section(doc, file, html_file, prod_name, df):
     # Center the paragraph
     paragraph_with_image.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
-    # Image HTML Tags
-    img_html_code = f'<img src="{img_url1}" alt="Product Image" width="702" height="561"></span></p></td></tr>'
-    img_html_code2 = f'<img src="{img_url2}" alt="Product Image" width="702" height="561"></span></p></td></tr>'
-
-    # Front image HTML 
-    with open(html_file, 'a', encoding='utf-8') as txt:
-        txt.write('<table class="MsoTableGrid" style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none" cellSpacing="3" cellPadding="0" width="720" border="0">\n')
-        txt.write('<tbody>\n')
-        txt.write('<tr style="HEIGHT: 15pt">\n')
-        txt.write('<td style="HEIGHT: 15pt; WIDTH: 537.25pt; PADDING-BOTTOM: 0.85pt; PADDING-TOP: 0.85pt; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt" width="716" colSpan="4">\n')
-        txt.write('<p class="MsoNormal" style="TEXT-ALIGN: center; LINE-HEIGHT: 115%" align="center"><span lang="EN-US" style="COLOR: red"><img id="Imagen 4" src="image001.png" width="702" height="561"></span></p></td></tr>\n')
-        txt.write('<tr style="HEIGHT: 15pt">\n')
-        txt.write('<td style="HEIGHT: 15pt; WIDTH: 537.25pt; PADDING-BOTTOM: 0.85pt; PADDING-TOP: 0.85pt; PADDING-LEFT: 0.85pt; PADDING-RIGHT: 0.85pt" vAlign="top" width="716" colSpan="4">')
-        txt.write('<p class="MsoNormal" style="TEXT-ALIGN: center; LINE-HEIGHT: 115%" align="center"><b><span lang="EN-US">Front</span></b></p></td></tr>')
-        #txt.write(img_html_code +  '\n')
-
     # Add Front subtitle
     paragraph = doc.add_paragraph()
     run = paragraph.add_run("Front")
@@ -142,21 +111,8 @@ def callout_section(doc, file, html_file, prod_name, df):
                     cell.text = str(int(value))
                 else:
                     cell.text = str(value)
-                    
-    #HTML Table
-    html_table = '<td style="HEIGHT: 15pt; WIDTH: 537.25pt; PADDING-BOTTOM: 0.85pt; PADDING-TOP: 0.85pt; PADDING-LEFT: 0.85pt; PADDING-RIGHT: 0.85pt" vAlign="top" width="716" colSpan="4"><p class="MsoNormal" style="TEXT-ALIGN: center; LINE-HEIGHT: 115%" align="center"><b><span lang="EN-US">&nbsp;</span></b></p></td></tr>\n'
-    for row_idx in range(num_rows):
-        html_table += f'<tr style="HEIGHT: 15pt">\n'
-        for col_idx in range(num_cols):
-            value = data_range.iat[row_idx, col_idx]
-            html_table += f'<td style="HEIGHT: 15pt; WIDTH: 19.2pt; PADDING-BOTTOM: 0.85pt; PADDING-TOP: 0.85pt; PADDING-LEFT: 0.85pt; PADDING-RIGHT: 0.85pt" vAlign="top" width="26"><p class="MsoNormal" style="LINE-HEIGHT: 115%"><span lang="EN-US">{value}</span></p></td>\n'
-
-    with open(html_file, 'a', encoding='utf-8') as txt:
-        txt.write(html_table)
-
-    # Insert HR
+                        # Insert HR
     insert_horizontal_line(doc.add_paragraph(), thickness=3)
-    insert_html_horizontal_line(html_file)
 
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
@@ -166,17 +122,6 @@ def callout_section(doc, file, html_file, prod_name, df):
 
     # Center the paragraph
     paragraph_with_image.alignment = WD_ALIGN_PARAGRAPH.CENTER
-
-    # Sides image HTML subtitle
-    with open(html_file, 'a', encoding='utf-8') as txt:
-        txt.write('<table class="MsoTableGrid" style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none" cellSpacing="3" cellPadding="0" width="720" border="0">\n')
-        txt.write('<tbody>\n')
-        txt.write('<tr style="HEIGHT: 15pt">\n')
-        txt.write('<td style="HEIGHT: 15pt; WIDTH: 537.25pt; PADDING-BOTTOM: 0.85pt; PADDING-TOP: 0.85pt; PADDING-LEFT: 5.4pt; PADDING-RIGHT: 5.4pt" width="716" colSpan="4">\n')
-        txt.write('<p class="MsoNormal" style="TEXT-ALIGN: center; LINE-HEIGHT: 115%" align="center"><span lang="EN-US" style="COLOR: red"><img id="Imagen 4" src="image002.png" width="702" height="561"></span></p></td></tr>\n')
-        txt.write('<tr style="HEIGHT: 15pt">\n')
-        txt.write('<td style="HEIGHT: 15pt; WIDTH: 537.25pt; PADDING-BOTTOM: 0.85pt; PADDING-TOP: 0.85pt; PADDING-LEFT: 0.85pt; PADDING-RIGHT: 0.85pt" vAlign="top" width="716" colSpan="4">')
-        txt.write('<p class="MsoNormal" style="TEXT-ALIGN: center; LINE-HEIGHT: 115%" align="center"><b><span lang="EN-US">Sides</span></b></p></td></tr>')
 
     # Add Right subtitle
     paragraph = doc.add_paragraph()
@@ -211,20 +156,8 @@ def callout_section(doc, file, html_file, prod_name, df):
                 else:
                     cell.text = str(value)
 
-    #HTML Table
-    html_table = '<td style="HEIGHT: 15pt; WIDTH: 537.25pt; PADDING-BOTTOM: 0.85pt; PADDING-TOP: 0.85pt; PADDING-LEFT: 0.85pt; PADDING-RIGHT: 0.85pt" vAlign="top" width="716" colSpan="4"><p class="MsoNormal" style="TEXT-ALIGN: center; LINE-HEIGHT: 115%" align="center"><b><span lang="EN-US">&nbsp;</span></b></p></td></tr>\n'
-    for row_idx in range(num_rows):
-        html_table += f'<tr style="HEIGHT: 15pt">\n'
-        for col_idx in range(num_cols):
-            value = data_range.iat[row_idx, col_idx]
-            html_table += f'<td style="HEIGHT: 15pt; WIDTH: 19.2pt; PADDING-BOTTOM: 0.85pt; PADDING-TOP: 0.85pt; PADDING-LEFT: 0.85pt; PADDING-RIGHT: 0.85pt" vAlign="top" width="26"><p class="MsoNormal" style="LINE-HEIGHT: 115%"><span lang="EN-US">{value}</span></p></td>\n'
-
-    with open(html_file, 'a', encoding='utf-8') as txt:
-        txt.write(html_table)
-
     # Insert HR
     insert_horizontal_line(doc.add_paragraph(), thickness=3)
-    insert_html_horizontal_line(html_file)
 
     doc.add_page_break()
     section = doc.sections[-1]
