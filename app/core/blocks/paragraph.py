@@ -64,13 +64,14 @@ def insert_list(doc, html_file, df, start_value):
     
     items = df.iloc[start_index:next_value_index, 1].tolist()
     
-    if 'Footnotes' in items:
-        footnotes_index = items.index('Footnotes')
-        items = items[:footnotes_index]
-        footnotes = df.iloc[footnotes_index + start_index + 1:next_value_index, 1].tolist()
-    else:
-        footnotes = []
-
+    # Identify footnotes based on the content starting with '['
+    footnotes_index = next(
+        (i for i, item in enumerate(items) if item.startswith("[")),
+        len(items)  # Default to end of list if no footnotes are found
+    )
+    non_footnotes = items[:footnotes_index]
+    footnotes = items[footnotes_index:]
+    
     paragraph = doc.add_paragraph()
     run = paragraph.add_run(start_value.upper()) 
     paragraph = doc.add_paragraph()
@@ -78,10 +79,10 @@ def insert_list(doc, html_file, df, start_value):
     run.bold = True
     run.add_break(WD_BREAK.LINE)
 
-    for index, data in enumerate(items[1:], start=1):
+    for index, data in enumerate(non_footnotes[1:], start=1):
         run = paragraph.add_run(data)
         
-        if index < len(items) - 1:
+        if index < len(non_footnotes) - 1:
             run.add_break(WD_BREAK.LINE)
     
     run.add_break(WD_BREAK.LINE)
@@ -90,7 +91,8 @@ def insert_list(doc, html_file, df, start_value):
     insert_horizontal_line(doc.add_paragraph(), thickness=3)
     insert_html_horizontal_line(html_file)
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
-
+    
+    
 def insert_footnote(doc, html_file, df, iloc_range, iloc_column):
     """
     Insert a footnote into both the Word document and the HTML file.
