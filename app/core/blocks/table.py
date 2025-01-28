@@ -23,6 +23,7 @@ def process_footnotes(doc, footnotes):
         if index < len(footnotes) - 1 and footnotes[index + 1].strip():  # Check if the next footnote is not empty
             run.add_break(WD_BREAK.LINE)
 
+
 def insert_table(doc, df):
     """
     Insert tables into the Word document.
@@ -32,16 +33,16 @@ def insert_table(doc, df):
         df (pandas.DataFrame): The DataFrame containing the table data.
     """
     footnotes = []  # To store footnotes temporarily
-    
+
     # Remove NaN values and empty rows from the DataFrame
     df.fillna('', inplace=True)
     df.dropna(how='all', inplace=True)
-    
+
     for index, row in df.iterrows():
         if row[0] == "Table":
             # Calculate page width
             page_width = doc.sections[0].page_width - doc.sections[0].left_margin - doc.sections[0].right_margin
-            
+
             # Add a table to the Word document
             table = doc.add_table(rows=1, cols=3)
             column_widths = (Inches(2), Inches(2), Inches(4))
@@ -51,20 +52,21 @@ def insert_table(doc, df):
                 if df.iloc[i, 0] == "Table":
                     break
                 elif df.iloc[i, 0] == "Footnotes":
+                    # Extract footnotes from the second column when 'Footnotes' is found in the first column
                     footnotes = []
                     for j in range(i + 1, len(df)):
                         if df.iloc[j, 0] == "Table":
                             break
-                        footnotes.append(str(df.iloc[j, 0]))
+                        footnotes.append(str(df.iloc[j, 1]))  # Extract from the second column
                     break
                 else:
                     cell_1 = table.add_row().cells[1]
-                    cell_1.text = str(df.iloc[i, 0])
+                    cell_1.text = str(df.iloc[i, 0])  # Data from the first column
                     for paragraph in cell_1.paragraphs:
                         for run in paragraph.runs:
                             run.font.bold = True
                     cell_2 = table.rows[-1].cells[2]
-                    cell_2.text = str(df.iloc[i, 1])
+                    cell_2.text = str(df.iloc[i, 1])  # Data from the second column
 
             cell_0 = table.cell(1, 0)
             cell_0.text = str(row[1])
@@ -72,7 +74,7 @@ def insert_table(doc, df):
                 for run in paragraph.runs:
                     run.font.bold = True
             table.rows[0]._element.getparent().remove(table.rows[0]._element)
-            
+
             if footnotes:
                 process_footnotes(doc, footnotes)
                 footnotes = []

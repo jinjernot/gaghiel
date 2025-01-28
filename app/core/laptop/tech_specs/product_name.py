@@ -1,6 +1,6 @@
 from app.core.format.hr import *
 
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.shared import Pt
 import pandas as pd
 
@@ -25,6 +25,7 @@ def product_name_section(doc, file):
 
         # Add horizontal line
         insert_horizontal_line(doc.add_paragraph(), thickness=3)
+        doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
     except Exception as e:
         print(f"An error occurred: {e}")

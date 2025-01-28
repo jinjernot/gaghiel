@@ -36,6 +36,20 @@ def process_footnotes(doc, footnotes):
         if index < len(footnotes) - 1:
             run.add_break(WD_BREAK.LINE)
 
+def insert_error(doc, error_message):
+    """
+    Insert an error message into the Word document with red font color.
+
+    Parameters:
+        doc (docx.Document): The Word document object.
+        error_message (str): The error message to be added.
+    """
+    paragraph = doc.add_paragraph()
+    run = paragraph.add_run(f"Error: {error_message}")
+    run.font.color.rgb = RGBColor(255, 0, 0)  # Set font color to red
+    run.font.bold = True
+    run.add_break(WD_BREAK.LINE)
+
 def insert_list(doc, df, start_value):
     """
     Insert a list into the Word document.
@@ -46,17 +60,17 @@ def insert_list(doc, df, start_value):
         start_value (str): The starting value for the list.
     """
     if start_value not in df.iloc[:, 1].tolist():
-        print(f"Error: '{start_value}' not found in DataFrame.")
+        insert_error(doc, f"'{start_value}' not found in DataFrame.")
         return
     
     start_index = df.index[df.iloc[:, 1] == start_value].tolist()[0]
     next_value_indices = df.iloc[start_index:, 1][df.iloc[start_index:, 1] == 'Value'].index.tolist()
     
     if not next_value_indices:
-        print("Error: 'Value' not found after", start_value)
+        insert_error(doc, f"'Value' not found after '{start_value}'")
         return
-    next_value_index = next_value_indices[0]
     
+    next_value_index = next_value_indices[0]
     items = df.iloc[start_index:next_value_index, 1].tolist()
     
     # Identify footnotes based on the content starting with '['
@@ -85,8 +99,7 @@ def insert_list(doc, df, start_value):
 
     insert_horizontal_line(doc.add_paragraph(), thickness=3)
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
-    
-    
+
 def insert_footnote(doc, df, iloc_range, iloc_column):
     """
     Insert a footnote into both the Word document.
